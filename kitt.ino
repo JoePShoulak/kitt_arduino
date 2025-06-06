@@ -1,12 +1,10 @@
 #include <Arduino_GigaDisplay_GFX.h>
 #include <lvgl.h>
-
 #include "buttons.h"
 
-// Initialize display object
-GigaDisplay_GFX tft;
+GigaDisplay_GFX tft; // Init tft
 
-// Button labels (matching your reference image)
+// Button labels
 const char *button_labels[] = {
     "TURBO BOOST",
     "MAP SYSTEM",
@@ -36,8 +34,7 @@ const lv_color_t button_colors[] = {
     RED  // SMOKE RELEASE
 };
 
-// Styles
-static lv_style_t style_kitt_button;
+static lv_style_t style_button_square;
 
 // Create the KITT button grid layout
 void create_kitt_panel(lv_obj_t *parent) {
@@ -46,14 +43,14 @@ void create_kitt_panel(lv_obj_t *parent) {
     lv_obj_set_style_bg_opa(parent, LV_OPA_COVER, 0);
 
     // Initialize button style
-    lv_style_init(&style_kitt_button);
-    lv_style_set_radius(&style_kitt_button, 0); // square corners
-    lv_style_set_border_width(&style_kitt_button, 0); // no border
-    lv_style_set_shadow_width(&style_kitt_button, 0); // no shadow
-    lv_style_set_outline_width(&style_kitt_button, 0); // no outline
-    lv_style_set_pad_all(&style_kitt_button, 0); // no padding
-    lv_style_set_text_color(&style_kitt_button, lv_color_hex(0x000000)); // black text
-    lv_style_set_text_font(&style_kitt_button, &lv_font_montserrat_14);
+    lv_style_init(&style_button_square);
+    lv_style_set_radius(&style_button_square, 0); // square corners
+    lv_style_set_border_width(&style_button_square, 0); // no border
+    lv_style_set_shadow_width(&style_button_square, 0); // no shadow
+    lv_style_set_outline_width(&style_button_square, 0); // no outline
+    lv_style_set_pad_all(&style_button_square, 0); // no padding
+    lv_style_set_text_color(&style_button_square, lv_color_hex(0x000000)); // black text
+    lv_style_set_text_font(&style_button_square, &lv_font_montserrat_14);
 
     // Calculate sizing
     int spacing = 20; // consistent margin and spacing
@@ -87,7 +84,7 @@ void create_kitt_panel(lv_obj_t *parent) {
 
         // Now create the LVGL button
         lv_obj_t *btn = lv_btn_create(grid);
-        lv_obj_add_style(btn, &style_kitt_button, 0);
+        lv_obj_add_style(btn, &style_button_square, 0);
 
         // Use color from ButtonSquare
         lv_obj_set_style_bg_color(btn, squares[i]->getColor(), 0);
@@ -107,8 +104,7 @@ void setup() {
     Serial.begin(115200); // Initialize Serial
     lv_init(); // Initialize LVGL
     tft.begin(); // Initialize Giga Display
-
-    create_kitt_panel(lv_scr_act());
+    create_kitt_panel(lv_scr_act()); // Display our page
 }
 
 void loop() {
