@@ -8,6 +8,11 @@
 #define RED lv_color_hex(0x990000)
 #define GREEN lv_color_hex(0x66FF66)
 
+struct ButtonData {
+    const char *label;
+    lv_color_t color;
+};
+
 class ButtonSquare {
 public:
 ButtonSquare(const char *label_text, lv_color_t color);

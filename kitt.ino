@@ -1,38 +1,9 @@
 #include <Arduino_GigaDisplay_GFX.h>
 #include <lvgl.h>
 #include "buttons.h"
+#include "config.h"
 
 GigaDisplay_GFX tft; // Init tft
-
-// Button labels
-const char *button_labels[] = {
-    "TURBO BOOST",
-    "MAP SYSTEM",
-    "SKI MODE",
-    "VOLTAGE OUTPUT",
-    "VITAL SCAN",
-    "EVADE",
-    "RANGE BRITE",
-    "RADAR IMAGE",
-    "MISSILE",
-    "SMOKE RELEASE"
-};
-
-const uint8_t NUM_BUTTONS = sizeof(button_labels) / sizeof(button_labels[0]);
-
-// Button background colors (matching your reference image)
-const lv_color_t button_colors[] = {
-    RED, // TURBO BOOST
-    YELLOW, // MAP SYSTEM
-    WHITE, // SKI MODE
-    YELLOW, // VOLTAGE OUTPUT
-    GREEN, // VITAL SCAN
-    GREEN, // EVADE
-    GREEN, // RANGE BRITE
-    GREEN, // RADAR IMAGE
-    RED, // MISSILE
-    RED  // SMOKE RELEASE
-};
 
 static lv_style_t style_button_square;
 
@@ -76,28 +47,30 @@ void create_kitt_panel(lv_obj_t *parent) {
     lv_obj_set_style_pad_column(grid, spacing, 0);   // spacing between columns
 
     // Create ButtonSquare instances → use them for LVGL button content
-    ButtonSquare *squares[NUM_BUTTONS];
+    ButtonSquare *squares[BUTTON_COUNT];
 
-    for (uint8_t i = 0; i < NUM_BUTTONS; i++) {
-        // First move: store label + color in ButtonSquare
-        squares[i] = new ButtonSquare(button_labels[i], button_colors[i]);
+    for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
+        // Pass label + color to ButtonSquare
+        squares[i] = new ButtonSquare(button_data[i].label, button_data[i].color);
 
-        // Now create the LVGL button
+        // Create LVGL button
         lv_obj_t *btn = lv_btn_create(grid);
         lv_obj_add_style(btn, &style_button_square, 0);
 
-        // Use color from ButtonSquare
+        // Set color
         lv_obj_set_style_bg_color(btn, squares[i]->getColor(), 0);
 
+        // Grid position
         lv_obj_set_grid_cell(btn,
             LV_GRID_ALIGN_STRETCH, i % 2, 1,
             LV_GRID_ALIGN_STRETCH, i / 2, 1);
 
-        // Use label from ButtonSquare
+        // Set label
         lv_obj_t *label = lv_label_create(btn);
         lv_label_set_text(label, squares[i]->getLabel());
         lv_obj_center(label);
     }
+
 }
 
 void setup() {
