@@ -9,20 +9,23 @@
 #define GREEN lv_color_hex(0x66FF66)
 
 struct ButtonData {
-    const char *label;
-    lv_color_t color;
+  const char *label;
+  lv_color_t color;
 };
 
 class ButtonSquare {
 public:
-ButtonSquare(const char *label_text, lv_color_t color);
+  ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row, lv_style_t *style);
+
   const char *getLabel() const { return label; }
   lv_color_t getColor() const { return color; }
+  lv_obj_t *getLVButton() const { return btn; }
 
 private:
   const char *label;
   lv_color_t color;
-  lv_obj_t *btn; // Will store the LVGL button later
+  lv_obj_t *btn;    // The button object
+  lv_obj_t *label_obj; // The label object inside the button
 };
 
 #endif

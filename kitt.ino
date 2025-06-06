@@ -46,31 +46,12 @@ void create_kitt_panel(lv_obj_t *parent) {
     lv_obj_set_style_pad_row(grid, spacing, 0);      // spacing between rows
     lv_obj_set_style_pad_column(grid, spacing, 0);   // spacing between columns
 
-    // Create ButtonSquare instances → use them for LVGL button content
+    // Create ButtonSquare instances → fully move all button logic into ButtonSquare
     ButtonSquare *squares[BUTTON_COUNT];
 
     for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
-        // Pass label + color to ButtonSquare
-        squares[i] = new ButtonSquare(button_data[i].label, button_data[i].color);
-
-        // Create LVGL button
-        lv_obj_t *btn = lv_btn_create(grid);
-        lv_obj_add_style(btn, &style_button_square, 0);
-
-        // Set color
-        lv_obj_set_style_bg_color(btn, squares[i]->getColor(), 0);
-
-        // Grid position
-        lv_obj_set_grid_cell(btn,
-            LV_GRID_ALIGN_STRETCH, i % 2, 1,
-            LV_GRID_ALIGN_STRETCH, i / 2, 1);
-
-        // Set label
-        lv_obj_t *label = lv_label_create(btn);
-        lv_label_set_text(label, squares[i]->getLabel());
-        lv_obj_center(label);
+        squares[i] = new ButtonSquare(grid, button_data[i], i % 2, i / 2, &style_button_square);
     }
-
 }
 
 void setup() {
