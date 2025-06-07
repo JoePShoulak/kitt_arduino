@@ -3,11 +3,14 @@
 
 static void btn_event_cb(lv_event_t * e) {
     ButtonSquare* self = static_cast<ButtonSquare*>(lv_event_get_user_data(e));
-    if (self) self->handlePress();
+    if(!self) return;
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code == LV_EVENT_PRESSED) self->onPress();
+    else if(code == LV_EVENT_RELEASED) self->onRelease();
 }
 
 ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
-    : label(data.label), color(data.color), toggleable(data.toggleable)
+    : label(data.label), color(data.color), toggleable(data.toggleable), long_press(data.long_press)
 {
     Serial.print("Creating ButtonSquare: ");
     Serial.println(label);
@@ -33,10 +36,21 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
     lv_label_set_text(label_obj, label);
     lv_obj_center(label_obj);
 
-    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, this);
+    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_PRESSED, this);
+    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_RELEASED, this);
 }
 
-void ButtonSquare::handlePress() {
+void ButtonSquare::onPress() {
+    press_start = millis();
+}
+
+void ButtonSquare::onRelease() {
+    unsigned long duration = millis() - press_start;
+    if(long_press && duration < 1000) {
+        Serial.println("Press too short - ignored");
+        return;
+    }
+
     Serial.print("Button pressed: ");
     Serial.println(label);
 

@@ -15,13 +15,15 @@ struct ButtonData {
     const char *label;
     lv_color_t color;
     button_callback callback;
-    bool toggleable; // <--- this was added to enable toggling
+    bool toggleable; // <--- enables toggling
+    bool long_press; // if true the button requires a long press
 };
 
 class ButtonSquare {
 public:
     ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
-    void handlePress();
+    void onPress();
+    void onRelease();
     void updateVisual();
 
     const char *getLabel() const { return label; }
@@ -35,8 +37,10 @@ private:
     lv_obj_t *label_obj;
     lv_style_t style;
 
-    bool toggleable; // <--- new field
-    bool toggled = false; // <--- new field
+    bool toggleable;
+    bool long_press;
+    bool toggled = false;
+    unsigned long press_start = 0;
 };
 
 #endif
