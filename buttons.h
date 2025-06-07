@@ -22,8 +22,7 @@ struct ButtonData {
 class ButtonSquare {
 public:
     ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
-    void onPress();
-    void onRelease();
+    void handlePress();
     void updateVisual();
     void eventHandler(lv_event_t* e);
 
@@ -45,14 +44,8 @@ private:
     uint32_t press_start = 0;
     bool long_press_handled = false;
 
-    uint16_t long_press_time = 0;
-    uint32_t press_start = 0;
-    bool long_press_handled = false;
-
     bool toggleable;
-    bool long_press;
     bool toggled = false;
-    unsigned long press_start = 0;
 };
 
 #endif
