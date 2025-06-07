@@ -5,6 +5,8 @@
 
 #include <lvgl.h>
 
+// TODO: toggleable buttons, long press, etc.
+
 #define WHITE lv_color_hex(0xFFFFFF)
 #define YELLOW lv_color_hex(0xFFFF66)
 #define RED lv_color_hex(0x990000)
