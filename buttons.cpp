@@ -16,8 +16,8 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
     // determine colors based on behaviour
     if (toggleable) {
         if (long_press_time > 0) { // red
-            color_off = RED;
-            color_on = RED_BRIGHT;
+            color_off = RED_DARK;
+            color_on = RED;
         } else { // yellow
             color_off = YELLOW_DARK;
             color_on = YELLOW;
