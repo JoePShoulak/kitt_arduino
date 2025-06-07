@@ -8,8 +8,10 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     int spacing = 20;
     int button_size = (480 - spacing * 3) / 2; // bottom buttons width (screen width 480)
     int grid_width = button_size * 2 + spacing * 3;
-    int viz_height = 320; // allow room for buttons
-    int grid_height = viz_height + button_size + spacing * 3;
+
+    // Fill the screen height so the buttons sit at the very bottom
+    int grid_height = 800;
+    int viz_height = grid_height - button_size - spacing * 3;
 
     lv_obj_t* grid = lv_obj_create(tile);
     lv_obj_remove_style_all(grid);
@@ -24,26 +26,49 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_row(grid, spacing, 0);
     lv_obj_set_style_pad_column(grid, spacing, 0);
 
-    // Visualizer mockup using rounded rectangles
+    // Visualizer mockup using three columns of rounded rectangles
     lv_obj_t* viz = lv_obj_create(grid);
     lv_obj_remove_style_all(viz);
     lv_obj_set_style_bg_color(viz, BLACK, 0);
     lv_obj_set_grid_cell(viz, LV_GRID_ALIGN_STRETCH, 0, 2,
                          LV_GRID_ALIGN_STRETCH, 0, 1);
     lv_obj_set_style_pad_all(viz, 10, 0);
+    lv_obj_set_style_pad_column(viz, 15, 0);
     lv_obj_set_layout(viz, LV_LAYOUT_FLEX);
     lv_obj_set_flex_flow(viz, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(viz, LV_FLEX_ALIGN_SPACE_EVENLY,
-                          LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_CENTER);
+    lv_obj_set_flex_align(viz, LV_FLEX_ALIGN_CENTER,
+                          LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
-    static int heights[5] = {100, 220, 300, 220, 100};
-    for(int i = 0; i < 5; ++i) {
-        lv_obj_t* bar = lv_obj_create(viz);
-        lv_obj_remove_style_all(bar);
-        lv_obj_set_style_bg_color(bar, RED_DARK, 0);
-        lv_obj_set_style_radius(bar, 10, 0);
-        lv_obj_set_size(bar, 30, heights[i]);
-    }
+    auto make_column = [&](int count) {
+        lv_obj_t* col = lv_obj_create(viz);
+        lv_obj_remove_style_all(col);
+        lv_obj_set_size(col, LV_SIZE_CONTENT, viz_height);
+        lv_obj_set_style_pad_row(col, 4, 0);
+        lv_obj_set_layout(col, LV_LAYOUT_FLEX);
+        lv_obj_set_flex_flow(col, LV_FLEX_FLOW_COLUMN);
+        lv_obj_set_flex_align(col, LV_FLEX_ALIGN_CENTER,
+                              LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+
+        int bar_h = 10;
+        int bar_w = 30;
+        int total = count * bar_h + (count - 1) * 4;
+        int pad = (viz_height - total) / 2;
+        if(pad < 0) pad = 0;
+        lv_obj_set_style_pad_top(col, pad, 0);
+        lv_obj_set_style_pad_bottom(col, pad, 0);
+
+        for(int i = 0; i < count; ++i) {
+            lv_obj_t* bar = lv_obj_create(col);
+            lv_obj_remove_style_all(bar);
+            lv_obj_set_style_bg_color(bar, RED_DARK, 0);
+            lv_obj_set_style_radius(bar, bar_h / 2, 0);
+            lv_obj_set_size(bar, bar_w, bar_h);
+        }
+    };
+
+    make_column(19);
+    make_column(37);
+    make_column(19);
 
     // Two buttons at bottom row
     ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 0, 1);
