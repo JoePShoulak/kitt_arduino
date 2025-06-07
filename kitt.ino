@@ -7,6 +7,7 @@
 #include "buttons.h"
 #include "button_panel.h"
 #include "config.h"
+#include "voice_scene.h"
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
@@ -17,6 +18,11 @@ void make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
 
     new ButtonPanel(tile, config);
 }
+
+ButtonData const voice_buttons[2] = {
+    { "LISTEN", null_btn, false, 0 },
+    { "CANCEL", null_btn, false, 0 },
+};
 
 void setup() {
   Serial.begin(115200); // Initialize Serial
@@ -32,7 +38,8 @@ void setup() {
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
   make_panel(button_panel1, tiles, 0);
-  make_panel(button_panel2, tiles, 1);
+  create_voice_tile(tiles, 1, voice_buttons);
+  make_panel(button_panel2, tiles, 2);
 }
 
 void loop() {
