@@ -18,6 +18,7 @@ struct ButtonData {
 class ButtonSquare {
 public:
   ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row, lv_style_t *style);
+  void handlePress();  // instance method to handle touch
 
   const char *getLabel() const { return label; }
   lv_color_t getColor() const { return color; }

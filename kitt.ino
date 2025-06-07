@@ -1,11 +1,14 @@
 // kitt.ino
 
 #include <Arduino_GigaDisplay_GFX.h>
+#include <Arduino_GigaDisplayTouch.h>
 #include <lvgl.h>
+
 #include "buttons.h"
 #include "config.h"
 
 GigaDisplay_GFX tft; // Init tft
+Arduino_GigaDisplayTouch  TouchDetector;
 
 static lv_style_t style_button_square;
 
@@ -60,7 +63,10 @@ void setup() {
     Serial.begin(115200); // Initialize Serial
     lv_init(); // Initialize LVGL
     tft.begin(); // Initialize Giga Display
+    TouchDetector.begin();
     create_kitt_panel(lv_scr_act()); // Display our page
+    Serial.println("KITT panel created");
+    Serial.println();
 }
 
 void loop() {
