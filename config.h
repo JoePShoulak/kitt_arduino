@@ -8,25 +8,25 @@
 void null_btn(lv_event_t *e); 
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    { "TURBO BOOST", RED, null_btn, true, 1000 },
-    { "MAP SYSTEM", YELLOW, null_btn, false, 0 },
-    { "SKI MODE", WHITE, null_btn, false, 0 },
-    { "VOLTAGE OUTPUT", YELLOW, null_btn, false, 0 },
-    { "VITAL SCAN", GREEN, null_btn, false, 0 },
-    { "EVADE", GREEN, null_btn, false, 0 },
-    { "RANGE BRITE", GREEN, null_btn, false, 0 },
-    { "RADAR IMAGE", GREEN, null_btn, false, 0 },
+    { "TURBO BOOST", null_btn, true, 1000 },
+    { "MAP SYSTEM", null_btn, true, 0 },
+    { "SKI MODE", null_btn, false, 1000 },
+    { "VOLTAGE OUTPUT", null_btn, true, 0 },
+    { "VITAL SCAN", null_btn, false, 0 },
+    { "EVADE", null_btn, false, 0 },
+    { "RANGE BRITE", null_btn, false, 0 },
+    { "RADAR IMAGE", null_btn, false, 0 },
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    { "BAD DOLPHINS", RED, null_btn, true, 1000 },
-    { "NERVE GAS", YELLOW, null_btn, false, 0 },
-    { "SHARKS", WHITE, null_btn, false, 0 },
-    { "CUTE OTTERS", YELLOW, null_btn, false, 0 },
-    { "EMERGENCY METH", GREEN, null_btn, false, 0 },
-    { "SCARLETT JOHANSSON", RED, null_btn, true, 1000 },
-    { "BROWNIES", GREEN, null_btn, false, 0 },
-    { "POT BROWNIES", GREEN, null_btn, false, 0 },
+    { "BAD DOLPHINS", null_btn, true, 1000 },
+    { "NERVE GAS", null_btn, true, 0 },
+    { "SHARKS", null_btn, false, 1000 },
+    { "CUTE OTTERS", null_btn, true, 0 },
+    { "EMERGENCY METH", null_btn, false, 0 },
+    { "SCARLETT JOHANSSON", null_btn, true, 1000 },
+    { "BROWNIES", null_btn, false, 0 },
+    { "POT BROWNIES", null_btn, false, 0 },
 };
 
 #endif
