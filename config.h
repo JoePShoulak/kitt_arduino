@@ -5,7 +5,8 @@
 
 #define BUTTON_COUNT 8
 
-void null_btn(lv_event_t *e); 
+void null_btn(lv_event_t *e);
+void quote_btn(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     { "TURBO BOOST", null_btn, true, 1000 },
@@ -19,7 +20,7 @@ const ButtonData button_panel1[BUTTON_COUNT] = {
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    { "BAD DOLPHINS", null_btn, true, 1000 },
+    { "QUOTE", quote_btn, false, 0 },
     { "NERVE GAS", null_btn, true, 0 },
     { "SHARKS", null_btn, false, 1000 },
     { "CUTE OTTERS", null_btn, true, 0 },
