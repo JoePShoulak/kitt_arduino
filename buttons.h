@@ -15,25 +15,26 @@
 using button_callback = void (*)(lv_event_t*);
 
 struct ButtonData {
-  const char *label;
-  lv_color_t color;
-  button_callback callback;
+  const char *label; // label text
+  lv_color_t color; // bg color
+  button_callback callback; // button obj
 };
 
 class ButtonSquare {
 public:
-  ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row, lv_style_t *style);
+  ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
   void handlePress();  // instance method to handle touch
 
-  const char *getLabel() const { return label; }
-  lv_color_t getColor() const { return color; }
-  lv_obj_t *getLVButton() const { return btn; }
+  const char *getLabel() const { return label; } // label text
+  lv_color_t getColor() const { return color; } // bg color
+  lv_obj_t *getLVButton() const { return btn; } // button obj
 
 private:
-  const char *label;
-  lv_color_t color;
-  lv_obj_t *btn;    // The button object
-  lv_obj_t *label_obj; // The label object inside the button
+  const char *label; // label text
+  lv_color_t color; // bg color
+  lv_obj_t *btn; // button obj
+  lv_obj_t *label_obj; // label obj
+  lv_style_t style; // default style
 };
 
 #endif
