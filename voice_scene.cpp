@@ -8,7 +8,8 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     int spacing = 20;
     int button_size = (480 - spacing * 3) / 2; // bottom buttons width (screen width 480)
     int grid_width = button_size * 2 + spacing * 3;
-    int grid_height = 800; // full screen height
+    int viz_height = 320; // allow room for buttons
+    int grid_height = viz_height + button_size + spacing * 3;
 
     lv_obj_t* grid = lv_obj_create(tile);
     lv_obj_remove_style_all(grid);
@@ -17,7 +18,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_center(grid);
 
     static lv_coord_t col_dsc[] = {button_size, button_size, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t row_dsc[] = {600, button_size, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t row_dsc[] = {viz_height, button_size, LV_GRID_TEMPLATE_LAST};
     lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
     lv_obj_set_style_pad_all(grid, spacing, 0);
     lv_obj_set_style_pad_row(grid, spacing, 0);
@@ -35,11 +36,11 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_flex_align(viz, LV_FLEX_ALIGN_SPACE_EVENLY,
                           LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_CENTER);
 
-    static int heights[5] = {150, 300, 450, 300, 150};
+    static int heights[5] = {100, 220, 300, 220, 100};
     for(int i = 0; i < 5; ++i) {
         lv_obj_t* bar = lv_obj_create(viz);
         lv_obj_remove_style_all(bar);
-        lv_obj_set_style_bg_color(bar, GREEN, 0);
+        lv_obj_set_style_bg_color(bar, RED_DARK, 0);
         lv_obj_set_style_radius(bar, 10, 0);
         lv_obj_set_size(bar, 30, heights[i]);
     }
