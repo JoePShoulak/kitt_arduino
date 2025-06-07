@@ -15,8 +15,8 @@ struct ButtonData {
     const char *label;
     lv_color_t color;
     button_callback callback;
-    bool toggleable; // <--- enables toggling
-    bool long_press; // if true the button requires a long press
+    bool toggleable; // <--- this was added to enable toggling
+    uint16_t long_press_time; // ms, 0 = normal click
 };
 
 class ButtonSquare {
@@ -25,6 +25,10 @@ public:
     void onPress();
     void onRelease();
     void updateVisual();
+    void eventHandler(lv_event_t* e);
+
+    bool isToggleable() const { return toggleable; }
+    bool isToggled() const { return toggled; }
 
     const char *getLabel() const { return label; }
     lv_color_t getColor() const { return color; }
@@ -36,6 +40,14 @@ private:
     lv_obj_t *btn;
     lv_obj_t *label_obj;
     lv_style_t style;
+
+    uint16_t long_press_time = 0;
+    uint32_t press_start = 0;
+    bool long_press_handled = false;
+
+    uint16_t long_press_time = 0;
+    uint32_t press_start = 0;
+    bool long_press_handled = false;
 
     bool toggleable;
     bool long_press;
