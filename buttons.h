@@ -49,6 +49,10 @@ private:
     lv_color_t color_off;
     lv_color_t color_on;
 
+    uint16_t long_press_time = 0;
+    uint32_t press_start = 0;
+    bool long_press_handled = false;
+
     bool toggleable;
     bool toggled = false;
 };
