@@ -8,7 +8,7 @@
 #define RED lv_color_hex(0xFF0000)
 #define YELLOW lv_color_hex(0xFFFF00)
 #define ORANGE lv_color_hex(0xFF8800)
-#define GREEN lv_color_hex(0x66FF66)
+#define GREEN lv_color_hex(0x00FF00)
 
 // dark variants for toggled-off states
 #define RED_DARK lv_color_hex(0x990000)

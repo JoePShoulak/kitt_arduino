@@ -92,6 +92,8 @@ void ButtonSquare::eventHandler(lv_event_t* e) {
             if(elapsed >= long_press_time) {
                 handlePress();
                 long_press_handled = true;
+                if(!toggleable)
+                    updateVisual();
             }
         }
     } else if(code == LV_EVENT_RELEASED || code == LV_EVENT_PRESS_LOST) {
