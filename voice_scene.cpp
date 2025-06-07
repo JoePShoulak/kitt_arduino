@@ -30,6 +30,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_t* viz = lv_obj_create(grid);
     lv_obj_remove_style_all(viz);
     lv_obj_set_style_bg_color(viz, BLACK, 0);
+    lv_obj_set_style_bg_opa(viz, LV_OPA_COVER, 0);
     lv_obj_set_grid_cell(viz, LV_GRID_ALIGN_STRETCH, 0, 2,
                          LV_GRID_ALIGN_STRETCH, 0, 1);
     lv_obj_set_style_pad_all(viz, 10, 0);
@@ -61,13 +62,15 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
             lv_obj_t* bar = lv_obj_create(col);
             lv_obj_remove_style_all(bar);
             lv_obj_set_style_bg_color(bar, RED_DARK, 0);
+            lv_obj_set_style_bg_opa(bar, LV_OPA_COVER, 0);
             lv_obj_set_style_radius(bar, bar_h / 2, 0);
             lv_obj_set_size(bar, bar_w, bar_h);
         }
     };
 
+    // 3 columns: outer columns 19 bars, center column 27 bars
     make_column(19);
-    make_column(37);
+    make_column(27);
     make_column(19);
 
     // Two buttons at bottom row
