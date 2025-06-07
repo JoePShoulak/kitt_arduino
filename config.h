@@ -24,8 +24,6 @@ const ButtonData button_data[BUTTON_COUNT] = {
   { "EVADE", GREEN, null_btn},
   { "RANGE BRITE", GREEN, null_btn},
   { "RADAR IMAGE", GREEN, null_btn},
-  // { "MISSILE", RED, null_btn},
-  // { "SMOKE RELEASE", RED, null_btn}
 };
 
 #endif
