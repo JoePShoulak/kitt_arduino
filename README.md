@@ -1,6 +1,6 @@
 # KITT Arduino Example
 
-This example demonstrates a simple LVGL UI with button panels for the Arduino GIGA Display. The project now includes a basic audio player which loads an MP3 file from a USB flash drive.
+This example demonstrates a simple LVGL UI with button panels for the Arduino GIGA Display. The project now includes a basic audio player which loads an MP3 file from a USB flash drive. Make sure the **Arduino_USBHostMbed5** library is installed so the GIGA can read USB mass-storage devices.
 
 ## Preparing a USB drive
 

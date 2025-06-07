@@ -1,26 +1,30 @@
 #include "audio_manager.h"
-#include <USBHost.h>
+#include <Arduino_USBHostMbed5.h>
 #include <Audio.h>
+#include <FATFileSystem.h>
 
 // USB host and mass storage objects
-static USBHost usb;
-static MassStorage ms(usb);
+static USBHostMSD msd;
+static mbed::FATFileSystem usbfs("usb");
 static AudioPlayer player;
-static File audioFile;
+static FILE *audioFile = nullptr;
 
 void audioSetup() {
-    usb.begin();
-    delay(200);
-    ms.begin();
+    while (!msd.connect()) {
+        delay(100);
+    }
+    usbfs.mount(&msd);
     player.begin();
 }
 
 bool audioPlay(const char *filename) {
     if (audioFile) {
         player.stop();
-        audioFile.close();
+        fclose(audioFile);
     }
-    audioFile = ms.open(filename);
+    char path[64];
+    snprintf(path, sizeof(path), "/usb/%s", filename);
+    audioFile = fopen(path, "rb");
     if (!audioFile) {
         return false;
     }
@@ -29,7 +33,9 @@ bool audioPlay(const char *filename) {
 }
 
 void audioUpdate() {
-    usb.Task();
+    if (!msd.connected()) {
+        msd.connect();
+    }
     player.tick();
 }
 
