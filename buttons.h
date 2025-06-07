@@ -11,9 +11,13 @@
 #define GREEN lv_color_hex(0x66FF66)
 #define BLACK lv_color_hex(0x000000)
 
+// Function of the form `void callback(lv_event_t*)`
+using button_callback = void (*)(lv_event_t*);
+
 struct ButtonData {
   const char *label;
   lv_color_t color;
+  button_callback callback;
 };
 
 class ButtonSquare {
