@@ -3,17 +3,12 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <Arduino.h>
 #include "buttons.h"
 
-#define BUTTON_COUNT 10
+#define BUTTON_COUNT 8
 
-void null_btn(lv_event_t *e) {
-  ButtonSquare* self = static_cast<ButtonSquare*>(lv_event_get_user_data(e));
-  if (self) {
-    Serial.print("Button pressed: ");
-    Serial.println(self->getLabel());
-  }
-}
+void null_btn(lv_event_t *e); // basic debug callback
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
   { "TURBO BOOST", RED, null_btn },
@@ -27,7 +22,7 @@ const ButtonData button_panel1[BUTTON_COUNT] = {
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-  { "BAD DOLPHINS", RED, null_btn },
+  { "RUDE DOLPHINS", RED, null_btn },
   { "NERVE GAS", YELLOW, null_btn},
   { "SHARKS", WHITE, null_btn},
   { "CUTE OTTERS", YELLOW, null_btn},

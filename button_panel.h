@@ -4,9 +4,8 @@
 #define BUTTON_PANEL_H
 
 #include <lvgl.h>
+#include "config.h"
 #include "buttons.h"
-
-#define BUTTON_COUNT 8
 
 class ButtonPanel {
   ButtonSquare* buttons[BUTTON_COUNT];

@@ -3,12 +3,6 @@
 #include "buttons.h"
 #include <Arduino.h>
 
-/* Static callback: routes event to instance method */
-static void btn_event_cb(lv_event_t * e) {
-  ButtonSquare* self = static_cast<ButtonSquare*>(lv_event_get_user_data(e));
-  if (self) self->handlePress();
-}
-
 /* Member constructor */
 ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
   : label(data.label), color(data.color)
