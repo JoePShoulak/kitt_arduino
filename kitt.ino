@@ -15,7 +15,7 @@ static lv_style_t style_button_square;
 // Create the KITT button grid layout
 void create_kitt_panel(lv_obj_t *parent) {
     // Make background black
-    lv_obj_set_style_bg_color(parent, lv_color_hex(0x000000), 0);
+    lv_obj_set_style_bg_color(parent, BLACK, 0);
     lv_obj_set_style_bg_opa(parent, LV_OPA_COVER, 0);
 
     // Initialize button style
@@ -25,7 +25,7 @@ void create_kitt_panel(lv_obj_t *parent) {
     lv_style_set_shadow_width(&style_button_square, 0); // no shadow
     lv_style_set_outline_width(&style_button_square, 0); // no outline
     lv_style_set_pad_all(&style_button_square, 0); // no padding
-    lv_style_set_text_color(&style_button_square, lv_color_hex(0x000000)); // black text
+    lv_style_set_text_color(&style_button_square, BLACK); // black text
     lv_style_set_text_font(&style_button_square, &lv_font_montserrat_14);
 
     // Calculate sizing
@@ -64,6 +64,7 @@ void setup() {
     lv_init(); // Initialize LVGL
     tft.begin(); // Initialize Giga Display
     TouchDetector.begin();
+    
     create_kitt_panel(lv_scr_act()); // Display our page
     Serial.println("KITT panel created");
     Serial.println();

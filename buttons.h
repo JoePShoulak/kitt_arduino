@@ -9,6 +9,7 @@
 #define YELLOW lv_color_hex(0xFFFF66)
 #define RED lv_color_hex(0x990000)
 #define GREEN lv_color_hex(0x66FF66)
+#define BLACK lv_color_hex(0x000000)
 
 struct ButtonData {
   const char *label;
