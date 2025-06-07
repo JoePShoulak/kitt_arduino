@@ -67,13 +67,15 @@ void ButtonSquare::eventHandler(lv_event_t* e) {
         press_start = millis();
         long_press_handled = false;
     } else if(code == LV_EVENT_PRESSING && long_press_time > 0) {
-        uint32_t elapsed = millis() - press_start;
-        lv_opa_t ratio = elapsed >= long_press_time ? 255 : (255 * elapsed / long_press_time);
-        lv_color_t base = toggleable && toggled ? lv_color_hex(0xFF0000) : color;
-        lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
-        if(elapsed >= long_press_time && !long_press_handled) {
-            handlePress();
-            long_press_handled = true;
+        if(!long_press_handled) {
+            uint32_t elapsed = millis() - press_start;
+            lv_opa_t ratio = elapsed >= long_press_time ? 255 : (255 * elapsed / long_press_time);
+            lv_color_t base = toggleable && toggled ? lv_color_hex(0xFF0000) : color;
+            lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
+            if(elapsed >= long_press_time) {
+                handlePress();
+                long_press_handled = true;
+            }
         }
     } else if(code == LV_EVENT_RELEASED || code == LV_EVENT_PRESS_LOST) {
         updateVisual();
