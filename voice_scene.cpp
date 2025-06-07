@@ -51,7 +51,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
                               LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
         int bar_h = 10;
-        int bar_w = 30;
+        int bar_w = 100; // wider bars to fill more space
         int total = count * bar_h + (count - 1) * 4;
         int pad = (viz_height - total) / 2;
         if(pad < 0) pad = 0;
@@ -68,9 +68,9 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         }
     };
 
-    // 3 columns: outer columns 19 bars, center column 27 bars
+    // 3 columns: outer columns 19 bars, center column 37 bars
     make_column(19);
-    make_column(27);
+    make_column(37);
     make_column(19);
 
     // Two buttons at bottom row
