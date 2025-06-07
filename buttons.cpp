@@ -3,11 +3,12 @@
 
 static void btn_event_cb(lv_event_t * e) {
     ButtonSquare* self = static_cast<ButtonSquare*>(lv_event_get_user_data(e));
-    if (self) self->handlePress();
+    if (self) self->eventHandler(e);
 }
 
 ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
     : label(data.label), color(data.color), toggleable(data.toggleable)
+    , long_press_time(data.long_press_time)
 {
     Serial.print("Creating ButtonSquare: ");
     Serial.println(label);
@@ -33,16 +34,19 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
     lv_label_set_text(label_obj, label);
     lv_obj_center(label_obj);
 
-    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, this);
+    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
 }
 
 void ButtonSquare::handlePress() {
-    Serial.print("Button pressed: ");
-    Serial.println(label);
-
     if (toggleable) {
         toggled = !toggled;
+        Serial.print("Button ");
+        Serial.print(toggled ? "On: " : "Off: ");
+        Serial.println(label);
         updateVisual();
+    } else {
+        Serial.print("Button pressed: ");
+        Serial.println(label);
     }
 }
 
@@ -53,5 +57,27 @@ void ButtonSquare::updateVisual() {
         } else {
             lv_obj_set_style_bg_color(btn, color, 0); // original color when off
         }
+    }
+}
+
+void ButtonSquare::eventHandler(lv_event_t* e) {
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_PRESSED) {
+        press_start = millis();
+        long_press_handled = false;
+    } else if(code == LV_EVENT_PRESSING && long_press_time > 0) {
+        uint32_t elapsed = millis() - press_start;
+        lv_opa_t ratio = elapsed >= long_press_time ? 255 : (255 * elapsed / long_press_time);
+        lv_color_t base = toggleable && toggled ? lv_color_hex(0xFF0000) : color;
+        lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
+        if(elapsed >= long_press_time && !long_press_handled) {
+            handlePress();
+            long_press_handled = true;
+        }
+    } else if(code == LV_EVENT_RELEASED || code == LV_EVENT_PRESS_LOST) {
+        updateVisual();
+    } else if(code == LV_EVENT_CLICKED && long_press_time == 0) {
+        handlePress();
     }
 }
