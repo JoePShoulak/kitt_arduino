@@ -4,12 +4,17 @@
 #include <lvgl.h>
 
 #define WHITE lv_color_hex(0xFFFFFF)
-#define YELLOW lv_color_hex(0xFFFF66)
-#define YELLOW_DARK lv_color_hex(0x999900)
+// bright variants
 #define RED lv_color_hex(0xFF0000)
-#define RED_DARK lv_color_hex(0x990000)
-#define ORANGE lv_color_hex(0xFF9900)
+#define YELLOW lv_color_hex(0xFFFF00)
+#define ORANGE lv_color_hex(0xFF8800)
 #define GREEN lv_color_hex(0x66FF66)
+
+// dark variants for toggled-off states
+#define RED_DARK lv_color_hex(0x990000)
+#define YELLOW_DARK lv_color_hex(0x999900)
+#define ORANGE_DARK lv_color_hex(0xCC6600)
+
 #define BLACK lv_color_hex(0x000000)
 
 using button_callback = void (*)(lv_event_t*);
