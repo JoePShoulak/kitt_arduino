@@ -7,11 +7,30 @@ static void btn_event_cb(lv_event_t * e) {
 }
 
 ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
-    : label(data.label), color(data.color), toggleable(data.toggleable)
+    : label(data.label), callback(data.callback), toggleable(data.toggleable)
     , long_press_time(data.long_press_time)
 {
     Serial.print("Creating ButtonSquare: ");
     Serial.println(label);
+
+    // determine colors based on behaviour
+    if (toggleable) {
+        if (long_press_time > 0) { // red
+            color_off = RED_DARK;
+            color_on = RED;
+        } else { // yellow
+            color_off = YELLOW_DARK;
+            color_on = YELLOW;
+        }
+    } else {
+        if (long_press_time > 0) { // orange
+            color_off = ORANGE;
+            color_on = ORANGE;
+        } else { // green
+            color_off = GREEN;
+            color_on = GREEN;
+        }
+    }
 
     lv_style_init(&style);
     lv_style_set_radius(&style, 0);
@@ -24,7 +43,7 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
 
     btn = lv_btn_create(parent_grid);
     lv_obj_add_style(btn, &style, 0);
-    lv_obj_set_style_bg_color(btn, color, 0);
+    lv_obj_set_style_bg_color(btn, color_off, 0);
 
     lv_obj_set_grid_cell(btn,
         LV_GRID_ALIGN_STRETCH, grid_col, 1,
@@ -52,11 +71,9 @@ void ButtonSquare::handlePress() {
 
 void ButtonSquare::updateVisual() {
     if (toggleable) {
-        if (toggled) {
-            lv_obj_set_style_bg_color(btn, lv_color_hex(0xFF0000), 0); // bright red when on
-        } else {
-            lv_obj_set_style_bg_color(btn, color, 0); // original color when off
-        }
+        lv_obj_set_style_bg_color(btn, toggled ? color_on : color_off, 0);
+    } else {
+        lv_obj_set_style_bg_color(btn, color_off, 0);
     }
 }
 
@@ -70,11 +87,13 @@ void ButtonSquare::eventHandler(lv_event_t* e) {
         if(!long_press_handled) {
             uint32_t elapsed = millis() - press_start;
             lv_opa_t ratio = elapsed >= long_press_time ? 255 : (255 * elapsed / long_press_time);
-            lv_color_t base = toggleable && toggled ? lv_color_hex(0xFF0000) : color;
+            lv_color_t base = toggleable ? (toggled ? color_on : color_off) : color_off;
             lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
             if(elapsed >= long_press_time) {
                 handlePress();
                 long_press_handled = true;
+                if(!toggleable)
+                    updateVisual();
             }
         }
     } else if(code == LV_EVENT_RELEASED || code == LV_EVENT_PRESS_LOST) {

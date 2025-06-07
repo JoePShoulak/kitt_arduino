@@ -4,19 +4,26 @@
 #include <lvgl.h>
 
 #define WHITE lv_color_hex(0xFFFFFF)
-#define YELLOW lv_color_hex(0xFFFF66)
-#define RED lv_color_hex(0x990000)
-#define GREEN lv_color_hex(0x66FF66)
+// bright variants
+#define RED lv_color_hex(0xFF0000)
+#define YELLOW lv_color_hex(0xFFFF00)
+#define ORANGE lv_color_hex(0xFF8800)
+#define GREEN lv_color_hex(0x00FF00)
+
+// dark variants for toggled-off states
+#define RED_DARK lv_color_hex(0x990000)
+#define YELLOW_DARK lv_color_hex(0x999900)
+#define ORANGE_DARK lv_color_hex(0xCC6600)
+
 #define BLACK lv_color_hex(0x000000)
 
 using button_callback = void (*)(lv_event_t*);
 
 struct ButtonData {
     const char *label;
-    lv_color_t color;
     button_callback callback;
-    bool toggleable; // <--- this was added to enable toggling
-    uint16_t long_press_time; // ms, 0 = normal click
+    bool toggleable;
+    uint16_t long_press_time; // ms, 0 = short press
 };
 
 class ButtonSquare {
@@ -30,19 +37,17 @@ public:
     bool isToggled() const { return toggled; }
 
     const char *getLabel() const { return label; }
-    lv_color_t getColor() const { return color; }
     lv_obj_t *getLVButton() const { return btn; }
 
 private:
     const char *label;
-    lv_color_t color;
+    button_callback callback;
     lv_obj_t *btn;
     lv_obj_t *label_obj;
     lv_style_t style;
 
-    uint16_t long_press_time = 0;
-    uint32_t press_start = 0;
-    bool long_press_handled = false;
+    lv_color_t color_off;
+    lv_color_t color_on;
 
     bool toggleable;
     bool toggled = false;
