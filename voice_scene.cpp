@@ -7,9 +7,10 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
 
     int spacing = 20;
     int circle_d = 60;
+    int column_w = circle_d * 6 / 5; // wider so lights aren't clipped
 
-    int center_width = (480 - circle_d * 2 - spacing * 4) * 9 / 10; // middle column 10% thinner
-    int grid_width = circle_d * 2 + center_width + spacing * 4; // recompute total width
+    int center_width = (480 - circle_d * 2 - spacing * 4) * 9 / 10; // keep middle column width
+    int grid_width = column_w * 2 + center_width + spacing * 4; // recompute total width
 
     // sizing for 3 stacked buttons and remaining space for the visualizer
     int button_h = 85; // 10% shorter
@@ -22,7 +23,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_size(grid, grid_width, grid_height);
     lv_obj_center(grid);
 
-    static lv_coord_t col_dsc[] = {circle_d, center_width, circle_d, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t col_dsc[] = {column_w, center_width, column_w, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t row_dsc[] = {viz_height, button_h, button_h, button_h, LV_GRID_TEMPLATE_LAST};
     lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
     lv_obj_set_style_pad_all(grid, spacing, 0);
@@ -40,7 +41,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         lv_obj_set_flex_flow(column, LV_FLEX_FLOW_COLUMN);
         lv_obj_set_flex_align(column, LV_FLEX_ALIGN_SPACE_EVENLY,
                               LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-        lv_obj_set_width(column, circle_d);
+        lv_obj_set_width(column, column_w);
 
         for(int i = 0; i < 4; ++i) {
             lv_obj_t* light = lv_obj_create(column);
@@ -99,9 +100,9 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         }
     };
 
-    // 3 columns: outer columns 19 bars, center column 37 bars
+    // 3 columns: outer columns 19 bars, center column shortened to 33 bars
     make_column(19);
-    make_column(37);
+    make_column(33);
     make_column(19);
 
     // Three stacked buttons in the centre column
