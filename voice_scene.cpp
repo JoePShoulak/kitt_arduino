@@ -12,7 +12,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     int grid_width = 480; // full screen width
 
     // sizing for 3 stacked buttons and remaining space for the visualizer
-    int button_h = 140;
+    int button_h = 95; // about 2/3 the previous height
     int grid_height = 800;
     int viz_height = grid_height - button_h * 3 - spacing * 5;
 
@@ -29,18 +29,26 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_row(grid, spacing, 0);
     lv_obj_set_style_pad_column(grid, spacing, 0);
 
-    // left and right columns of indicator circles
+    // left and right columns of indicator circles evenly spaced vertically
     for(int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
+        lv_obj_t* column = lv_obj_create(grid);
+        lv_obj_remove_style_all(column);
+        lv_obj_set_grid_cell(column, LV_GRID_ALIGN_CENTER, col, 1,
+                             LV_GRID_ALIGN_STRETCH, 0, 4);
+        lv_obj_set_layout(column, LV_LAYOUT_FLEX);
+        lv_obj_set_flex_flow(column, LV_FLEX_FLOW_COLUMN);
+        lv_obj_set_flex_align(column, LV_FLEX_ALIGN_SPACE_EVENLY,
+                              LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+        lv_obj_set_width(column, circle_d);
+
         for(int i = 0; i < 4; ++i) {
-            lv_obj_t* circ = lv_obj_create(grid);
+            lv_obj_t* circ = lv_obj_create(column);
             lv_obj_remove_style_all(circ);
             lv_obj_set_style_bg_opa(circ, LV_OPA_COVER, 0);
             lv_obj_set_style_radius(circ, LV_RADIUS_CIRCLE, 0);
             lv_obj_set_style_bg_color(circ, i < 2 ? YELLOW : RED, 0);
             lv_obj_set_size(circ, circle_d, circle_d);
-            lv_obj_set_grid_cell(circ, LV_GRID_ALIGN_CENTER, col, 1,
-                                 LV_GRID_ALIGN_CENTER, i, 1);
         }
     }
 
