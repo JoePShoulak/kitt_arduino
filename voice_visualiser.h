@@ -18,10 +18,10 @@ class VoiceVisualiser {
     int col_count[3];
 
     void make_column(int id, int count);
-    void set_cols_active(float ratio_norm);
-
+    
 public:
     VoiceVisualiser(lv_obj_t* parent);
+    void set_cols_active(float ratio_norm);
 };
 
 #endif

@@ -50,6 +50,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     }
 
     auto viz = new VoiceVisualiser(grid);
+    viz->set_cols_active(16.0f/16); // Set initial active state for visualizer columns
 
     // Three stacked buttons in the centre column with custom colours
     ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);
