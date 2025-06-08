@@ -4,7 +4,7 @@
 #include <Arduino_GigaDisplayTouch.h>
 #include <lvgl.h>
 
-#include "buttons.h"
+#include "button.h"
 #include "button_panel.h"
 #include "config.h"
 
