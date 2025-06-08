@@ -32,6 +32,8 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
         }
     }
 
+    toggled = data.start_active && toggleable;
+
     lv_style_init(&style);
     lv_style_set_radius(&style, 0);
     lv_style_set_border_width(&style, 0);
@@ -43,7 +45,7 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
 
     btn = lv_btn_create(parent_grid);
     lv_obj_add_style(btn, &style, 0);
-    lv_obj_set_style_bg_color(btn, color_off, 0);
+    lv_obj_set_style_bg_color(btn, toggled ? color_on : color_off, 0);
 
     lv_obj_set_grid_cell(btn,
         LV_GRID_ALIGN_STRETCH, grid_col, 1,

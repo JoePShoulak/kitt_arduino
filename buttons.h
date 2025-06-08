@@ -24,6 +24,7 @@ struct ButtonData {
     button_callback callback;
     bool toggleable;
     uint16_t long_press_time; // ms, 0 = short press
+    bool start_active = false;
 };
 
 class ButtonSquare {
