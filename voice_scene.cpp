@@ -8,11 +8,11 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     int spacing = 20;
     int circle_d = 60;
 
-    int center_width = 480 - circle_d * 2 - spacing * 4; // account for side columns and padding
-    int grid_width = 480; // full screen width
+    int center_width = (480 - circle_d * 2 - spacing * 4) * 9 / 10; // middle column 10% thinner
+    int grid_width = circle_d * 2 + center_width + spacing * 4; // recompute total width
 
     // sizing for 3 stacked buttons and remaining space for the visualizer
-    int button_h = 95; // about 2/3 the previous height
+    int button_h = 85; // 10% shorter
     int grid_height = 800;
     int viz_height = grid_height - button_h * 3 - spacing * 5;
 
@@ -22,14 +22,14 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_size(grid, grid_width, grid_height);
     lv_obj_center(grid);
 
-    static lv_coord_t col_dsc[] = {circle_d, center_width, circle_d, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t row_dsc[] = {viz_height, button_h, button_h, button_h, LV_GRID_TEMPLATE_LAST};
+    lv_coord_t col_dsc[] = {circle_d, center_width, circle_d, LV_GRID_TEMPLATE_LAST};
+    lv_coord_t row_dsc[] = {viz_height, button_h, button_h, button_h, LV_GRID_TEMPLATE_LAST};
     lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
     lv_obj_set_style_pad_all(grid, spacing, 0);
     lv_obj_set_style_pad_row(grid, spacing, 0);
     lv_obj_set_style_pad_column(grid, spacing, 0);
 
-    // left and right columns of indicator circles evenly spaced vertically
+    // left and right columns of indicator lights evenly spaced vertically
     for(int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
         lv_obj_t* column = lv_obj_create(grid);
@@ -43,12 +43,17 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         lv_obj_set_width(column, circle_d);
 
         for(int i = 0; i < 4; ++i) {
-            lv_obj_t* circ = lv_obj_create(column);
-            lv_obj_remove_style_all(circ);
-            lv_obj_set_style_bg_opa(circ, LV_OPA_COVER, 0);
-            lv_obj_set_style_radius(circ, LV_RADIUS_CIRCLE, 0);
-            lv_obj_set_style_bg_color(circ, i < 2 ? YELLOW : RED, 0);
-            lv_obj_set_size(circ, circle_d, circle_d);
+            lv_obj_t* light = lv_obj_create(column);
+            lv_obj_remove_style_all(light);
+            lv_obj_set_style_bg_opa(light, LV_OPA_COVER, 0);
+            lv_obj_set_style_radius(light, circle_d / 2, 0);
+            lv_obj_set_style_bg_color(light, i < 2 ? YELLOW_DARK : RED_DARK, 0);
+            lv_obj_set_size(light, circle_d * 6 / 5, circle_d);
+
+            lv_obj_t* lbl = lv_label_create(light);
+            lv_obj_set_style_text_color(lbl, BLACK, 0);
+            lv_label_set_text(lbl, i < 2 ? "YL" : "RD");
+            lv_obj_center(lbl);
         }
     }
 

@@ -39,8 +39,11 @@ void setup() {
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
   make_panel(button_panel1, tiles, 0);
-  create_voice_tile(tiles, 1, voice_buttons);
+  lv_obj_t* voice_tile = create_voice_tile(tiles, 1, voice_buttons);
   make_panel(button_panel2, tiles, 2);
+
+  lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
+  LV_UNUSED(voice_tile);
 }
 
 void loop() {
