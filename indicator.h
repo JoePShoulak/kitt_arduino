@@ -11,11 +11,11 @@ struct IndicatorData {
 
 class Indicator {
     const IndicatorData& data;
+    lv_obj_t* indicator;
 
 public:
     Indicator(const IndicatorData& data, lv_obj_t* parent);
-    // turn on
-    // turn off
+    void toggle(bool on);
 };
 
 #endif

@@ -22,6 +22,8 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_column(grid, SPACING, 0);
 
     // left and right columns of indicator lights evenly spaced vertically
+    Indicator* indicator_objs[8];
+
     for(int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
         lv_obj_t* column = lv_obj_create(grid);
@@ -34,16 +36,15 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
                               LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
         lv_obj_set_width(column, COLUMN_WIDTH);
 
-        for(int i = 0; i < 4; ++i) {
-            new Indicator(
-                indicators[side * 4 + i],
-                column //parent
-            );
-        }
+        for (int i = 0; i < 4; ++i) 
+            indicator_objs[side * 4 + i] = new Indicator(indicators[side * 4 + i], column);
     }
 
     auto viz = new VoiceVisualiser(grid);
+    
+    // debug
     viz->set_cols_active(5.0f/16); // TEST
+    indicator_objs[0]->toggle(true); // Air
 
     // Three stacked buttons in the centre column with custom colours
     ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);

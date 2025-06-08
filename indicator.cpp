@@ -14,4 +14,10 @@ Indicator::Indicator(const IndicatorData& data, lv_obj_t* parent) : data(data) {
     lv_obj_set_style_text_color(lbl, BLACK, 0);
     lv_label_set_text(lbl, data.label);
     lv_obj_center(lbl);
+    
+    this->indicator = indicator;
+}
+
+void Indicator::toggle(bool on) {
+    lv_obj_set_style_bg_color(this->indicator, on ? data.light : data.dark, 0);
 }
