@@ -22,8 +22,8 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_size(grid, grid_width, grid_height);
     lv_obj_center(grid);
 
-    lv_coord_t col_dsc[] = {circle_d, center_width, circle_d, LV_GRID_TEMPLATE_LAST};
-    lv_coord_t row_dsc[] = {viz_height, button_h, button_h, button_h, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t col_dsc[] = {circle_d, center_width, circle_d, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t row_dsc[] = {viz_height, button_h, button_h, button_h, LV_GRID_TEMPLATE_LAST};
     lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
     lv_obj_set_style_pad_all(grid, spacing, 0);
     lv_obj_set_style_pad_row(grid, spacing, 0);
