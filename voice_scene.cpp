@@ -1,34 +1,23 @@
 #include "voice_scene.h"
 #include "buttons.h"
+#include "voice_visualiser.h"
 
 lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* buttons) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
     lv_obj_set_style_bg_color(tile, BLACK, 0);
 
-    int spacing = 20;
-    int circle_d = 60;
-    int column_w = circle_d * 6 / 5; // wider so lights aren't clipped
-
-    int center_width = (480 - circle_d * 2 - spacing * 4) * 9 / 10; // keep middle column width
-    int grid_width = column_w * 2 + center_width + spacing * 4; // recompute total width
-
-    // sizing for 3 stacked buttons and remaining space for the visualizer
-    int button_h = 85; // 10% shorter
-    int grid_height = 800;
-    int viz_height = grid_height - button_h * 3 - spacing * 5;
-
     lv_obj_t* grid = lv_obj_create(tile);
     lv_obj_remove_style_all(grid);
     lv_obj_set_layout(grid, LV_LAYOUT_GRID);
-    lv_obj_set_size(grid, grid_width, grid_height);
+    lv_obj_set_size(grid, GRID_WIDTH, GRID_HEIGHT);
     lv_obj_center(grid);
 
-    static lv_coord_t col_dsc[] = {column_w, center_width, column_w, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t row_dsc[] = {viz_height, button_h, button_h, button_h, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t col_dsc[] = {COLUMN_WIDTH, CENTER_WIDTH, COLUMN_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t row_dsc[] = {VISUALISER_HEIGHT, BUTTON_HEIGHT, BUTTON_HEIGHT, BUTTON_HEIGHT, LV_GRID_TEMPLATE_LAST};
     lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
-    lv_obj_set_style_pad_all(grid, spacing, 0);
-    lv_obj_set_style_pad_row(grid, spacing, 0);
-    lv_obj_set_style_pad_column(grid, spacing, 0);
+    lv_obj_set_style_pad_all(grid, SPACING, 0);
+    lv_obj_set_style_pad_row(grid, SPACING, 0);
+    lv_obj_set_style_pad_column(grid, SPACING, 0);
 
     // left and right columns of indicator lights evenly spaced vertically
     static const char* left_labels[4] = {"AIR", "OIL", "P1", "P2"};
@@ -43,15 +32,15 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         lv_obj_set_flex_flow(column, LV_FLEX_FLOW_COLUMN);
         lv_obj_set_flex_align(column, LV_FLEX_ALIGN_SPACE_EVENLY,
                               LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-        lv_obj_set_width(column, column_w);
+        lv_obj_set_width(column, COLUMN_WIDTH);
 
         for(int i = 0; i < 4; ++i) {
             lv_obj_t* light = lv_obj_create(column);
             lv_obj_remove_style_all(light);
             lv_obj_set_style_bg_opa(light, LV_OPA_COVER, 0);
-            lv_obj_set_style_radius(light, circle_d / 2, 0);
+            lv_obj_set_style_radius(light, CIRCLE_DIAMETER / 2, 0);
             lv_obj_set_style_bg_color(light, i < 2 ? YELLOW_DARK : RED_DARK, 0);
-            lv_obj_set_size(light, circle_d * 6 / 5, circle_d);
+            lv_obj_set_size(light, CIRCLE_DIAMETER * 6 / 5, CIRCLE_DIAMETER);
 
             lv_obj_t* lbl = lv_label_create(light);
             lv_obj_set_style_text_color(lbl, BLACK, 0);
@@ -60,52 +49,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         }
     }
 
-    // Visualizer mockup using three columns of rounded rectangles
-    lv_obj_t* viz = lv_obj_create(grid);
-    lv_obj_remove_style_all(viz);
-    lv_obj_set_style_bg_color(viz, BLACK, 0);
-    lv_obj_set_style_bg_opa(viz, LV_OPA_COVER, 0);
-    lv_obj_set_grid_cell(viz, LV_GRID_ALIGN_STRETCH, 1, 1,
-                         LV_GRID_ALIGN_STRETCH, 0, 1);
-    lv_obj_set_style_pad_all(viz, 10, 0);
-    lv_obj_set_style_pad_column(viz, 15, 0);
-    lv_obj_set_layout(viz, LV_LAYOUT_FLEX);
-    lv_obj_set_flex_flow(viz, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(viz, LV_FLEX_ALIGN_CENTER,
-                          LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-
-    auto make_column = [&](int count) {
-        lv_obj_t* col = lv_obj_create(viz);
-        lv_obj_remove_style_all(col);
-        lv_obj_set_size(col, LV_SIZE_CONTENT, viz_height);
-        lv_obj_set_style_pad_row(col, 4, 0);
-        lv_obj_set_layout(col, LV_LAYOUT_FLEX);
-        lv_obj_set_flex_flow(col, LV_FLEX_FLOW_COLUMN);
-        lv_obj_set_flex_align(col, LV_FLEX_ALIGN_CENTER,
-                              LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-
-        int bar_h = 10;
-        int bar_w = (center_width - 50) / 3; // fit within the smaller visualizer
-        int total = count * bar_h + (count - 1) * 4;
-        int pad = (viz_height - total) / 2;
-        if(pad < 0) pad = 0;
-        lv_obj_set_style_pad_top(col, pad, 0);
-        lv_obj_set_style_pad_bottom(col, pad, 0);
-
-        for(int i = 0; i < count; ++i) {
-            lv_obj_t* bar = lv_obj_create(col);
-            lv_obj_remove_style_all(bar);
-            lv_obj_set_style_bg_color(bar, RED_DARK, 0);
-            lv_obj_set_style_bg_opa(bar, LV_OPA_COVER, 0);
-            lv_obj_set_style_radius(bar, bar_h / 2, 0);
-            lv_obj_set_size(bar, bar_w, bar_h);
-        }
-    };
-
-    // 3 columns: outer columns 19 bars, center column shortened to 29 bars
-    make_column(19);
-    make_column(29);
-    make_column(19);
+    auto viz = new VoiceVisualiser(grid);
 
     // Three stacked buttons in the centre column with custom colours
     ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);

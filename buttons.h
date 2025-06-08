@@ -2,25 +2,7 @@
 #define BUTTONS_H
 
 #include <lvgl.h>
-
-#define WHITE lv_color_hex(0xFFFFFF)
-// bright variants
-#define RED lv_color_hex(0xFF0000)
-#define YELLOW lv_color_hex(0xFFFF00)
-#define ORANGE lv_color_hex(0xFF8800)
-#define GREEN lv_color_hex(0x00FF00)
-// new blue variant
-#define BLUE lv_color_hex(0x0077FF)
-
-// dark variants for toggled-off states
-#define RED_DARK lv_color_hex(0x990000)
-#define YELLOW_DARK lv_color_hex(0x999900)
-#define ORANGE_DARK lv_color_hex(0xCC6600)
-#define GREEN_DARK lv_color_hex(0x009900)
-// dark blue
-#define BLUE_DARK lv_color_hex(0x0033AA)
-
-#define BLACK lv_color_hex(0x000000)
+#include "colors.h"
 
 using button_callback = void (*)(lv_event_t*);
 
