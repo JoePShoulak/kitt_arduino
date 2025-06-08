@@ -3,6 +3,14 @@
 #include "config.h"
 
 Indicator::Indicator(const IndicatorData& data, lv_obj_t* parent) : data(data) {
+    createIndicator(parent);
+}
+
+void Indicator::toggle(bool on) {
+    lv_obj_set_style_bg_color(this->indicator, on ? data.light : data.dark, 0);
+}
+
+void Indicator::createIndicator(lv_obj_t* parent) {
     lv_obj_t* indicator = lv_obj_create(parent);
     lv_obj_remove_style_all(indicator);
     lv_obj_set_style_bg_opa(indicator, LV_OPA_COVER, 0);
@@ -14,10 +22,6 @@ Indicator::Indicator(const IndicatorData& data, lv_obj_t* parent) : data(data) {
     lv_obj_set_style_text_color(lbl, BLACK, 0);
     lv_label_set_text(lbl, data.label);
     lv_obj_center(lbl);
-    
-    this->indicator = indicator;
-}
 
-void Indicator::toggle(bool on) {
-    lv_obj_set_style_bg_color(this->indicator, on ? data.light : data.dark, 0);
+    this->indicator = indicator;
 }

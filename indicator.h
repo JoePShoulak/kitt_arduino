@@ -13,6 +13,8 @@ class Indicator {
     const IndicatorData& data;
     lv_obj_t* indicator;
 
+    void createIndicator(lv_obj_t* parent);
+
 public:
     Indicator(const IndicatorData& data, lv_obj_t* parent);
     void toggle(bool on);

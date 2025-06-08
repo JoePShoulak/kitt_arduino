@@ -45,6 +45,8 @@ private:
 
     bool toggleable;
     bool toggled = false;
+
+    void createButton(lv_obj_t *parent_grid, uint8_t grid_col, uint8_t grid_row);
 };
 
 #endif
