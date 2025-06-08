@@ -14,6 +14,7 @@
 #define RED_DARK lv_color_hex(0x990000)
 #define YELLOW_DARK lv_color_hex(0x999900)
 #define ORANGE_DARK lv_color_hex(0xCC6600)
+#define GREEN_DARK lv_color_hex(0x009900)
 
 #define BLACK lv_color_hex(0x000000)
 

@@ -19,9 +19,10 @@ void make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
     new ButtonPanel(tile, config);
 }
 
-ButtonData const voice_buttons[2] = {
+ButtonData const voice_buttons[3] = {
     { "MUTE", null_btn, false, 0 },
     { "QUOTE", null_btn, false, 0 },
+    { "OVERRIDE", null_btn, false, 0 },
 };
 
 void setup() {
