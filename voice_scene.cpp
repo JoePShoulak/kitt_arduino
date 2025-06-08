@@ -31,7 +31,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_column(grid, spacing, 0);
 
     // left and right columns of indicator lights evenly spaced vertically
-    static const char* left_labels[4] = {"Air", "OIL", "P1", "P2"};
+    static const char* left_labels[4] = {"AIR", "OIL", "P1", "P2"};
     static const char* right_labels[4] = {"S1", "S2", "P3", "P4"};
     for(int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
