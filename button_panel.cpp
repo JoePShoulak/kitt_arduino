@@ -28,7 +28,7 @@ ButtonPanel::ButtonPanel(lv_obj_t* parent, ButtonData const* config) {
   lv_obj_set_style_pad_column(grid, spacing, 0);  // spacing between columns
 
   for (int i=0; i<BUTTON_COUNT; ++i) {
-    buttons[i] = new ButtonSquare(grid, config[i], i % 2, i / 2);
+    buttons[i] = new Button(grid, config[i], i % 2, i / 2);
   }
 };
 
