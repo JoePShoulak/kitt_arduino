@@ -58,6 +58,43 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
     lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
 }
 
+ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
+                           lv_color_t override_off, lv_color_t override_on)
+    : label(data.label), callback(data.callback), toggleable(data.toggleable)
+    , long_press_time(data.long_press_time)
+{
+    Serial.print("Creating ButtonSquare: ");
+    Serial.println(label);
+
+    color_off = override_off;
+    color_on = override_on;
+
+    toggled = data.start_active && toggleable;
+
+    lv_style_init(&style);
+    lv_style_set_radius(&style, 0);
+    lv_style_set_border_width(&style, 0);
+    lv_style_set_shadow_width(&style, 0);
+    lv_style_set_outline_width(&style, 0);
+    lv_style_set_pad_all(&style, 0);
+    lv_style_set_text_color(&style, BLACK);
+    lv_style_set_text_font(&style, &lv_font_montserrat_14);
+
+    btn = lv_btn_create(parent_grid);
+    lv_obj_add_style(btn, &style, 0);
+    lv_obj_set_style_bg_color(btn, toggled ? color_on : color_off, 0);
+
+    lv_obj_set_grid_cell(btn,
+        LV_GRID_ALIGN_STRETCH, grid_col, 1,
+        LV_GRID_ALIGN_STRETCH, grid_row, 1);
+
+    label_obj = lv_label_create(btn);
+    lv_label_set_text(label_obj, label);
+    lv_obj_center(label_obj);
+
+    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
+}
+
 void ButtonSquare::handlePress() {
     if (toggleable) {
         toggled = !toggled;

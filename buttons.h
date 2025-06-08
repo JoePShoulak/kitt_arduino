@@ -9,12 +9,16 @@
 #define YELLOW lv_color_hex(0xFFFF00)
 #define ORANGE lv_color_hex(0xFF8800)
 #define GREEN lv_color_hex(0x00FF00)
+// new blue variant
+#define BLUE lv_color_hex(0x0077FF)
 
 // dark variants for toggled-off states
 #define RED_DARK lv_color_hex(0x990000)
 #define YELLOW_DARK lv_color_hex(0x999900)
 #define ORANGE_DARK lv_color_hex(0xCC6600)
 #define GREEN_DARK lv_color_hex(0x009900)
+// dark blue
+#define BLUE_DARK lv_color_hex(0x0033AA)
 
 #define BLACK lv_color_hex(0x000000)
 
@@ -31,6 +35,8 @@ struct ButtonData {
 class ButtonSquare {
 public:
     ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
+    ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
+                 lv_color_t color_off, lv_color_t color_on);
     void handlePress();
     void updateVisual();
     void eventHandler(lv_event_t* e);

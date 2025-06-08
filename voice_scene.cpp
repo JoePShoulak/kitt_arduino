@@ -107,10 +107,10 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     make_column(29);
     make_column(19);
 
-    // Three stacked buttons in the centre column
-    ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1);
-    ButtonSquare* btn1 = new ButtonSquare(grid, buttons[1], 1, 2);
-    ButtonSquare* btn2 = new ButtonSquare(grid, buttons[2], 1, 3);
+    // Three stacked buttons in the centre column with custom colours
+    ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);
+    ButtonSquare* btn1 = new ButtonSquare(grid, buttons[1], 1, 2, ORANGE_DARK, ORANGE);
+    ButtonSquare* btn2 = new ButtonSquare(grid, buttons[2], 1, 3, BLUE_DARK, BLUE);
 
     LV_UNUSED(btn0); // avoid unused warnings if compiled
     LV_UNUSED(btn1);
