@@ -12,7 +12,7 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
 {
     Serial.print("Creating Button: ");
     Serial.println(label);
-
+    
     // determine colors based on behaviour
     if (toggleable) {
         if (long_press_time > 0) { // red
