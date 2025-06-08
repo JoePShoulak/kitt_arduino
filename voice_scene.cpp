@@ -1,6 +1,8 @@
 #include "voice_scene.h"
 #include "buttons.h"
 #include "voice_visualiser.h"
+#include "indicator.h"
+#include "config.h"
 
 lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* buttons) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
@@ -20,8 +22,6 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_column(grid, SPACING, 0);
 
     // left and right columns of indicator lights evenly spaced vertically
-    static const char* left_labels[4] = {"AIR", "OIL", "P1", "P2"};
-    static const char* right_labels[4] = {"S1", "S2", "P3", "P4"};
     for(int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
         lv_obj_t* column = lv_obj_create(grid);
@@ -35,22 +35,15 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         lv_obj_set_width(column, COLUMN_WIDTH);
 
         for(int i = 0; i < 4; ++i) {
-            lv_obj_t* light = lv_obj_create(column);
-            lv_obj_remove_style_all(light);
-            lv_obj_set_style_bg_opa(light, LV_OPA_COVER, 0);
-            lv_obj_set_style_radius(light, CIRCLE_DIAMETER / 2, 0);
-            lv_obj_set_style_bg_color(light, i < 2 ? YELLOW_DARK : RED_DARK, 0);
-            lv_obj_set_size(light, CIRCLE_DIAMETER * 6 / 5, CIRCLE_DIAMETER);
-
-            lv_obj_t* lbl = lv_label_create(light);
-            lv_obj_set_style_text_color(lbl, BLACK, 0);
-            lv_label_set_text(lbl, side == 0 ? left_labels[i] : right_labels[i]);
-            lv_obj_center(lbl);
+            new Indicator(
+                indicators[side * 4 + i],
+                column //parent
+            );
         }
     }
 
     auto viz = new VoiceVisualiser(grid);
-    viz->set_cols_active(16.0f/16); // Set initial active state for visualizer columns
+    viz->set_cols_active(5.0f/16); // TEST
 
     // Three stacked buttons in the centre column with custom colours
     ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);

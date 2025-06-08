@@ -1,5 +1,6 @@
 #include "voice_visualiser.h"
 #include "colors.h"
+#include "config.h"
 
 VoiceVisualiser::VoiceVisualiser(lv_obj_t* parent) {
     viz = lv_obj_create(parent);
