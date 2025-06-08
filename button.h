@@ -36,6 +36,8 @@ private:
     lv_obj_t *label_obj;
     lv_style_t style;
 
+    void createLvButton(lv_obj_t *parent_grid, uint8_t grid_col, uint8_t grid_row);
+
     lv_color_t color_off;
     lv_color_t color_on;
 
