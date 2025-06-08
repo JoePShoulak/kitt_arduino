@@ -47,13 +47,9 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     indicator_objs[0]->toggle(true); // Air
 
     // Three stacked buttons in the centre column with custom colours
-    Button* btn0 = new Button(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);
-    Button* btn1 = new Button(grid, buttons[1], 1, 2, ORANGE_DARK, ORANGE);
+    Button* btn0 = new Button(grid, buttons[0], 1, 1, ORANGE_DARK, ORANGE);
+    Button* btn1 = new Button(grid, buttons[1], 1, 2, GREEN_DARK, GREEN);
     Button* btn2 = new Button(grid, buttons[2], 1, 3, BLUE_DARK, BLUE);
-
-    LV_UNUSED(btn0); // avoid unused warnings if compiled
-    LV_UNUSED(btn1);
-    LV_UNUSED(btn2);
 
     return tile;
 }

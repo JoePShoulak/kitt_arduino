@@ -2,10 +2,7 @@
 #define CONFIG_H
 
 #include "button.h"
-<<<<<<< HEAD
-=======
 #include "indicator.h"
->>>>>>> 77027bfc9d040ae8c143a182cf3250e0fb0d5b4f
 
 // PANEL DATA
 #define BUTTON_COUNT 8
@@ -44,16 +41,13 @@ const ButtonData button_panel2[BUTTON_COUNT] = {
 #define GRID_HEIGHT 800
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
-static const char* left_labels[4] = {"AIR", "OIL", "P1", "P2"};
-static const char* right_labels[4] = {"S1", "S2", "P3", "P4"};
-
 static const IndicatorData indicators[8] = {
-    { "AIR", YELLOW_DARK, YELLOW },
-    { "OIL", YELLOW_DARK, YELLOW },
+    { "AIR", ORANGE_DARK, ORANGE },
+    { "OIL", ORANGE_DARK, ORANGE },
     { "P1", RED_DARK, RED },
     { "P2", RED_DARK, RED },
-    { "S1", YELLOW_DARK, YELLOW },
-    { "S2", YELLOW_DARK, YELLOW },
+    { "S1", ORANGE_DARK, ORANGE },
+    { "S2", ORANGE_DARK, ORANGE },
     { "P3", RED_DARK, RED },
     { "P4", RED_DARK, RED }
 };
