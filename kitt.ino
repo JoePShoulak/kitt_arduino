@@ -20,9 +20,9 @@ void make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
 }
 
 ButtonData const voice_buttons[3] = {
-    { "MUTE", null_btn, false, 0 },
-    { "QUOTE", null_btn, false, 0 },
-    { "OVERRIDE", null_btn, false, 0 },
+    { "Normal Cruise", null_btn, false, 0 },
+    { "Auto Cruise", null_btn, false, 0 },
+    { "Pursuit", null_btn, false, 0 },
 };
 
 void setup() {

@@ -31,6 +31,8 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_column(grid, spacing, 0);
 
     // left and right columns of indicator lights evenly spaced vertically
+    static const char* left_labels[4] = {"Air", "OIL", "P1", "P2"};
+    static const char* right_labels[4] = {"S1", "S2", "P3", "P4"};
     for(int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
         lv_obj_t* column = lv_obj_create(grid);
@@ -53,7 +55,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
 
             lv_obj_t* lbl = lv_label_create(light);
             lv_obj_set_style_text_color(lbl, BLACK, 0);
-            lv_label_set_text(lbl, i < 2 ? "YL" : "RD");
+            lv_label_set_text(lbl, side == 0 ? left_labels[i] : right_labels[i]);
             lv_obj_center(lbl);
         }
     }
@@ -100,9 +102,9 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
         }
     };
 
-    // 3 columns: outer columns 19 bars, center column shortened to 33 bars
+    // 3 columns: outer columns 19 bars, center column shortened to 29 bars
     make_column(19);
-    make_column(33);
+    make_column(29);
     make_column(19);
 
     // Three stacked buttons in the centre column
