@@ -1,5 +1,5 @@
-#ifndef BUTTONS_H
-#define BUTTONS_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include <lvgl.h>
 #include "colors.h"
@@ -14,10 +14,10 @@ struct ButtonData {
     bool start_active = false;
 };
 
-class ButtonSquare {
+class Button {
 public:
-    ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
-    ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
+    Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
+    Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
                  lv_color_t color_off, lv_color_t color_on);
     void handlePress();
     void updateVisual();

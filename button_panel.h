@@ -5,10 +5,10 @@
 
 #include <lvgl.h>
 #include "config.h"
-#include "buttons.h"
+#include "button.h"
 
 class ButtonPanel {
-  ButtonSquare* buttons[BUTTON_COUNT];
+  Button* buttons[BUTTON_COUNT];
 
 public:
   ButtonPanel(lv_obj_t* parent, ButtonData const* config);

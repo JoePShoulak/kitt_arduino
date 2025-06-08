@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "buttons.h"
+#include "button.h"
 #include "indicator.h"
 
 // PANEL DATA

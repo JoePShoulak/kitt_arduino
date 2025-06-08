@@ -1,16 +1,16 @@
-#include "buttons.h"
+#include "button.h"
 #include <Arduino.h>
 
 static void btn_event_cb(lv_event_t * e) {
-    ButtonSquare* self = static_cast<ButtonSquare*>(lv_event_get_user_data(e));
+    Button* self = static_cast<Button*>(lv_event_get_user_data(e));
     if (self) self->eventHandler(e);
 }
 
-ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
+Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
     : label(data.label), callback(data.callback), toggleable(data.toggleable)
     , long_press_time(data.long_press_time)
 {
-    Serial.print("Creating ButtonSquare: ");
+    Serial.print("Creating Button: ");
     Serial.println(label);
 
     // determine colors based on behaviour
@@ -58,12 +58,12 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
     lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
 }
 
-ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
+Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
                            lv_color_t override_off, lv_color_t override_on)
     : label(data.label), callback(data.callback), toggleable(data.toggleable)
     , long_press_time(data.long_press_time)
 {
-    Serial.print("Creating ButtonSquare: ");
+    Serial.print("Creating Button: ");
     Serial.println(label);
 
     color_off = override_off;
@@ -95,7 +95,7 @@ ButtonSquare::ButtonSquare(lv_obj_t *parent_grid, const ButtonData &data, uint8_
     lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
 }
 
-void ButtonSquare::handlePress() {
+void Button::handlePress() {
     if (toggleable) {
         toggled = !toggled;
         Serial.print("Button ");
@@ -108,7 +108,7 @@ void ButtonSquare::handlePress() {
     }
 }
 
-void ButtonSquare::updateVisual() {
+void Button::updateVisual() {
     if (toggleable) {
         lv_obj_set_style_bg_color(btn, toggled ? color_on : color_off, 0);
     } else {
@@ -116,7 +116,7 @@ void ButtonSquare::updateVisual() {
     }
 }
 
-void ButtonSquare::eventHandler(lv_event_t* e) {
+void Button::eventHandler(lv_event_t* e) {
     lv_event_code_t code = lv_event_get_code(e);
 
     if (code == LV_EVENT_PRESSED) {

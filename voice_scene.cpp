@@ -1,5 +1,5 @@
 #include "voice_scene.h"
-#include "buttons.h"
+#include "button.h"
 #include "voice_visualiser.h"
 #include "indicator.h"
 #include "config.h"
@@ -47,9 +47,9 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     indicator_objs[0]->toggle(true); // Air
 
     // Three stacked buttons in the centre column with custom colours
-    ButtonSquare* btn0 = new ButtonSquare(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);
-    ButtonSquare* btn1 = new ButtonSquare(grid, buttons[1], 1, 2, ORANGE_DARK, ORANGE);
-    ButtonSquare* btn2 = new ButtonSquare(grid, buttons[2], 1, 3, BLUE_DARK, BLUE);
+    Button* btn0 = new Button(grid, buttons[0], 1, 1, GREEN_DARK, GREEN);
+    Button* btn1 = new Button(grid, buttons[1], 1, 2, ORANGE_DARK, ORANGE);
+    Button* btn2 = new Button(grid, buttons[2], 1, 3, BLUE_DARK, BLUE);
 
     LV_UNUSED(btn0); // avoid unused warnings if compiled
     LV_UNUSED(btn1);
