@@ -36,6 +36,8 @@ private:
     lv_obj_t *label_obj;
     lv_style_t style;
 
+    void set_style();
+
     lv_color_t color_off;
     lv_color_t color_on;
 

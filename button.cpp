@@ -34,14 +34,7 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
 
     toggled = data.start_active && toggleable;
 
-    lv_style_init(&style);
-    lv_style_set_radius(&style, 0);
-    lv_style_set_border_width(&style, 0);
-    lv_style_set_shadow_width(&style, 0);
-    lv_style_set_outline_width(&style, 0);
-    lv_style_set_pad_all(&style, 0);
-    lv_style_set_text_color(&style, BLACK);
-    lv_style_set_text_font(&style, &lv_font_montserrat_14);
+    set_style();
 
     btn = lv_btn_create(parent_grid);
     lv_obj_add_style(btn, &style, 0);
@@ -71,14 +64,7 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
 
     toggled = data.start_active && toggleable;
 
-    lv_style_init(&style);
-    lv_style_set_radius(&style, 0);
-    lv_style_set_border_width(&style, 0);
-    lv_style_set_shadow_width(&style, 0);
-    lv_style_set_outline_width(&style, 0);
-    lv_style_set_pad_all(&style, 0);
-    lv_style_set_text_color(&style, BLACK);
-    lv_style_set_text_font(&style, &lv_font_montserrat_14);
+    set_style();
 
     btn = lv_btn_create(parent_grid);
     lv_obj_add_style(btn, &style, 0);
@@ -140,4 +126,15 @@ void Button::eventHandler(lv_event_t* e) {
     } else if (code == LV_EVENT_CLICKED && long_press_time == 0) {
         handlePress();
     }
+}
+
+void Button::set_style() {
+    lv_style_init(&style);
+    lv_style_set_radius(&style, 0);
+    lv_style_set_border_width(&style, 0);
+    lv_style_set_shadow_width(&style, 0);
+    lv_style_set_outline_width(&style, 0);
+    lv_style_set_pad_all(&style, 0);
+    lv_style_set_text_color(&style, BLACK);
+    lv_style_set_text_font(&style, &lv_font_montserrat_14);
 }
