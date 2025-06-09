@@ -35,6 +35,16 @@ int current_audio_index = 0;
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
 VoiceTile* voiceTile = nullptr;
+Button* motor_btn = nullptr;
+
+bool validate_24v(lv_event_t* e) {
+  auto self = static_cast<Button*>(lv_event_get_user_data(e));
+  if (self && !self->isToggled() && motor_btn && motor_btn->isToggled()) {
+    Serial.println("ERROR: Cannot activate 24V MODE while MOTOR is ON");
+    return false;
+  }
+  return true;
+}
 
 void motor_override_cb(lv_event_t* e) {
   Serial.println("MOTOR override callback!");
@@ -57,8 +67,12 @@ void setup() {
   auto leftPanel = ButtonPanel::createTile(tiles, 0, button_panel1);
   voiceTile = new VoiceTile(tiles, 1, voice_buttons);
   auto rightPanel = ButtonPanel::createTile(tiles, 2, button_panel2);
-  if (auto btn = rightPanel->getButton(0)) {
-    btn->setCallback(motor_override_cb);
+  motor_btn = rightPanel->getButton(0);
+  if (motor_btn) {
+    motor_btn->setCallback(motor_override_cb);
+  }
+  if (auto btn24 = rightPanel->getButton(2)) {
+    btn24->setValidate(validate_24v);
   }
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile

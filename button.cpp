@@ -6,8 +6,10 @@ static void btn_event_cb(lv_event_t * e) {
     if (self) self->eventHandler(e);
 }
 
+static bool dummy_validate(lv_event_t *) { return true; }
+
 Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
-    : label(data.label), callback(data.callback), toggleable(data.toggleable)
+    : label(data.label), callback(data.callback), validate(dummy_validate), toggleable(data.toggleable)
     , severe(data.severe)
 {
     Serial.print("Creating Button: ");
@@ -53,7 +55,7 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
 
 Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
                            lv_color_t override_off, lv_color_t override_on)
-    : label(data.label), callback(data.callback), toggleable(data.toggleable)
+    : label(data.label), callback(data.callback), validate(dummy_validate), toggleable(data.toggleable)
     , severe(data.severe)
 {
     Serial.print("Creating Button: ");
@@ -85,6 +87,10 @@ void Button::setCallback(button_callback cb) {
     callback = cb;
 }
 
+void Button::setValidate(validate_callback cb) {
+    validate = cb ? cb : dummy_validate;
+}
+
 void Button::handlePress() {
     if (toggleable) {
         toggled = !toggled;
@@ -113,8 +119,10 @@ void Button::eventHandler(lv_event_t* e) {
             lv_color_t base = toggleable ? (toggled ? color_on : color_off) : color_off;
             lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
             if (elapsed >= LONG_PRESS_DURATION) {
-                handlePress();
-                if (callback) callback(e);
+                if (!validate || validate(e)) {
+                    handlePress();
+                    if (callback) callback(e);
+                }
                 long_press_handled = true;
                 if (!toggleable)
                     updateVisual();
@@ -123,8 +131,10 @@ void Button::eventHandler(lv_event_t* e) {
     } else if (code == LV_EVENT_RELEASED || code == LV_EVENT_PRESS_LOST) {
         updateVisual();
     } else if (code == LV_EVENT_CLICKED && !severe) {
-        handlePress();
-        if (callback) callback(e);
+        if (!validate || validate(e)) {
+            handlePress();
+            if (callback) callback(e);
+        }
     }
 }
 
