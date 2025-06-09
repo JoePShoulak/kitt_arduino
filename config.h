@@ -7,6 +7,8 @@
 // GENERAL DATA
 #define SPACING 20
 #define GRID_HEIGHT 800
+#define POPUP_WIDTH 300
+#define POPUP_HEIGHT 180
 
 // PANEL DATA
 #define BUTTON_COUNT 8

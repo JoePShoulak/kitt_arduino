@@ -9,6 +9,7 @@
 #include "button_panel.h"
 #include "config.h"
 #include "voice_tile.h"
+#include "popup.h"
 
 
 // GigaAudio audio("USB DISK"); // replace with name of USB volume
@@ -41,6 +42,11 @@ bool validate_24v(lv_event_t* e) {
   auto self = static_cast<Button*>(lv_event_get_user_data(e));
   if (self && !self->isToggled() && motor_btn && motor_btn->isToggled()) {
     Serial.println("ERROR: Cannot activate 24V MODE while MOTOR is ON");
+    lv_obj_t* grid = lv_obj_get_parent(self->getLVButton());
+    if (grid) {
+      lv_obj_t* tile = lv_obj_get_parent(grid);
+      show_error_popup(tile, "Cannot activate 24V MODE while MOTOR is ON");
+    }
     return false;
   }
   return true;
