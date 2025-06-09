@@ -8,14 +8,14 @@ static void btn_event_cb(lv_event_t * e) {
 
 Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row)
     : label(data.label), callback(data.callback), toggleable(data.toggleable)
-    , long_press_time(data.long_press_time)
+    , severe(data.severe)
 {
     Serial.print("Creating Button: ");
     Serial.println(label);
     
     // determine colors based on behaviour
     if (toggleable) {
-        if (long_press_time > 0) { // red
+        if (severe) { // red
             color_off = RED_DARK;
             color_on = RED;
         } else { // yellow
@@ -23,7 +23,7 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
             color_on = YELLOW;
         }
     } else {
-        if (long_press_time > 0) { // orange
+        if (severe) { // orange
             color_off = ORANGE;
             color_on = ORANGE;
         } else { // green
@@ -54,7 +54,7 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
 Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
                            lv_color_t override_off, lv_color_t override_on)
     : label(data.label), callback(data.callback), toggleable(data.toggleable)
-    , long_press_time(data.long_press_time)
+    , severe(data.severe)
 {
     Serial.print("Creating Button: ");
     Serial.println(label);
@@ -108,13 +108,13 @@ void Button::eventHandler(lv_event_t* e) {
     if (code == LV_EVENT_PRESSED) {
         press_start = millis();
         long_press_handled = false;
-    } else if (code == LV_EVENT_PRESSING && long_press_time > 0) {
+    } else if (code == LV_EVENT_PRESSING && severe) {
         if (!long_press_handled) {
             uint32_t elapsed = millis() - press_start;
-            lv_opa_t ratio = elapsed >= long_press_time ? 255 : (255 * elapsed / long_press_time);
+            lv_opa_t ratio = elapsed >= LONG_PRESS_DURATION ? 255 : (255 * elapsed / LONG_PRESS_DURATION);
             lv_color_t base = toggleable ? (toggled ? color_on : color_off) : color_off;
             lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
-            if (elapsed >= long_press_time) {
+            if (elapsed >= LONG_PRESS_DURATION) {
                 handlePress();
                 long_press_handled = true;
                 if (!toggleable)
@@ -123,7 +123,7 @@ void Button::eventHandler(lv_event_t* e) {
         }
     } else if (code == LV_EVENT_RELEASED || code == LV_EVENT_PRESS_LOST) {
         updateVisual();
-    } else if (code == LV_EVENT_CLICKED && long_press_time == 0) {
+    } else if (code == LV_EVENT_CLICKED && !severe) {
         handlePress();
     }
 }
