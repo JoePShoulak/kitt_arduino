@@ -49,7 +49,7 @@ void setup() {
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
   LV_UNUSED(voice_tile); 
 
-  if (!audio.load("explode.wav")) {  // replace with name of file to play
+  if (!audio.load("kitt_shoe.wav")) {  // replace with name of file to play
     if (audio.hasError()) Serial.println(audio.errorMessage());
     else Serial.println("Cannot load WAV file");
     return;
