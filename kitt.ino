@@ -40,11 +40,6 @@ void motor_override_cb(lv_event_t* e) {
   Serial.println("MOTOR override callback!");
 }
 
-ButtonData const voice_buttons[3] = {
-    { "AUTO CRUISE", null_btn, true, true },
-    { "NORMAL CRUISE", null_btn, true, true },
-    { "PURSUIT", null_btn, true, true },
-};
 
 void setup() {
   Serial.begin(115200); // Initialize Serial

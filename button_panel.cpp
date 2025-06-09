@@ -5,10 +5,9 @@
 
 ButtonPanel::ButtonPanel(lv_obj_t* parent, ButtonData const* config) {
   // Calculate sizing
-  int spacing = 20; // consistent margin and spacing
-  int button_size = (800 - spacing * 6) / (BUTTON_COUNT / 2); // ~136 px
-  int grid_width = button_size * 2 + spacing * 3;
-  int grid_height = button_size * (BUTTON_COUNT / 2) + spacing * 6;
+  int button_size = PANEL_BUTTON_SIZE; // ~136 px
+  int grid_width = PANEL_GRID_WIDTH;
+  int grid_height = PANEL_GRID_HEIGHT;
 
   // Grid container (now direct child of parent, centered)
   lv_obj_t *grid = lv_obj_create(parent);
@@ -23,9 +22,9 @@ ButtonPanel::ButtonPanel(lv_obj_t* parent, ButtonData const* config) {
   lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
 
   // Set equal padding around grid and between buttons
-  lv_obj_set_style_pad_all(grid, spacing, 0);  // margin to edges (top = bottom = spacing)
-  lv_obj_set_style_pad_row(grid, spacing, 0);  // spacing between rows
-  lv_obj_set_style_pad_column(grid, spacing, 0);  // spacing between columns
+  lv_obj_set_style_pad_all(grid, SPACING, 0);  // margin to edges
+  lv_obj_set_style_pad_row(grid, SPACING, 0);  // spacing between rows
+  lv_obj_set_style_pad_column(grid, SPACING, 0);  // spacing between columns
 
   for (int i=0; i<BUTTON_COUNT; ++i) {
     buttons[i] = new Button(grid, config[i], i % 2, i / 2);

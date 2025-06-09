@@ -4,10 +4,17 @@
 #include "button.h"
 #include "indicator.h"
 
+// GENERAL DATA
+#define SPACING 20
+#define GRID_HEIGHT 800
+
 // PANEL DATA
 #define BUTTON_COUNT 8
+#define PANEL_BUTTON_SIZE ((GRID_HEIGHT - SPACING * 6) / (BUTTON_COUNT / 2))
+#define PANEL_GRID_WIDTH (PANEL_BUTTON_SIZE * 2 + SPACING * 3)
+#define PANEL_GRID_HEIGHT (PANEL_BUTTON_SIZE * (BUTTON_COUNT / 2) + SPACING * 6)
 
-void null_btn(lv_event_t *e); 
+void null_btn(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     { "TURBO BOOST", null_btn, true, true },
@@ -31,14 +38,19 @@ const ButtonData button_panel2[BUTTON_COUNT] = {
     { "LIGHTING", null_btn, true },
 };
 
+// VOICE DATA
+const ButtonData voice_buttons[3] = {
+    { "AUTO CRUISE", null_btn, true, true },
+    { "NORMAL CRUISE", null_btn, true, true },
+    { "PURSUIT", null_btn, true, true },
+};
+
 // VIZ DATA
-#define SPACING 20
 #define CIRCLE_DIAMETER 60
 #define COLUMN_WIDTH (CIRCLE_DIAMETER * 6 / 5)
 #define CENTER_WIDTH ((480 - CIRCLE_DIAMETER * 2 - SPACING * 4) * 9 / 10)
 #define GRID_WIDTH (COLUMN_WIDTH * 2 + CENTER_WIDTH + SPACING * 4)
 #define BUTTON_HEIGHT 85
-#define GRID_HEIGHT 800
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
 static const IndicatorData indicators[8] = {
