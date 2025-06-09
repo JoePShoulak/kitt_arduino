@@ -9,6 +9,10 @@
 #include "config.h"
 #include "voice_scene.h"
 
+#include <GigaAudio.h>
+
+GigaAudio audio("USB DISK"); // replace with name of USB volume
+
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
 
@@ -44,9 +48,20 @@ void setup() {
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
   LV_UNUSED(voice_tile); 
+
+  if (!audio.load("explode.wav")) {  // replace with name of file to play
+    if (audio.hasError()) Serial.println(audio.errorMessage());
+    else Serial.println("Cannot load WAV file");
+    return;
+  }
+  audio.play();
+
 }
 
 void loop() {
   lv_timer_handler();
-  delay(5);
+  if (audio.isFinished()) {
+    audio.play(); // restart the playback when it is complete
+    Serial.println("Restarting . . .");
+}
 }

@@ -44,7 +44,8 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     
     // debug
     viz->set_cols_active(5.0f/16); // TEST
-    indicator_objs[0]->toggle(true); // Air
+    indicator_objs[0]->toggle(true);
+    indicator_objs[2]->toggle(true);
 
     // Three stacked buttons in the centre column with custom colours
     Button* btn0 = new Button(grid, buttons[0], 1, 1, ORANGE_DARK, ORANGE);
