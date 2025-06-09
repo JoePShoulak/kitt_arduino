@@ -8,7 +8,6 @@
 #include "button_panel.h"
 #include "config.h"
 #include "voice_scene.h"
-#include "voice_visualiser.h"
 
 #include <GigaAudio.h>
 
@@ -17,10 +16,6 @@ GigaAudio audio("USB DISK"); // replace with name of USB volume
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
 
-unsigned long last_viz_update = 0;
-const float voice_pattern[] = {0.05f, 0.12f, 0.25f, 0.4f, 0.65f, 0.5f, 0.3f, 0.15f};
-const size_t voice_pattern_len = sizeof(voice_pattern) / sizeof(voice_pattern[0]);
-size_t voice_pattern_idx = 0;
 
 void make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
@@ -66,15 +61,6 @@ void setup() {
 
 void loop() {
   lv_timer_handler();
-  unsigned long now = millis();
-  if (now - last_viz_update > 100) {
-    last_viz_update = now;
-    VoiceVisualiser* viz = get_voice_visualiser();
-    if (viz) {
-      viz->set_cols_active(voice_pattern[voice_pattern_idx]);
-      voice_pattern_idx = (voice_pattern_idx + 1) % voice_pattern_len;
-    }
-  }
   if (audio.isFinished()) {
     audio.play(); // restart the playback when it is complete
     Serial.println("Restarting . . .");
