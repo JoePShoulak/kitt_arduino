@@ -48,9 +48,6 @@ ButtonData const voice_buttons[3] = {
     { "PURSUIT", null_btn, true, true },
 };
 
-ButtonPanel leftPanel;
-ButtonPanel rightPanel;
-
 void setup() {
   Serial.begin(115200); // Initialize Serial
   lv_init(); // Initialize LVGL
@@ -64,11 +61,11 @@ void setup() {
   lv_obj_set_style_bg_color(tiles, BLACK, 0);
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
-  make_panel(button_panel1, tiles, 0);
+  auto leftPanel = make_panel(button_panel1, tiles, 0);
   // TODO: Make the voice tile a class so we can store the visualiser and indicators
   // and update them from the voice tile to reflect things like voice state, indicators, etc.
   lv_obj_t* voice_tile = create_voice_tile(tiles, 1, voice_buttons);
-  make_panel(button_panel2, tiles, 2);
+  auto rightPanel = make_panel(button_panel2, tiles, 2);
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
