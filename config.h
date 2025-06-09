@@ -17,6 +17,10 @@
 #define PANEL_GRID_HEIGHT (PANEL_BUTTON_SIZE * (BUTTON_COUNT / 2) + SPACING * 6)
 
 void null_btn(lv_event_t *e);
+void voice_mode_cb(lv_event_t *e);
+bool validate_24v(lv_event_t *e);
+bool validate_motor(lv_event_t *e);
+bool validate_inverter(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", null_btn, true, true}, {"MAP SYSTEM", null_btn, true},

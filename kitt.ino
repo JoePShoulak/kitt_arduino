@@ -2,35 +2,14 @@
 
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay_GFX.h>
-#include <GigaAudio.h>
 #include <lvgl.h>
 
+#include "audio_helper.h"
 #include "button.h"
 #include "button_panel.h"
 #include "config.h"
 #include "popup.h"
 #include "voice_tile.h"
-
-// GigaAudio audio("USB DISK"); // replace with name of USB volume
-
-// List of audio files to play in sequence
-const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav"};
-const int audio_file_count = sizeof(audio_files) / sizeof(audio_files[0]);
-int current_audio_index = 0;
-
-// Helper to load the current audio file
-// bool load_current_audio() {
-//   if (!audio.load(const_cast<char*>(audio_files[current_audio_index]))) {
-//     if (audio.hasError()) {
-//       Serial.println(audio.errorMessage());
-//     } else {
-//       Serial.print("Cannot load WAV file ");
-//       Serial.println(audio_files[current_audio_index]);
-//     }
-//     return false;
-//   }
-//   return true;
-// }
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
@@ -38,71 +17,6 @@ VoiceTile *voiceTile = nullptr;
 Button *motor_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
-
-void voice_mode_cb(lv_event_t *e) {
-    auto self = static_cast<Button *>(lv_event_get_user_data(e));
-    if (!self || !self->isToggled() || !voiceTile)
-        return;
-    for (int i = 0; i < 3; ++i) {
-        Button *other = voiceTile->getButton(i);
-        if (other && other != self && other->isToggled()) {
-            other->handlePress();
-        }
-    }
-}
-
-bool validate_24v(lv_event_t *e) {
-    auto self = static_cast<Button *>(lv_event_get_user_data(e));
-    if (!self)
-        return true;
-    if (!self->isToggled() && motor_btn && motor_btn->isToggled()) {
-        Serial.println("ERROR: Cannot activate 24V MODE while MOTOR is ON");
-        lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
-        if (grid) {
-            lv_obj_t *tile = lv_obj_get_parent(grid);
-            show_error_popup(tile, "Cannot activate 24V MODE while MOTOR is ON");
-        }
-        return false;
-    }
-    if (self->isToggled() && inverter_btn && inverter_btn->isToggled()) {
-        Serial.println("ERROR: Cannot deactivate 24V MODE while INVERTER is ON");
-        lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
-        if (grid) {
-            lv_obj_t *tile = lv_obj_get_parent(grid);
-            show_error_popup(tile, "Cannot deactivate 24V MODE while INVERTER is ON");
-        }
-        return false;
-    }
-    return true;
-}
-
-bool validate_motor(lv_event_t *e) {
-    auto self = static_cast<Button *>(lv_event_get_user_data(e));
-    if (self && !self->isToggled() && btn24v && btn24v->isToggled()) {
-        Serial.println("ERROR: Cannot activate MOTOR while 24V MODE is ON");
-        lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
-        if (grid) {
-            lv_obj_t *tile = lv_obj_get_parent(grid);
-            show_error_popup(tile, "Cannot activate MOTOR while 24V MODE is ON");
-        }
-        return false;
-    }
-    return true;
-}
-
-bool validate_inverter(lv_event_t *e) {
-    auto self = static_cast<Button *>(lv_event_get_user_data(e));
-    if (self && !self->isToggled() && btn24v && !btn24v->isToggled()) {
-        Serial.println("ERROR: Cannot activate INVERTER while 24V MODE is OFF");
-        lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
-        if (grid) {
-            lv_obj_t *tile = lv_obj_get_parent(grid);
-            show_error_popup(tile, "Cannot activate INVERTER while 24V MODE is OFF");
-        }
-        return false;
-    }
-    return true;
-}
 
 void motor_override_cb(lv_event_t *e) { Serial.println("MOTOR override callback!"); }
 
@@ -143,18 +57,10 @@ void setup() {
 
     lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
-    // if (!audio.load("shoe.wav")) {  // replace with name of file to play
-    //   if (audio.hasError()) Serial.println(audio.errorMessage());
-    //   else Serial.println("Cannot load WAV file");
-    //   return;
-    // }
-    // audio.play();
+    play_audio_file("shoe.wav");
 }
 
 void loop() {
     lv_timer_handler();
-    //   if (audio.isFinished()) {
-    //     audio.play(); // restart the playback when it is complete
-    //     Serial.println("Restarting . . .");
-    //    }
+    audio_loop();
 }
