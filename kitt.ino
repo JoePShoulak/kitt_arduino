@@ -35,11 +35,11 @@ int current_audio_index = 0;
 GigaDisplay_GFX tft; // Init tft
     Arduino_GigaDisplayTouch TouchDetector;
 
-void make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
+ButtonPanel make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
     lv_obj_set_style_bg_color(tile, BLACK, 0);
 
-    new ButtonPanel(tile, config);
+    return new ButtonPanel(tile, config);
 }
 
 ButtonData const voice_buttons[3] = {
@@ -47,6 +47,9 @@ ButtonData const voice_buttons[3] = {
     { "NORMAL CRUISE", null_btn, true, true },
     { "PURSUIT", null_btn, true, true },
 };
+
+ButtonPanel leftPanel;
+ButtonPanel rightPanel;
 
 void setup() {
   Serial.begin(115200); // Initialize Serial
