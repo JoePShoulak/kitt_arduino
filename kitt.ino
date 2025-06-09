@@ -3,18 +3,18 @@
 #include <Arduino_GigaDisplay_GFX.h>
 #include <Arduino_GigaDisplayTouch.h>
 #include <lvgl.h>
+#include <GigaAudio.h>
 
 #include "button.h"
 #include "button_panel.h"
 #include "config.h"
 #include "voice_scene.h"
 
-#include <GigaAudio.h>
 
 GigaAudio audio("USB DISK"); // replace with name of USB volume
 
 // List of audio files to play in sequence
-const char *audio_files[] = {"intro.wav", "explode.wav", "kitt_shoe.wav"};
+const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav"};
 const int audio_file_count = sizeof(audio_files) / sizeof(audio_files[0]);
 int current_audio_index = 0;
 
@@ -66,21 +66,17 @@ void setup() {
   make_panel(button_panel2, tiles, 2);
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
-  LV_UNUSED(voice_tile); 
 
   if (!load_current_audio()) {
     return;
   }
-  audio.play();
-  Serial.print("Playing ");
-  Serial.println(audio_files[current_audio_index]);
-
 }
 
 void loop() {
   lv_timer_handler();
+
+  // Audio testing
   if (audio.isFinished()) {
-    // Move to the next audio file
     current_audio_index = (current_audio_index + 1) % audio_file_count;
     if (load_current_audio()) {
       audio.play();
