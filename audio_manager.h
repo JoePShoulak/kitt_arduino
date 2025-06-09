@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <mbed.h>
-#include <USBHostMSD.h>
+#include <Arduino_USBHostMbed5.h>
 #include <FATFileSystem.h>
 #include <I2S.h>
 #include <vector>
