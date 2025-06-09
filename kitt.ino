@@ -43,7 +43,7 @@ void setup() {
   make_panel(button_panel2, tiles, 2);
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
-  LV_UNUSED(voice_tile);
+  LV_UNUSED(voice_tile); 
 }
 
 void loop() {
