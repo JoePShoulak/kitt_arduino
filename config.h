@@ -43,7 +43,7 @@ const ButtonData button_panel2[BUTTON_COUNT] = {
 // VOICE DATA
 const ButtonData voice_buttons[3] = {
     { "AUTO CRUISE", null_btn, true, true },
-    { "NORMAL CRUISE", null_btn, true, true },
+    { "NORMAL CRUISE", null_btn, true, true, true },
     { "PURSUIT", null_btn, true, true },
 };
 

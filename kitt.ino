@@ -40,6 +40,17 @@ Button* motor_btn = nullptr;
 Button* btn24v = nullptr;
 Button* inverter_btn = nullptr;
 
+void voice_mode_cb(lv_event_t* e) {
+  auto self = static_cast<Button*>(lv_event_get_user_data(e));
+  if (!self || !self->isToggled() || !voiceTile) return;
+  for (int i = 0; i < 3; ++i) {
+    Button* other = voiceTile->getButton(i);
+    if (other && other != self && other->isToggled()) {
+      other->handlePress();
+    }
+  }
+}
+
 bool validate_24v(lv_event_t* e) {
   auto self = static_cast<Button*>(lv_event_get_user_data(e));
   if (!self) return true;
@@ -112,6 +123,10 @@ void setup() {
 
   auto leftPanel = ButtonPanel::createTile(tiles, 0, button_panel1);
   voiceTile = new VoiceTile(tiles, 1, voice_buttons);
+  for (int i = 0; i < 3; ++i) {
+    Button* btn = voiceTile->getButton(i);
+    if (btn) btn->setCallback(voice_mode_cb);
+  }
   auto rightPanel = ButtonPanel::createTile(tiles, 2, button_panel2);
   motor_btn = rightPanel->getButton(0);
   if (motor_btn) {
