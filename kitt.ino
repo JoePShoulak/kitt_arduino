@@ -33,13 +33,17 @@ int current_audio_index = 0;
 // }
 
 GigaDisplay_GFX tft; // Init tft
-    Arduino_GigaDisplayTouch TouchDetector;
+Arduino_GigaDisplayTouch TouchDetector;
 
-ButtonPanel make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
+ButtonPanel* make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
     lv_obj_set_style_bg_color(tile, BLACK, 0);
 
     return new ButtonPanel(tile, config);
+}
+
+void motor_override_cb(lv_event_t* e) {
+  Serial.println("MOTOR override callback!");
 }
 
 ButtonData const voice_buttons[3] = {
@@ -66,6 +70,9 @@ void setup() {
   // and update them from the voice tile to reflect things like voice state, indicators, etc.
   lv_obj_t* voice_tile = create_voice_tile(tiles, 1, voice_buttons);
   auto rightPanel = make_panel(button_panel2, tiles, 2);
+  if (auto btn = rightPanel->getButton(0)) {
+    btn->setCallback(motor_override_cb);
+  }
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 

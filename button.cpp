@@ -81,6 +81,10 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
     lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
 }
 
+void Button::setCallback(button_callback cb) {
+    callback = cb;
+}
+
 void Button::handlePress() {
     if (toggleable) {
         toggled = !toggled;
@@ -116,6 +120,7 @@ void Button::eventHandler(lv_event_t* e) {
             lv_obj_set_style_bg_color(btn, lv_color_mix(WHITE, base, ratio), 0);
             if (elapsed >= LONG_PRESS_DURATION) {
                 handlePress();
+                if (callback) callback(e);
                 long_press_handled = true;
                 if (!toggleable)
                     updateVisual();
@@ -125,6 +130,7 @@ void Button::eventHandler(lv_event_t* e) {
         updateVisual();
     } else if (code == LV_EVENT_CLICKED && !severe) {
         handlePress();
+        if (callback) callback(e);
     }
 }
 
