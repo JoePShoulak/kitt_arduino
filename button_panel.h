@@ -8,16 +8,19 @@
 #include <lvgl.h>
 
 class ButtonPanel {
-    Button *buttons[BUTTON_COUNT];
+  Button *buttons[BUTTON_COUNT];
 
-  public:
-    ButtonPanel(lv_obj_t *parent, ButtonData const *config);
+public:
+  ButtonPanel(lv_obj_t *parent, ButtonData const *config);
 
-    static ButtonPanel *createTile(lv_obj_t *tileview, int row_id, ButtonData const *config);
+  static ButtonPanel *createTile(lv_obj_t *tileview, int row_id,
+                                 ButtonData const *config);
 
-    Button *getButton(uint8_t index) { return index < BUTTON_COUNT ? buttons[index] : nullptr; }
+  Button *getButton(uint8_t index) {
+    return index < BUTTON_COUNT ? buttons[index] : nullptr;
+  }
 
-    ~ButtonPanel();
+  ~ButtonPanel();
 };
 
 #endif

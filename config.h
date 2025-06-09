@@ -17,10 +17,6 @@
 #define PANEL_GRID_HEIGHT (PANEL_BUTTON_SIZE * (BUTTON_COUNT / 2) + SPACING * 6)
 
 void null_btn(lv_event_t *e);
-void voice_mode_cb(lv_event_t *e);
-bool validate_24v(lv_event_t *e);
-bool validate_motor(lv_event_t *e);
-bool validate_inverter(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", null_btn, true, true}, {"MAP SYSTEM", null_btn, true},
@@ -30,10 +26,14 @@ const ButtonData button_panel1[BUTTON_COUNT] = {
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    {"MOTOR", null_btn, true, true, true}, {"BLACKOUT", null_btn, true, true},
-    {"24V MODE", null_btn, true, true},    {"INVERTER", null_btn, true, true},
-    {"GPS", null_btn, true, false, true},  {"RADIO", null_btn, true, false, true},
-    {"USB", null_btn, true, false, true},  {"LIGHTING", null_btn, true},
+    {"MOTOR", null_btn, true, true, true},
+    {"BLACKOUT", null_btn, true, true},
+    {"24V MODE", null_btn, true, true},
+    {"INVERTER", null_btn, true, true},
+    {"GPS", null_btn, true, false, true},
+    {"RADIO", null_btn, true, false, true},
+    {"USB", null_btn, true, false, true},
+    {"LIGHTING", null_btn, true},
 };
 
 // VOICE DATA
@@ -52,8 +52,9 @@ const ButtonData voice_buttons[3] = {
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
 static const IndicatorData indicators[8] = {
-    {"AIR", ORANGE_DARK, ORANGE}, {"OIL", ORANGE_DARK, ORANGE}, {"P1", RED_DARK, RED},
-    {"P2", RED_DARK, RED},        {"S1", ORANGE_DARK, ORANGE},  {"S2", ORANGE_DARK, ORANGE},
+    {"AIR", ORANGE_DARK, ORANGE}, {"OIL", ORANGE_DARK, ORANGE},
+    {"P1", RED_DARK, RED},        {"P2", RED_DARK, RED},
+    {"S1", ORANGE_DARK, ORANGE},  {"S2", ORANGE_DARK, ORANGE},
     {"P3", RED_DARK, RED},        {"P4", RED_DARK, RED}};
 
 #endif
