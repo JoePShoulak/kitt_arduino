@@ -11,7 +11,7 @@
 #include "popup.h"
 #include "voice_tile.h"
 
-// GigaAudio audio("USB DISK"); // replace with name of USB volume
+GigaAudio audio("USB DISK"); // replace with name of USB volume
 
 // List of audio files to play in sequence
 const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav"};
@@ -19,18 +19,18 @@ const int audio_file_count = sizeof(audio_files) / sizeof(audio_files[0]);
 int current_audio_index = 0;
 
 // Helper to load the current audio file
-// bool load_current_audio() {
-//   if (!audio.load(const_cast<char*>(audio_files[current_audio_index]))) {
-//     if (audio.hasError()) {
-//       Serial.println(audio.errorMessage());
-//     } else {
-//       Serial.print("Cannot load WAV file ");
-//       Serial.println(audio_files[current_audio_index]);
-//     }
-//     return false;
-//   }
-//   return true;
-// }
+bool load_current_audio() {
+  if (!audio.load(const_cast<char *>(audio_files[current_audio_index]))) {
+    if (audio.hasError()) {
+      Serial.println(audio.errorMessage());
+    } else {
+      Serial.print("Cannot load WAV file ");
+      Serial.println(audio_files[current_audio_index]);
+    }
+    return false;
+  }
+  return true;
+}
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
@@ -145,18 +145,20 @@ void setup() {
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
-  // if (!audio.load("shoe.wav")) {  // replace with name of file to play
-  //   if (audio.hasError()) Serial.println(audio.errorMessage());
-  //   else Serial.println("Cannot load WAV file");
-  //   return;
-  // }
-  // audio.play();
+  if (!audio.load("shoe.wav")) { // replace with name of file to play
+    if (audio.hasError())
+      Serial.println(audio.errorMessage());
+    else
+      Serial.println("Cannot load WAV file");
+    return;
+  }
+  audio.play();
 }
 
 void loop() {
   lv_timer_handler();
-  //   if (audio.isFinished()) {
-  //     audio.play(); // restart the playback when it is complete
-  //     Serial.println("Restarting . . .");
-  //    }
+  if (audio.isFinished()) {
+    audio.play(); // restart the playback when it is complete
+    Serial.println("Restarting . . .");
+  }
 }
