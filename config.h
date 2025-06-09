@@ -4,13 +4,13 @@
 #include "button.h"
 #include "indicator.h"
 
-// GENERAL DATA
+// ==== Layout constants ====
 #define SPACING 20
 #define GRID_HEIGHT 800
 #define POPUP_WIDTH 300
 #define POPUP_HEIGHT 220
 
-// PANEL DATA
+// ==== Button panel configuration ====
 #define BUTTON_COUNT 8
 #define PANEL_BUTTON_SIZE ((GRID_HEIGHT - SPACING * 6) / (BUTTON_COUNT / 2))
 #define PANEL_GRID_WIDTH (PANEL_BUTTON_SIZE * 2 + SPACING * 3)
@@ -36,14 +36,14 @@ const ButtonData button_panel2[BUTTON_COUNT] = {
     {"LIGHTING", null_btn, true},
 };
 
-// VOICE DATA
+// ==== Voice tile configuration ====
 const ButtonData voice_buttons[3] = {
     {"AUTO CRUISE", null_btn, true, true},
     {"NORMAL CRUISE", null_btn, true, true, true},
     {"PURSUIT", null_btn, true, true},
 };
 
-// VIZ DATA
+// ==== Visualiser configuration ====
 #define CIRCLE_DIAMETER 60
 #define COLUMN_WIDTH (CIRCLE_DIAMETER * 6 / 5)
 #define CENTER_WIDTH ((480 - CIRCLE_DIAMETER * 2 - SPACING * 4) * 9 / 10)
@@ -57,6 +57,7 @@ static const IndicatorData indicators[8] = {
     {"S1", ORANGE_DARK, ORANGE},  {"S2", ORANGE_DARK, ORANGE},
     {"P3", RED_DARK, RED},        {"P4", RED_DARK, RED}};
 
+// ==== Global UI references ====
 class VoiceTile;
 
 extern VoiceTile *voiceTile;
@@ -64,6 +65,8 @@ extern Button *motor_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
 
+// ==== Event callbacks ====
+void motor_override_cb(lv_event_t *e);
 void voice_mode_cb(lv_event_t *e);
 bool validate_24v(lv_event_t *e);
 bool validate_motor(lv_event_t *e);

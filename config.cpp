@@ -5,6 +5,10 @@
 #include "popup.h"
 #include "voice_tile.h"
 
+// This file implements the callbacks and validation logic declared in
+// config.h. Functions are grouped by purpose for clarity.
+
+// ==== Basic callbacks ====
 void null_btn(lv_event_t *e) {
   Button *self = static_cast<Button *>(lv_event_get_user_data(e));
   if (self) {
@@ -16,6 +20,10 @@ void null_btn(lv_event_t *e) {
     }
     Serial.println(self->getLabel());
   }
+}
+
+void motor_override_cb(lv_event_t *e) {
+  Serial.println("MOTOR override callback!");
 }
 
 void voice_mode_cb(lv_event_t *e) {
@@ -30,6 +38,7 @@ void voice_mode_cb(lv_event_t *e) {
   }
 }
 
+// ==== Validation helpers ====
 bool validate_24v(lv_event_t *e) {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
   if (!self)

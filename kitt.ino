@@ -18,10 +18,6 @@ Button *motor_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
 
-void motor_override_cb(lv_event_t *e) {
-  Serial.println("MOTOR override callback!");
-}
-
 void setup() {
   Serial.begin(115200); // Initialize Serial
   lv_init();            // Initialize LVGL
