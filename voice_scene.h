@@ -7,5 +7,6 @@
 lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* buttons);
 
 class VoiceVisualiser;
+VoiceVisualiser* get_voice_visualiser();
 
 #endif

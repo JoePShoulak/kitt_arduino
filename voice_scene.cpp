@@ -5,19 +5,9 @@
 #include "config.h"
 
 static VoiceVisualiser* g_visualiser = nullptr;
-static lv_timer_t* viz_timer = nullptr;
 
-static const float voice_pattern[] = {
-    0.05f, 0.12f, 0.25f, 0.4f, 0.65f, 0.5f, 0.3f, 0.15f
-};
-static const size_t voice_pattern_len = sizeof(voice_pattern) / sizeof(voice_pattern[0]);
-static size_t voice_pattern_idx = 0;
-
-static void voice_timer_cb(lv_timer_t* timer) {
-    LV_UNUSED(timer);
-    if (!g_visualiser) return;
-    g_visualiser->set_cols_active(voice_pattern[voice_pattern_idx]);
-    voice_pattern_idx = (voice_pattern_idx + 1) % voice_pattern_len;
+VoiceVisualiser* get_voice_visualiser() {
+    return g_visualiser;
 }
 
 
@@ -60,11 +50,8 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     auto viz = new VoiceVisualiser(grid);
     g_visualiser = viz;
 
-    if (!viz_timer)
-        viz_timer = lv_timer_create(voice_timer_cb, 100, nullptr);
-
-    // debug initial state
-    viz->set_cols_active(voice_pattern[0]);
+    // debug initial state (all off)
+    viz->set_cols_active(0.0f);
     indicator_objs[0]->toggle(true);
     indicator_objs[2]->toggle(true);
 
