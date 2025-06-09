@@ -52,8 +52,6 @@ void audio_loop() {
     if (!audio)
         return;
 
-    audio->loop();
-
     if (audio->isFinished()) {
         current_audio_index = (current_audio_index + 1) % audio_file_count;
         if (play_current_audio())
