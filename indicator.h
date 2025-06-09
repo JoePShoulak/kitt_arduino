@@ -13,6 +13,7 @@ class Indicator {
     const IndicatorData& data;
     lv_obj_t* indicator;
 
+    void initStyle(lv_obj_t* obj);
     void style(lv_obj_t* parent);
 
 public:

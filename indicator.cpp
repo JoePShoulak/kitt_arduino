@@ -3,11 +3,15 @@
 #include "config.h"
 
 Indicator::Indicator(const IndicatorData& data, lv_obj_t* parent) : data(data) {
-    this->style(parent);
+void Indicator::initStyle(lv_obj_t* obj) {
+    lv_obj_remove_style_all(obj);
+    lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, 0);
+    lv_obj_set_style_radius(obj, CIRCLE_DIAMETER / 2, 0);
+    lv_obj_set_style_bg_color(obj, data.dark, 0);
+    lv_obj_set_size(obj, CIRCLE_DIAMETER * 6 / 5, CIRCLE_DIAMETER);
 }
 
-void Indicator::toggle(bool on) {
-    lv_obj_set_style_bg_color(this->indicator, on ? data.light : data.dark, 0);
+    initStyle(indicator);
 
     lv_obj_t* lbl = lv_label_create(indicator);
     lv_obj_set_style_text_color(lbl, BLACK, 0);

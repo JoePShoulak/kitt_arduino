@@ -77,15 +77,19 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, 
     lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, this);
 }
 
-void Button::handlePress() {
-    if (toggleable) {
-        toggled = !toggled;
-        Serial.print("Button ");
-        Serial.print(toggled ? "On: " : "Off: ");
-        Serial.println(label);
-        updateVisual();
-    } else {
-        Serial.print("Button pressed: ");
+void Button::initStyle() {
+    lv_style_init(&btn_style);
+    lv_style_set_radius(&btn_style, 0);
+    lv_style_set_border_width(&btn_style, 0);
+    lv_style_set_shadow_width(&btn_style, 0);
+    lv_style_set_outline_width(&btn_style, 0);
+    lv_style_set_pad_all(&btn_style, 0);
+    lv_style_set_text_color(&btn_style, BLACK);
+    lv_style_set_text_font(&btn_style, &lv_font_montserrat_14);
+}
+
+    initStyle();
+    lv_obj_add_style(btn, &btn_style, 0);
         Serial.println(label);
     }
 }

@@ -33,8 +33,9 @@ private:
     button_callback callback;
     lv_obj_t *btn;
     lv_obj_t *label_obj;
-    lv_style_t style;
+    lv_style_t btn_style;
 
+    void initStyle();
     void style(lv_obj_t *parent_grid);
 
     lv_color_t color_off;
