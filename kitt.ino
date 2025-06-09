@@ -67,7 +67,9 @@ void setup() {
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
-  if (!load_current_audio()) {
+  if (!audio.load("shoe.wav")) {  // replace with name of file to play
+    if (audio.hasError()) Serial.println(audio.errorMessage());
+    else Serial.println("Cannot load WAV file");
     return;
   }
 }
