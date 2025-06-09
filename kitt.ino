@@ -8,6 +8,7 @@
 #include "button_panel.h"
 #include "config.h"
 #include "voice_scene.h"
+#include "audio_manager.h"
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
@@ -30,6 +31,8 @@ void setup() {
   lv_init(); // Initialize LVGL
   tft.begin(); // Initialize Giga Display
   TouchDetector.begin();
+  AudioManager::instance().begin("/USB DISK/AUDIO");
+  AudioManager::instance().play("explode.wav");
 
   auto* canvas = lv_scr_act();
   lv_obj_set_style_bg_color(canvas, BLACK, 0);
@@ -48,5 +51,10 @@ void setup() {
 
 void loop() {
   lv_timer_handler();
+  AudioManager::instance().update();
+  if (!AudioManager::instance().isPlaying()) {
+    AudioManager::instance().play("explode.wav");
+  }
   delay(5);
 }
+
