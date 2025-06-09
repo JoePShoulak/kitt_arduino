@@ -31,7 +31,7 @@ lv_obj_t* show_error_popup(lv_obj_t* parent_tile, const char* msg) {
     lv_obj_t* box = lv_obj_create(overlay);
     lv_obj_remove_style_all(box);
     lv_obj_set_size(box, POPUP_WIDTH, POPUP_HEIGHT);
-    lv_obj_set_style_bg_color(box, WHITE, 0);
+    lv_obj_set_style_bg_color(box, GRAY_LIGHT, 0);
     lv_obj_set_style_bg_opa(box, LV_OPA_COVER, 0);
     lv_obj_set_style_radius(box, 10, 0);
     lv_obj_set_style_pad_all(box, 20, 0);
@@ -42,8 +42,11 @@ lv_obj_t* show_error_popup(lv_obj_t* parent_tile, const char* msg) {
     lv_obj_center(box);
 
     lv_obj_t* label = lv_label_create(box);
+    lv_label_set_long_mode(label, LV_LABEL_LONG_WRAP);
+    lv_obj_set_width(label, POPUP_WIDTH - 40);
     lv_label_set_text(label, msg);
     lv_obj_set_style_text_color(label, BLACK, 0);
+    lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
 
     lv_obj_t* btn = lv_btn_create(box);
     lv_obj_remove_style_all(btn);

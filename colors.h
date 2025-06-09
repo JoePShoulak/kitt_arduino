@@ -10,6 +10,9 @@
 #define GREEN lv_color_hex(0x00FF00)
 #define BLUE lv_color_hex(0x0077FF)
 
+// additional colors
+#define GRAY_LIGHT lv_color_hex(0xDDDDDD)
+
 // dark variants for toggled-off states
 #define RED_DARK lv_color_hex(0x990000)
 #define YELLOW_DARK lv_color_hex(0x999900)
