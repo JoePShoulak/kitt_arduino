@@ -1,25 +1,28 @@
 #include "audio_manager.h"
 
 #include <Arduino.h>
-#include <FS.h>
+#include <mbed.h>
+#include <dirent.h>
+#include <cstdio>
 
 AudioManager& AudioManager::instance() {
     static AudioManager instance;
     return instance;
 }
 
+AudioManager::AudioManager() : m_fs("fs") {}
+
 bool AudioManager::begin(const char* folder) {
-    if (!m_msc.begin()) {
+    if (!m_msd.connect()) {
         Serial.println("AudioManager: USB drive not detected");
         return false;
     }
 
-    // wait until the drive is ready
-    while (!m_msc.ready()) {
-        m_usb.Task();
+    if (m_fs.mount(&m_msd) != 0) {
+        Serial.println("AudioManager: failed to mount filesystem");
+        return false;
     }
 
-    m_fs = &m_msc;
     m_folder = String(folder);
     scanFolder(folder);
 
@@ -33,43 +36,41 @@ bool AudioManager::begin(const char* folder) {
 
 void AudioManager::scanFolder(const char* folder) {
     m_files.clear();
-    if (!m_fs) {
-        Serial.println("AudioManager: filesystem not ready");
-        return;
-    }
 
-    File dir = m_fs->open(folder);
+    char path[256];
+    snprintf(path, sizeof(path), "/fs/%s", folder);
+
+    DIR* dir = opendir(path);
     if (!dir) {
         Serial.println("AudioManager: failed to open directory");
         return;
     }
 
-    File entry;
-    while ((entry = dir.openNextFile())) {
-        if (!entry.isDirectory()) {
-            String name = entry.name();
+    struct dirent* ent;
+    while ((ent = readdir(dir)) != nullptr) {
+        if (ent->d_type != DT_DIR) {
+            String name = ent->d_name;
             name.toLowerCase();
             if (name.endsWith(".mp3") || name.endsWith(".wav")) {
-                m_files.push_back(String(entry.name()));
+                m_files.push_back(String(ent->d_name));
             }
         }
-        entry.close();
     }
-    dir.close();
+    closedir(dir);
 }
 
 void AudioManager::update() {
     if (!m_playing)
         return;
 
-    if (!m_file || !m_file.available()) {
+    if (!m_file || feof(m_file)) {
         stop();
         return;
     }
 
-    while (m_file.available() && I2S.availableForWrite() >= (int)sizeof(m_buffer)) {
-        size_t bytesRead = m_file.read((uint8_t*)m_buffer, sizeof(m_buffer));
-        if (!bytesRead) {
+    while (!feof(m_file) && I2S.availableForWrite() >= (int)sizeof(m_buffer)) {
+        size_t bytesRead = fread(m_buffer, 1, sizeof(m_buffer), m_file);
+        if (bytesRead == 0) {
             stop();
             break;
         }
@@ -87,13 +88,14 @@ void AudioManager::update() {
 }
 
 bool AudioManager::play(const char* filename) {
-    if (!filename || !*filename || !m_fs)
+    if (!filename || !*filename)
         return false;
 
     stop();
 
-    String path = String(m_folder) + "/" + filename;
-    m_file = m_fs->open(path.c_str());
+    char path[256];
+    snprintf(path, sizeof(path), "/fs/%s/%s", m_folder.c_str(), filename);
+    m_file = fopen(path, "rb");
     if (!m_file) {
         Serial.println("AudioManager: failed to open file");
         return false;
@@ -119,9 +121,10 @@ const std::vector<String>& AudioManager::files() const {
 void AudioManager::stop() {
     if (m_playing) {
         I2S.flush();
-        I2S.end();
-        if (m_file)
-            m_file.close();
+        if (m_file) {
+            fclose(m_file);
+            m_file = nullptr;
+        }
         m_playing = false;
         m_loudness = 0.0f;
     }

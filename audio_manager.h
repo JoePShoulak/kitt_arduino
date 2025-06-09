@@ -2,8 +2,9 @@
 #define AUDIO_MANAGER_H
 
 #include <Arduino.h>
-#include <USBHost.h>
-#include <USBMSC.h>
+#include <mbed.h>
+#include <USBHostMSD.h>
+#include <FATFileSystem.h>
 #include <I2S.h>
 #include <vector>
 
@@ -32,14 +33,13 @@ public:
     const std::vector<String>& files() const;
 
 private:
-    AudioManager() = default;
+    AudioManager();
     void scanFolder(const char* folder);
     void stop();
 
-    USBHost m_usb{};
-    USBMSC m_msc{m_usb};
-    fs::FS* m_fs = nullptr;
-    File m_file;
+    USBHostMSD m_msd{"usb"};
+    mbed::FATFileSystem m_fs{"fs"};
+    FILE* m_file = nullptr;
     std::vector<String> m_files;
     String m_folder;
     bool m_playing = false;
