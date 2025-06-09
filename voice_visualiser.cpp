@@ -74,3 +74,4 @@ void VoiceVisualiser::set_cols_active(float ratio_norm) {
         }
     }
 }
+

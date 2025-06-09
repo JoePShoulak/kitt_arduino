@@ -1,11 +1,8 @@
-#include "voice_scene.h"
-#include "button.h"
-#include "voice_visualiser.h"
-#include "indicator.h"
+#include "voice_tile.h"
 #include "config.h"
 
-lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* buttons) {
-    auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
+VoiceTile::VoiceTile(lv_obj_t* tileview, int row_id, ButtonData const* button_data) {
+    tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
     lv_obj_set_style_bg_color(tile, BLACK, 0);
 
     lv_obj_t* grid = lv_obj_create(tile);
@@ -21,10 +18,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     lv_obj_set_style_pad_row(grid, SPACING, 0);
     lv_obj_set_style_pad_column(grid, SPACING, 0);
 
-    // left and right columns of indicator lights evenly spaced vertically
-    Indicator* indicator_objs[8];
-
-    for(int side = 0; side < 2; ++side) {
+    for (int side = 0; side < 2; ++side) {
         int col = side == 0 ? 0 : 2;
         lv_obj_t* column = lv_obj_create(grid);
         lv_obj_remove_style_all(column);
@@ -36,21 +30,30 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
                               LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
         lv_obj_set_width(column, COLUMN_WIDTH);
 
-        for (int i = 0; i < 4; ++i) 
-            indicator_objs[side * 4 + i] = new Indicator(indicators[side * 4 + i], column);
+        for (int i = 0; i < 4; ++i) {
+            indicators[side * 4 + i] = new Indicator(::indicators[side * 4 + i], column);
+        }
     }
 
-    auto viz = new VoiceVisualiser(grid);
-    
+    visualiser = new VoiceVisualiser(grid);
+
     // debug
-    viz->set_cols_active(5.0f/16); // TEST
-    indicator_objs[0]->toggle(true);
-    indicator_objs[2]->toggle(true);
+    visualiser->set_cols_active(5.0f / 16);
+    this->indicators[0]->toggle(true);
+    this->indicators[2]->toggle(true);
 
-    // Three stacked buttons in the centre column with custom colours
-    Button* btn0 = new Button(grid, buttons[0], 1, 1, ORANGE_DARK, ORANGE);
-    Button* btn1 = new Button(grid, buttons[1], 1, 2, GREEN_DARK, GREEN);
-    Button* btn2 = new Button(grid, buttons[2], 1, 3, BLUE_DARK, BLUE);
-
-    return tile;
+    buttons[0] = new Button(grid, button_data[0], 1, 1, ORANGE_DARK, ORANGE);
+    buttons[1] = new Button(grid, button_data[1], 1, 2, GREEN_DARK, GREEN);
+    buttons[2] = new Button(grid, button_data[2], 1, 3, BLUE_DARK, BLUE);
 }
+
+VoiceTile::~VoiceTile() {
+    for (auto& btn : buttons) {
+        delete btn;
+    }
+    for (auto& ind : indicators) {
+        delete ind;
+    }
+    delete visualiser;
+}
+

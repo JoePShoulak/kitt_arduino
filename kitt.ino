@@ -8,7 +8,7 @@
 #include "button.h"
 #include "button_panel.h"
 #include "config.h"
-#include "voice_scene.h"
+#include "voice_tile.h"
 
 
 // GigaAudio audio("USB DISK"); // replace with name of USB volume
@@ -34,6 +34,7 @@ int current_audio_index = 0;
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
+VoiceTile* voiceTile = nullptr;
 
 ButtonPanel* make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
@@ -66,9 +67,7 @@ void setup() {
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
   auto leftPanel = make_panel(button_panel1, tiles, 0);
-  // TODO: Make the voice tile a class so we can store the visualiser and indicators
-  // and update them from the voice tile to reflect things like voice state, indicators, etc.
-  lv_obj_t* voice_tile = create_voice_tile(tiles, 1, voice_buttons);
+  voiceTile = new VoiceTile(tiles, 1, voice_buttons);
   auto rightPanel = make_panel(button_panel2, tiles, 2);
   if (auto btn = rightPanel->getButton(0)) {
     btn->setCallback(motor_override_cb);
