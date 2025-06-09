@@ -20,7 +20,7 @@ int current_audio_index = 0;
 
 // Helper to load the current audio file
 bool load_current_audio() {
-  if (!audio.load(audio_files[current_audio_index])) {
+  if (!audio.load(const_cast<char*>(audio_files[current_audio_index]))) {
     if (audio.hasError()) {
       Serial.println(audio.errorMessage());
     } else {
