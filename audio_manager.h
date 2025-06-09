@@ -34,6 +34,7 @@ public:
 
 private:
     AudioManager();
+    ~AudioManager();
     void scanFolder(const char* folder);
     void stop();
 

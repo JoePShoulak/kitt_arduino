@@ -12,6 +12,13 @@ AudioManager& AudioManager::instance() {
 
 AudioManager::AudioManager() : m_fs("fs") {}
 
+AudioManager::~AudioManager() {
+    stop();
+    I2S.end();
+    m_fs.unmount();
+    m_msd.disconnect();
+}
+
 bool AudioManager::begin(const char* folder) {
     if (!m_msd.connect()) {
         Serial.println("AudioManager: USB drive not detected");
