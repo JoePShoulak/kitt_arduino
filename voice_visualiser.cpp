@@ -19,6 +19,8 @@ VoiceVisualiser::VoiceVisualiser(lv_obj_t *parent) {
   make_column(0, 19);
   make_column(1, 29);
   make_column(2, 19);
+
+  timer = lv_timer_create(timer_cb, 50, this); // 20 FPS update
 }
 
 void VoiceVisualiser::make_column(int id, int count) {
@@ -75,4 +77,19 @@ void VoiceVisualiser::set_cols_active(float ratio_norm) {
       }
     }
   }
+}
+
+void VoiceVisualiser::setLevel(float lvl) {
+  if (lvl < 0.f)
+    lvl = 0.f;
+  if (lvl > 1.f)
+    lvl = 1.f;
+  level = lvl;
+}
+
+void VoiceVisualiser::timer_cb(lv_timer_t *t) {
+  auto self = static_cast<VoiceVisualiser *>(t->user_data);
+  if (!self)
+    return;
+  self->set_cols_active(self->level);
 }

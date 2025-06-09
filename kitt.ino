@@ -4,6 +4,7 @@
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay_GFX.h>
 #include <lvgl.h>
+#include <math.h>
 
 #include "button.h"
 #include "button_panel.h"
@@ -17,6 +18,16 @@ VoiceTile *voiceTile = nullptr;
 Button *motor_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
+lv_timer_t *voice_anim_timer = nullptr;
+
+static void voice_anim_cb(lv_timer_t *t) {
+  static uint32_t step = 0;
+  (void)t;
+  float val = (sin(step * 0.1f) + 1.0f) / 2.0f;
+  if (voiceTile && voiceTile->getVisualiser())
+    voiceTile->getVisualiser()->setLevel(val);
+  step++;
+}
 
 void setup() {
   Serial.begin(115200); // Initialize Serial
@@ -54,6 +65,8 @@ void setup() {
   }
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
+
+  voice_anim_timer = lv_timer_create(voice_anim_cb, 50, nullptr);
 
   // audio_setup();
 }

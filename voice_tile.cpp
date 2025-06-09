@@ -42,8 +42,8 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id,
 
   visualiser = new VoiceVisualiser(grid);
 
-  // debug
-  visualiser->set_cols_active(5.0f / 16);
+  // start with no volume
+  visualiser->setLevel(0.0f);
   this->indicators[0]->toggle(true);
   this->indicators[2]->toggle(true);
 
