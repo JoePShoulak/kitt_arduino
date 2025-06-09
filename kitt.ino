@@ -55,10 +55,10 @@ void setup() {
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
-  audio_setup();
+  // audio_setup();
 }
 
 void loop() {
   lv_timer_handler();
-  audio_loop();
+  // audio_loop();
 }
