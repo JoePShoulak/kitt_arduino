@@ -57,4 +57,16 @@ static const IndicatorData indicators[8] = {
     {"S1", ORANGE_DARK, ORANGE},  {"S2", ORANGE_DARK, ORANGE},
     {"P3", RED_DARK, RED},        {"P4", RED_DARK, RED}};
 
+class VoiceTile;
+
+extern VoiceTile *voiceTile;
+extern Button *motor_btn;
+extern Button *btn24v;
+extern Button *inverter_btn;
+
+void voice_mode_cb(lv_event_t *e);
+bool validate_24v(lv_event_t *e);
+bool validate_motor(lv_event_t *e);
+bool validate_inverter(lv_event_t *e);
+
 #endif
