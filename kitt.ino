@@ -24,6 +24,7 @@ void setup() {
     Serial.begin(115200); // Initialize Serial
     lv_init();            // Initialize LVGL
     tft.begin();          // Initialize Giga Display
+    delay(200);           // let display hardware settle
     TouchDetector.begin();
 
     auto *canvas = lv_scr_act();

@@ -49,10 +49,14 @@ bool play_current_audio() {
 }
 
 void audio_loop() {
-    if (audio && audio->isFinished()) {
+    if (!audio)
+        return;
+
+    audio->loop();
+
+    if (audio->isFinished()) {
         current_audio_index = (current_audio_index + 1) % audio_file_count;
-        if (play_current_audio()) {
+        if (play_current_audio())
             Serial.println("Restarting . . .");
-        }
     }
 }
