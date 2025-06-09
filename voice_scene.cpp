@@ -4,6 +4,12 @@
 #include "indicator.h"
 #include "config.h"
 
+static VoiceVisualiser* g_visualiser = nullptr;
+
+VoiceVisualiser* get_voice_visualiser() {
+    return g_visualiser;
+}
+
 lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* buttons) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
     lv_obj_set_style_bg_color(tile, BLACK, 0);
@@ -41,6 +47,7 @@ lv_obj_t* create_voice_tile(lv_obj_t* tileview, int row_id, ButtonData const* bu
     }
 
     auto viz = new VoiceVisualiser(grid);
+    g_visualiser = viz;
     
     // debug
     viz->set_cols_active(5.0f/16); // TEST
