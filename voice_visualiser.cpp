@@ -59,6 +59,8 @@ void VoiceVisualiser::set_cols_active(float ratio_norm) {
   lv_obj_t *center = cols[1];
   int child_count = lv_obj_get_child_cnt(center);
 
+  float limit = ratio_norm * ((child_count + 1) / 2.0f);
+
   for (int n = 0; n < 3; ++n) {
     lv_obj_t *col = cols[n];
     int col_count = lv_obj_get_child_cnt(col);
@@ -67,13 +69,12 @@ void VoiceVisualiser::set_cols_active(float ratio_norm) {
       lv_obj_t *child = lv_obj_get_child(col, i);
 
       int dist = child_count / 2 - i - (child_count - col_count) / 2;
-      // int dist = child_count + i - col_count / 2;
       dist = dist < 0 ? -dist : dist;
 
-      if (dist > ratio_norm * (child_count / 2)) {
-        lv_obj_set_style_bg_color(child, RED_DARK, 0);
-      } else {
+      if (dist < limit) {
         lv_obj_set_style_bg_color(child, RED, 0);
+      } else {
+        lv_obj_set_style_bg_color(child, RED_DARK, 0);
       }
     }
   }

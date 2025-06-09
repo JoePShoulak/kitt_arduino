@@ -5,6 +5,7 @@
 #include <Arduino_GigaDisplay_GFX.h>
 #include <lvgl.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "button.h"
 #include "button_panel.h"
@@ -21,12 +22,25 @@ Button *inverter_btn = nullptr;
 lv_timer_t *voice_anim_timer = nullptr;
 
 static void voice_anim_cb(lv_timer_t *t) {
-  static uint32_t step = 0;
+  static float level = 0.f;
+  static float target = 0.f;
+  static int hold = 0;
   (void)t;
-  float val = (sin(step * 0.1f) + 1.0f) / 2.0f;
+
+  if (--hold <= 0) {
+    if (target > 0.05f) {
+      target = 0.f;                   // short pause between words
+      hold = 2 + rand() % 3;          // 100-200 ms
+    } else {
+      target = 0.3f + (rand() % 70) / 100.f; // new burst 0.3-1.0
+      hold = 2 + rand() % 5;         // 100-300 ms
+    }
+  }
+
+  level += (target - level) * 0.25f; // smooth towards target
+
   if (voiceTile && voiceTile->getVisualiser())
-    voiceTile->getVisualiser()->setLevel(val);
-  step++;
+    voiceTile->getVisualiser()->setLevel(level);
 }
 
 void setup() {
