@@ -37,3 +37,10 @@ ButtonPanel::~ButtonPanel() {
     delete buttons[i];
   }
 }
+
+ButtonPanel* ButtonPanel::createTile(lv_obj_t* tileview, int row_id,
+                                     ButtonData const* config) {
+  auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
+  lv_obj_set_style_bg_color(tile, BLACK, 0);
+  return new ButtonPanel(tile, config);
+}

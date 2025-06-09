@@ -36,13 +36,6 @@ GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
 VoiceTile* voiceTile = nullptr;
 
-ButtonPanel* make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
-    auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
-    lv_obj_set_style_bg_color(tile, BLACK, 0);
-
-    return new ButtonPanel(tile, config);
-}
-
 void motor_override_cb(lv_event_t* e) {
   Serial.println("MOTOR override callback!");
 }
@@ -66,9 +59,9 @@ void setup() {
   lv_obj_set_style_bg_color(tiles, BLACK, 0);
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
-  auto leftPanel = make_panel(button_panel1, tiles, 0);
+  auto leftPanel = ButtonPanel::createTile(tiles, 0, button_panel1);
   voiceTile = new VoiceTile(tiles, 1, voice_buttons);
-  auto rightPanel = make_panel(button_panel2, tiles, 2);
+  auto rightPanel = ButtonPanel::createTile(tiles, 2, button_panel2);
   if (auto btn = rightPanel->getButton(0)) {
     btn->setCallback(motor_override_cb);
   }
