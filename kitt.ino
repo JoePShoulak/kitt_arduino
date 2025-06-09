@@ -145,11 +145,8 @@ void setup() {
 
   lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
-  if (!audio.load("shoe.wav")) { // replace with name of file to play
-    if (audio.hasError())
-      Serial.println(audio.errorMessage());
-    else
-      Serial.println("Cannot load WAV file");
+  current_audio_index = 0; // start with the first clip
+  if (!load_current_audio()) {
     return;
   }
   audio.play();
@@ -158,7 +155,10 @@ void setup() {
 void loop() {
   lv_timer_handler();
   if (audio.isFinished()) {
-    audio.play(); // restart the playback when it is complete
-    Serial.println("Restarting . . .");
+    current_audio_index = (current_audio_index + 1) % audio_file_count;
+    if (load_current_audio()) {
+      audio.play();
+      Serial.println("Restarting . . .");
+    }
   }
 }
