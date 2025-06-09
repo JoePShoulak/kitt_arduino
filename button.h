@@ -10,7 +10,7 @@ struct ButtonData {
     const char *label;
     button_callback callback;
     bool toggleable;
-    uint16_t long_press_time; // ms, 0 = short press
+    bool severe = false; // hold for one second before triggering if true
     bool start_active = false;
 };
 
@@ -41,7 +41,8 @@ private:
     lv_color_t color_off;
     lv_color_t color_on;
 
-    uint16_t long_press_time = 0;
+    static const uint16_t LONG_PRESS_DURATION = 1000; // ms
+    bool severe = false;
     uint32_t press_start = 0;
     bool long_press_handled = false;
 

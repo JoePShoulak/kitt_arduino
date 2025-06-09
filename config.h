@@ -10,25 +10,25 @@
 void null_btn(lv_event_t *e); 
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    { "TURBO BOOST", null_btn, true, 1000, true },
-    { "MAP SYSTEM", null_btn, true, 0 },
-    { "SKI MODE", null_btn, false, 1000 },
-    { "VOLTAGE OUTPUT", null_btn, true, 0 },
-    { "VITAL SCAN", null_btn, false, 0 },
-    { "EVADE", null_btn, false, 0 },
-    { "RANGE BRITE", null_btn, false, 0 },
-    { "RADAR IMAGE", null_btn, false, 0 },
+    { "TURBO BOOST", null_btn, true, true, true },
+    { "MAP SYSTEM", null_btn, true, false },
+    { "SKI MODE", null_btn, false, true },
+    { "VOLTAGE OUTPUT", null_btn, true, false },
+    { "VITAL SCAN", null_btn, false, false },
+    { "EVADE", null_btn, false, false },
+    { "RANGE BRITE", null_btn, false, false },
+    { "RADAR IMAGE", null_btn, false, false },
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    { "BAD DOLPHINS", null_btn, true, 1000, true },
-    { "NERVE GAS", null_btn, true, 0 },
-    { "SHARKS", null_btn, false, 1000 },
-    { "CUTE OTTERS", null_btn, true, 0 },
-    { "EMERGENCY METH", null_btn, false, 0 },
-    { "SCARLETT JOHANSSON", null_btn, true, 1000, true },
-    { "BROWNIES", null_btn, false, 0 },
-    { "POT BROWNIES", null_btn, false, 0 },
+    { "BAD DOLPHINS", null_btn, true, true, true },
+    { "NERVE GAS", null_btn, true, false },
+    { "SHARKS", null_btn, false, true },
+    { "CUTE OTTERS", null_btn, true, false },
+    { "EMERGENCY METH", null_btn, false, false },
+    { "SCARLETT JOHANSSON", null_btn, true, true, true },
+    { "BROWNIES", null_btn, false, false },
+    { "POT BROWNIES", null_btn, false, false },
 };
 
 // VIZ DATA
