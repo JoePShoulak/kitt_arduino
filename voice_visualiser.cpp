@@ -88,7 +88,7 @@ void VoiceVisualiser::setLevel(float lvl) {
 }
 
 void VoiceVisualiser::timer_cb(lv_timer_t *t) {
-  auto self = static_cast<VoiceVisualiser *>(t->user_data);
+  auto self = static_cast<VoiceVisualiser *>(lv_timer_get_user_data(t));
   if (!self)
     return;
   self->set_cols_active(self->level);
