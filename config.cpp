@@ -2,6 +2,7 @@
 
 #include "button.h"
 #include "config.h"
+#include "popup.h"
 #include "voice_tile.h"
 
 void null_btn(lv_event_t *e) {
