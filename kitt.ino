@@ -19,21 +19,21 @@ const int audio_file_count = sizeof(audio_files) / sizeof(audio_files[0]);
 int current_audio_index = 0;
 
 // Helper to load the current audio file
-bool load_current_audio() {
-  if (!audio.load(const_cast<char*>(audio_files[current_audio_index]))) {
-    if (audio.hasError()) {
-      Serial.println(audio.errorMessage());
-    } else {
-      Serial.print("Cannot load WAV file ");
-      Serial.println(audio_files[current_audio_index]);
-    }
-    return false;
-  }
-  return true;
-}
+// bool load_current_audio() {
+//   if (!audio.load(const_cast<char*>(audio_files[current_audio_index]))) {
+//     if (audio.hasError()) {
+//       Serial.println(audio.errorMessage());
+//     } else {
+//       Serial.print("Cannot load WAV file ");
+//       Serial.println(audio_files[current_audio_index]);
+//     }
+//     return false;
+//   }
+//   return true;
+// }
 
 GigaDisplay_GFX tft; // Init tft
-Arduino_GigaDisplayTouch TouchDetector;
+    Arduino_GigaDisplayTouch TouchDetector;
 
 void make_panel(ButtonData const* config, lv_obj_t* tileview, int row_id) {
     auto* tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
