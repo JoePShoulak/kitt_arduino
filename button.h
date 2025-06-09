@@ -27,7 +27,6 @@ public:
     bool isToggled() const { return toggled; }
 
     const char *getLabel() const { return label; }
-    lv_obj_t *getLVButton() const { return btn; }
 
 private:
     const char *label;
@@ -36,7 +35,7 @@ private:
     lv_obj_t *label_obj;
     lv_style_t style;
 
-    void createLvButton(lv_obj_t *parent_grid, uint8_t grid_col, uint8_t grid_row);
+    void style(lv_obj_t *parent_grid);
 
     lv_color_t color_off;
     lv_color_t color_on;
