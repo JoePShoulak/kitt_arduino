@@ -51,6 +51,15 @@ const ButtonData voice_buttons[3] = {
 #define BUTTON_HEIGHT 85
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
+// ==== Gauge configuration ====
+#define GAUGE_SEG_COUNT 10
+#define GAUGE_SEG_W 20
+#define GAUGE_SEG_H 10
+#define GAUGE_SPACING 4
+#define GAUGE_WIDTH                                                            \
+  (GAUGE_SEG_COUNT * GAUGE_SEG_W + (GAUGE_SEG_COUNT - 1) * GAUGE_SPACING)
+#define GAUGE_HEIGHT GAUGE_SEG_H * 2
+
 static const IndicatorData indicators[8] = {
     {"AIR", ORANGE_DARK, ORANGE}, {"OIL", ORANGE_DARK, ORANGE},
     {"P1", RED_DARK, RED},        {"P2", RED_DARK, RED},
@@ -59,8 +68,10 @@ static const IndicatorData indicators[8] = {
 
 // ==== Global UI references ====
 class VoiceTile;
+class GaugeTile;
 
 extern VoiceTile *voiceTile;
+extern GaugeTile *gaugeTile;
 extern Button *motor_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;

@@ -5,11 +5,13 @@
 #include "config.h"
 #include "voice_synth.h"
 #include "voice_tile.h"
+#include "gauge_tile.h"
 
 UI ui;
 
 // Global UI element pointers defined here
 VoiceTile *voiceTile = nullptr;
+GaugeTile *gaugeTile = nullptr;
 Button *motor_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
@@ -31,6 +33,7 @@ void UI::init() {
       btn->setCallback(voice_mode_cb);
   }
   rightPanel = ButtonPanel::createTile(tiles, 2, button_panel2);
+  gaugeTile = new GaugeTile(tiles, 3);
   motor_btn = rightPanel->getButton(0);
   if (motor_btn) {
     motor_btn->setCallback(motor_override_cb);
