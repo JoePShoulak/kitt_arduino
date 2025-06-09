@@ -10,25 +10,25 @@
 void null_btn(lv_event_t *e); 
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    { "TURBO BOOST", null_btn, true, 1000, true },
-    { "MAP SYSTEM", null_btn, true, 0 },
-    { "PRINTER", null_btn, true, 0 },
-    { "VOLTAGE OUTPUT", null_btn, true, 0 },
-    { "VITAL SCAN", null_btn, false, 0 },
-    { "EVADE", null_btn, false, 0 },
-    { "RANGE BRITE", null_btn, false, 0 },
-    { "RADAR IMAGE", null_btn, false, 0 },
+    { "TURBO BOOST", null_btn, true, true },
+    { "MAP SYSTEM", null_btn, true },
+    { "PRINTER", null_btn, true },
+    { "VOLTAGE OUTPUT", null_btn, true },
+    { "VITAL SCAN", null_btn, false },
+    { "EVADE", null_btn, false },
+    { "RANGE BRITE", null_btn, false },
+    { "RADAR IMAGE", null_btn, false },
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    { "MOTOR", null_btn, true, 1000, true },
-    { "BLACKOUT", null_btn, true, 1000 },
-    { "24V MODE", null_btn, true, 1000 },
-    { "INVERTER", null_btn, true, 1000 },
-    { "GPS", null_btn, true, 0, true },
-    { "RADIO", null_btn, true, 0, true },
-    { "USB", null_btn, true, 0, true },
-    { "LIGHTING", null_btn, true, 0 },
+    { "MOTOR", null_btn, true, true, true },
+    { "BLACKOUT", null_btn, true, true },
+    { "24V MODE", null_btn, true, true },
+    { "INVERTER", null_btn, true, true },
+    { "GPS", null_btn, true, false, true },
+    { "RADIO", null_btn, true, false, true },
+    { "USB", null_btn, true, false, true },
+    { "LIGHTING", null_btn, true },
 };
 
 // VIZ DATA
