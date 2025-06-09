@@ -17,6 +17,7 @@ public:
   Gauge(lv_obj_t *parent, const char *text);
   lv_obj_t *getContainer() const { return container; }
   void setLevel(float level); // level normalized 0..1
+  void rotate(int16_t angle10); // rotate container by angle in 0.1deg
 };
 
 #endif

@@ -27,6 +27,7 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id) {
       gauges[idx] = new Gauge(grid, gauge_labels[idx]);
       lv_obj_set_grid_cell(gauges[idx]->getContainer(), LV_GRID_ALIGN_CENTER, col, 1,
                            LV_GRID_ALIGN_CENTER, row, 1);
+      gauges[idx]->rotate(900);
       idx++;
     }
   }

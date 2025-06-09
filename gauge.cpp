@@ -58,3 +58,12 @@ void Gauge::setLevel(float level) {
     lv_obj_set_style_bg_color(bars[i], col, 0);
   }
 }
+
+void Gauge::rotate(int16_t angle10) {
+  lv_coord_t w = lv_obj_get_width(container);
+  lv_coord_t h = lv_obj_get_height(container);
+  lv_obj_set_size(container, h, w); // swap to avoid cropping
+  lv_obj_set_style_transform_pivot_x(container, h / 2, 0);
+  lv_obj_set_style_transform_pivot_y(container, w / 2, 0);
+  lv_obj_set_style_transform_angle(container, angle10, 0);
+}
