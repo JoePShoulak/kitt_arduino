@@ -88,13 +88,7 @@ void Button::setCallback(button_callback cb) {
 void Button::handlePress() {
     if (toggleable) {
         toggled = !toggled;
-        Serial.print("Button ");
-        Serial.print(toggled ? "On: " : "Off: ");
-        Serial.println(label);
         updateVisual();
-    } else {
-        Serial.print("Button pressed: ");
-        Serial.println(label);
     }
 }
 
