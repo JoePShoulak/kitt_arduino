@@ -50,7 +50,7 @@ lv_obj_t* show_error_popup(lv_obj_t* parent_tile, const char* msg) {
 
     lv_obj_t* btn = lv_btn_create(box);
     lv_obj_remove_style_all(btn);
-    lv_obj_set_size(btn, 80, 40);
+    lv_obj_set_size(btn, 100, 50);
     lv_obj_set_style_radius(btn, 5, 0);
     lv_obj_set_style_bg_color(btn, GREEN, 0);
     lv_obj_set_style_bg_opa(btn, LV_OPA_COVER, 0);

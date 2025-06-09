@@ -11,7 +11,8 @@
 #define BLUE lv_color_hex(0x0077FF)
 
 // additional colors
-#define GRAY_LIGHT lv_color_hex(0xDDDDDD)
+// slightly darker gray for popup background
+#define GRAY_LIGHT lv_color_hex(0xCCCCCC)
 
 // dark variants for toggled-off states
 #define RED_DARK lv_color_hex(0x990000)
