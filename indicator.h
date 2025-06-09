@@ -10,13 +10,13 @@ struct IndicatorData {
 };
 
 class Indicator {
-    const IndicatorData& data;
-    lv_obj_t* indicator;
+    const IndicatorData &data;
+    lv_obj_t *indicator;
 
-    void set_style(lv_obj_t* obj);
+    void set_style(lv_obj_t *obj);
 
-public:
-    Indicator(const IndicatorData& data, lv_obj_t* parent);
+  public:
+    Indicator(const IndicatorData &data, lv_obj_t *parent);
     void toggle(bool on);
 };
 

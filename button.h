@@ -1,11 +1,11 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <lvgl.h>
 #include "colors.h"
+#include <lvgl.h>
 
-using button_callback = void (*)(lv_event_t*);
-using validate_callback = bool (*)(lv_event_t*);
+using button_callback = void (*)(lv_event_t *);
+using validate_callback = bool (*)(lv_event_t *);
 
 struct ButtonData {
     const char *label;
@@ -16,15 +16,15 @@ struct ButtonData {
 };
 
 class Button {
-public:
+  public:
     Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row);
     Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col, uint8_t grid_row,
-                 lv_color_t color_off, lv_color_t color_on);
+           lv_color_t color_off, lv_color_t color_on);
     void setCallback(button_callback cb);
     void setValidate(validate_callback cb);
     void handlePress();
     void updateVisual();
-    void eventHandler(lv_event_t* e);
+    void eventHandler(lv_event_t *e);
 
     bool isToggleable() const { return toggleable; }
     bool isToggled() const { return toggled; }
@@ -32,7 +32,7 @@ public:
     const char *getLabel() const { return label; }
     lv_obj_t *getLVButton() const { return btn; }
 
-private:
+  private:
     const char *label;
     button_callback callback;
     validate_callback validate;
