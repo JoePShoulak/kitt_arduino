@@ -1,11 +1,16 @@
 #include "audio_helper.h"
 #include <Arduino.h>
 
-GigaAudio audio("USB DISK");
+static GigaAudio audio("USB DISK");
 
 static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav"};
 static const int audio_file_count = sizeof(audio_files) / sizeof(audio_files[0]);
 static int current_audio_index = 0;
+
+void audio_setup() {
+    current_audio_index = 0;
+    play_current_audio();
+}
 
 bool load_current_audio() {
     if (!audio.load(const_cast<char *>(audio_files[current_audio_index]))) {

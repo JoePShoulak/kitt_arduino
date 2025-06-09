@@ -57,10 +57,11 @@ void setup() {
 
     lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
 
-    play_audio_file("shoe.wav");
+    audio_setup();
 }
 
 void loop() {
     lv_timer_handler();
     audio_loop();
+    delay(5);
 }

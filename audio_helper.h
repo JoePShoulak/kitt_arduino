@@ -3,7 +3,8 @@
 
 #include <GigaAudio.h>
 
-extern GigaAudio audio;
+// Initialize audio playback. Call once from setup
+void audio_setup();
 
 bool load_current_audio();
 bool play_audio_file(const char *filename);
