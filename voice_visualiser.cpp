@@ -56,19 +56,16 @@ void VoiceVisualiser::make_column(int id, int count) {
 }
 
 void VoiceVisualiser::set_cols_active(float ratio_norm) {
-  lv_obj_t *center = cols[1];
-  int child_count = lv_obj_get_child_cnt(center);
-
-  float limit = ratio_norm * ((child_count + 1) / 2.0f);
-
   for (int n = 0; n < 3; ++n) {
     lv_obj_t *col = cols[n];
     int col_count = lv_obj_get_child_cnt(col);
 
+    float limit = ratio_norm * ((col_count + 1) / 2.0f);
+
     for (int i = 0; i < col_count; ++i) {
       lv_obj_t *child = lv_obj_get_child(col, i);
 
-      int dist = child_count / 2 - i - (child_count - col_count) / 2;
+      int dist = col_count / 2 - i;
       dist = dist < 0 ? -dist : dist;
 
       if (dist < limit) {
