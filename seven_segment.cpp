@@ -14,12 +14,12 @@ static lv_obj_t *create_seg(lv_obj_t *parent, int x, int y, int w, int h,
   return seg;
 }
 
-void SevenSegmentDisplay::createDigit(int idx) {
-  const int w = 40;
-  const int h = 80;
-  const int t = 8;
-  lv_color_t off = ORANGE_DARK;
-  lv_obj_t *digit = lv_obj_create(container);
+void SevenSegmentDisplay::createDigit(lv_obj_t *parent, int idx) {
+  const int w = 60;
+  const int h = 120;
+  const int t = 12;
+  lv_color_t off = RED_DARK;
+  lv_obj_t *digit = lv_obj_create(parent);
   lv_obj_remove_style_all(digit);
   lv_obj_set_size(digit, w, h);
   lv_obj_set_style_bg_opa(digit, LV_OPA_TRANSP, 0);
@@ -34,21 +34,39 @@ void SevenSegmentDisplay::createDigit(int idx) {
   segments[idx][6] = create_seg(digit, t, h / 2 - t / 2, w - 2 * t, t, off); // middle
 }
 
-SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent) {
+SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText) {
   container = lv_obj_create(parent);
   lv_obj_remove_style_all(container);
   lv_obj_set_width(container, lv_pct(100));
-  lv_obj_set_height(container, 120); // about two gauge heights
+  lv_obj_set_height(container, 180); // larger than before
   lv_obj_set_layout(container, LV_LAYOUT_FLEX);
-  lv_obj_set_flex_flow(container, LV_FLEX_FLOW_ROW);
-  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER,
+  lv_obj_set_flex_flow(container, LV_FLEX_FLOW_COLUMN);
+  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_CENTER,
                         LV_FLEX_ALIGN_CENTER);
-  lv_obj_set_style_pad_column(container, 8, 0);
   lv_obj_set_style_pad_all(container, 0, 0);
+  lv_obj_set_style_pad_row(container, 8, 0);
+
+  lv_obj_t *row = lv_obj_create(container);
+  lv_obj_remove_style_all(row);
+  lv_obj_set_layout(row, LV_LAYOUT_FLEX);
+  lv_obj_set_flex_flow(row, LV_FLEX_FLOW_ROW);
+  lv_obj_set_flex_align(row, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER,
+                        LV_FLEX_ALIGN_CENTER);
+  lv_obj_set_style_pad_column(row, 12, 0);
+  lv_obj_set_style_pad_all(row, 0, 0);
 
   for (int i = 0; i < 3; ++i) {
-    createDigit(i);
+    createDigit(row, i);
   }
+
+  label = lv_label_create(container);
+  lv_label_set_text(label, labelText ? labelText : "");
+  lv_obj_set_style_text_color(label, WHITE, 0);
+  lv_obj_set_style_text_font(label, &lv_font_montserrat_14, 0);
+  lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_RIGHT, 0);
+  lv_obj_set_width(label, lv_pct(100));
+  lv_obj_set_style_pad_right(label, 0, 0);
+  lv_obj_set_style_pad_bottom(label, 0, 0);
 
   setValue(0);
 }
@@ -75,7 +93,7 @@ void SevenSegmentDisplay::setValue(int value) {
   for (int d = 0; d < 3; ++d) {
     uint8_t mask = digit_masks[vals[d]];
     for (int s = 0; s < 7; ++s) {
-      lv_color_t color = (mask & (1 << s)) ? ORANGE : ORANGE_DARK;
+      lv_color_t color = (mask & (1 << s)) ? RED : RED_DARK;
       lv_obj_set_style_bg_color(segments[d][s], color, 0);
     }
   }

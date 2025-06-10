@@ -6,11 +6,12 @@
 class SevenSegmentDisplay {
   lv_obj_t *container;
   lv_obj_t *segments[3][7];
+  lv_obj_t *label;
 
-  void createDigit(int idx);
+  void createDigit(lv_obj_t *parent, int idx);
 
 public:
-  SevenSegmentDisplay(lv_obj_t *parent);
+  SevenSegmentDisplay(lv_obj_t *parent, const char *labelText = "MPH");
   void setValue(int value);
   lv_obj_t *getObj() const { return container; }
 };
