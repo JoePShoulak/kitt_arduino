@@ -1,5 +1,6 @@
 #include "seven_segment.h"
 #include "colors.h"
+#include "config.h"
 
 // Make the digits wider for a larger speedometer display
 static const int DIGIT_WIDTH = 80;
@@ -71,7 +72,8 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_LEFT, 0);
   lv_obj_set_width(label, LV_SIZE_CONTENT);
   // Place the label to the right of the digit row with some margin
-  lv_obj_align_to(label, row, LV_ALIGN_OUT_RIGHT_BOTTOM, DIGIT_WIDTH, 0);
+  // Keep the label closer so the display fits on screen
+  lv_obj_align_to(label, row, LV_ALIGN_OUT_RIGHT_BOTTOM, SPACING, 0);
 
   setValue(0);
 }
