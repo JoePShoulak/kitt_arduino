@@ -29,8 +29,10 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   lv_obj_set_style_text_color(label_obj, WHITE, 0);
   lv_obj_set_style_text_font(label_obj, &lv_font_montserrat_14, 0);
   lv_obj_set_style_text_align(label_obj, LV_TEXT_ALIGN_RIGHT, 0);
-  lv_obj_set_width(label_obj, lv_pct(100));
-  lv_obj_set_style_pad_bottom(label_obj, 2, 0);
+  lv_obj_set_width(label_obj, LV_SIZE_CONTENT);
+  lv_obj_set_style_pad_bottom(label_obj, 0, 0);
+  lv_obj_set_style_pad_right(label_obj, 0, 0);
+  lv_obj_set_style_pad_top(label_obj, 0, 0);
 
   lv_obj_t *row = lv_obj_create(container);
   lv_obj_remove_style_all(row);
@@ -42,7 +44,7 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
                         LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_column(row, 2, 0);
   lv_obj_set_style_pad_row(row, 0, 0);
-  lv_obj_set_width(row, lv_pct(100));
+  lv_obj_set_width(row, LV_SIZE_CONTENT);
 
   int h = 20;
   int w = 40;
