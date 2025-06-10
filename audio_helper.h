@@ -3,5 +3,6 @@
 
 void audio_setup();
 void audio_loop();
+bool audio_is_enabled();
 
 #endif

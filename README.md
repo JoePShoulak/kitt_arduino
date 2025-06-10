@@ -39,7 +39,7 @@ Ensure the board package and all libraries are up to date in the Arduino IDE or 
 
 After uploading, the device starts on the center voice tile. Swipe left or right to access the button panels.
 
-Audio files (`*.wav`) are stored in the `data` folder for reference. They can be copied to a USB drive connected to the board if you wish to enable the audio helper.
+Audio files (`*.wav`) are stored in the `data` folder for reference. They can be copied to a USB drive connected to the board if you wish to enable the audio helper. If no USB storage is detected at runtime the sketch simply runs without audio.
 
 ## License
 

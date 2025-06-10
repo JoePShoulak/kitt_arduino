@@ -8,6 +8,7 @@ static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav"};
 static const int audio_file_count =
     sizeof(audio_files) / sizeof(audio_files[0]);
 static int current_audio_index = 0;
+static bool audio_enabled = false;
 
 static bool load_current_audio() {
   if (!audio.load(const_cast<char *>(audio_files[current_audio_index]))) {
@@ -25,16 +26,28 @@ static bool load_current_audio() {
 void audio_setup() {
   current_audio_index = 0;
   if (load_current_audio()) {
+    audio_enabled = true;
     audio.play();
+  } else {
+    audio_enabled = false;
+    Serial.println("USB drive not found - audio disabled");
   }
 }
 
 void audio_loop() {
+  if (!audio_enabled)
+    return;
+
   if (audio.isFinished()) {
     current_audio_index = (current_audio_index + 1) % audio_file_count;
     if (load_current_audio()) {
       audio.play();
       Serial.println("Restarting . . .");
+    } else {
+      audio_enabled = false;
+      Serial.println("Audio playback failed - disabling audio");
     }
   }
 }
+
+bool audio_is_enabled() { return audio_enabled; }
