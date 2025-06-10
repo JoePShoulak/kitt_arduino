@@ -1,6 +1,9 @@
 #include "seven_segment.h"
 #include "colors.h"
 
+static const int DIGIT_WIDTH = 60;
+
+
 static lv_obj_t *create_seg(lv_obj_t *parent, int x, int y, int w, int h,
                             lv_color_t color_off) {
   lv_obj_t *seg = lv_obj_create(parent);
@@ -15,7 +18,7 @@ static lv_obj_t *create_seg(lv_obj_t *parent, int x, int y, int w, int h,
 }
 
 void SevenSegmentDisplay::createDigit(lv_obj_t *parent, int idx) {
-  const int w = 60;
+  const int w = DIGIT_WIDTH;
   const int h = 120;
   const int t = 12;
   lv_color_t off = RED_DARK;
@@ -62,10 +65,10 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   lv_obj_set_style_text_color(label, WHITE, 0);
   // Use the default 14pt font since larger fonts may not be compiled
   lv_obj_set_style_text_font(label, &lv_font_montserrat_14, 0);
-  lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_RIGHT, 0);
+  lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_LEFT, 0);
   lv_obj_set_width(label, LV_SIZE_CONTENT);
-  // Position the label so its bottom edge aligns with the digit row
-  lv_obj_align_to(label, row, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
+  // Place the label to the right of the digit row with some margin
+  lv_obj_align_to(label, row, LV_ALIGN_OUT_RIGHT_BOTTOM, DIGIT_WIDTH, 0);
 
   setValue(0);
 }
