@@ -24,21 +24,16 @@ static bool load_current_audio() {
 }
 
 bool audio_setup(unsigned long timeout_ms) {
+  Serial.println("Initializing audio . . .");
+  if (audio.hasError()) {
+    Serial.println(audio.errorMessage());
+    return false;
+  }
   current_audio_index = 0;
   unsigned long start = millis();
 
-  while (millis() - start < timeout_ms) {
-    if (load_current_audio()) {
-      audio.play();
-      audio_enabled = true;
-      return true;
-    }
-    delay(100);
-  }
-
-  audio_enabled = false;
-  Serial.println("USB drive not found - audio disabled");
-  return false;
+  Serial.println("Made it here");
+  return true; 
 }
 
 void audio_loop() {

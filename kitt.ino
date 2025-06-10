@@ -27,7 +27,7 @@ void setup() {
 
   ui.init();
 
-  audio_enabled = audio_setup();
+  audio_enabled = audio_setup(2000);
 }
 
 void loop() {
