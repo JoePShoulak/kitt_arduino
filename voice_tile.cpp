@@ -5,9 +5,15 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id,
                      ButtonData const *button_data) {
   tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
   lv_obj_set_style_bg_color(tile, BLACK, 0);
+  // Tile itself shouldn't be scrollable
+  lv_obj_clear_flag(tile, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(tile, LV_SCROLLBAR_MODE_OFF);
 
   lv_obj_t *grid = lv_obj_create(tile);
   lv_obj_remove_style_all(grid);
+  // Disable scrolling inside the grid container
+  lv_obj_clear_flag(grid, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(grid, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_layout(grid, LV_LAYOUT_GRID);
   lv_obj_set_size(grid, GRID_WIDTH, GRID_HEIGHT);
   lv_obj_center(grid);
@@ -26,6 +32,9 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id,
     int col = side == 0 ? 0 : 2;
     lv_obj_t *column = lv_obj_create(grid);
     lv_obj_remove_style_all(column);
+    // Keep columns fixed in place
+    lv_obj_clear_flag(column, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_scrollbar_mode(column, LV_SCROLLBAR_MODE_OFF);
     lv_obj_set_grid_cell(column, LV_GRID_ALIGN_CENTER, col, 1,
                          LV_GRID_ALIGN_STRETCH, 0, 4);
     lv_obj_set_layout(column, LV_LAYOUT_FLEX);

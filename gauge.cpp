@@ -5,6 +5,9 @@
 Gauge::Gauge(lv_obj_t *parent, const char *label) {
   container = lv_obj_create(parent);
   lv_obj_remove_style_all(container);
+  // Ensure the gauge container itself doesn't scroll
+  lv_obj_clear_flag(container, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(container, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_layout(container, LV_LAYOUT_FLEX);
   lv_obj_set_flex_flow(container, LV_FLEX_FLOW_COLUMN);
   // Place children from the top of the container so the label appears above
@@ -39,6 +42,9 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
 
   lv_obj_t *row = lv_obj_create(container);
   lv_obj_remove_style_all(row);
+  // Prevent scrolling within the row of bars
+  lv_obj_clear_flag(row, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(row, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_layout(row, LV_LAYOUT_FLEX);
   lv_obj_set_flex_flow(row, LV_FLEX_FLOW_ROW);
   // Align the row's children from left to right but keep them anchored to the
@@ -54,6 +60,7 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   for (int n = 0; n < 10; ++n) {
     lv_obj_t *bar = lv_obj_create(row);
     lv_obj_remove_style_all(bar);
+    lv_obj_clear_flag(bar, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_style_radius(bar, 3, 0);
     lv_obj_set_size(bar, w, h);
     lv_obj_set_style_bg_opa(bar, LV_OPA_COVER, 0);

@@ -5,6 +5,9 @@
 VoiceVisualiser::VoiceVisualiser(lv_obj_t *parent) {
   viz = lv_obj_create(parent);
   lv_obj_remove_style_all(viz);
+  // Prevent scrolling of the visualiser container
+  lv_obj_clear_flag(viz, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(viz, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_style_bg_color(viz, BLACK, 0);
   lv_obj_set_style_bg_opa(viz, LV_OPA_COVER, 0);
   lv_obj_set_grid_cell(viz, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_STRETCH,
@@ -26,6 +29,9 @@ VoiceVisualiser::VoiceVisualiser(lv_obj_t *parent) {
 void VoiceVisualiser::make_column(int id, int count) {
   lv_obj_t *col = lv_obj_create(viz);
   lv_obj_remove_style_all(col);
+  // Columns should also remain fixed
+  lv_obj_clear_flag(col, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(col, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_size(col, LV_SIZE_CONTENT, VISUALISER_HEIGHT);
   lv_obj_set_style_pad_row(col, 4, 0);
   lv_obj_set_layout(col, LV_LAYOUT_FLEX);
@@ -45,6 +51,8 @@ void VoiceVisualiser::make_column(int id, int count) {
   for (int i = 0; i < count; ++i) {
     lv_obj_t *bar = lv_obj_create(col);
     lv_obj_remove_style_all(bar);
+    lv_obj_clear_flag(bar, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_scrollbar_mode(bar, LV_SCROLLBAR_MODE_OFF);
     lv_obj_set_style_bg_color(bar, RED_DARK, 0);
     lv_obj_set_style_bg_opa(bar, LV_OPA_COVER, 0);
     lv_obj_set_style_radius(bar, bar_h / 2, 0);
