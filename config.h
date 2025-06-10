@@ -59,11 +59,13 @@ static const IndicatorData indicators[8] = {
 
 // ==== Global UI references ====
 class VoiceTile;
+class GaugeTile;
 
 extern VoiceTile *voiceTile;
 extern Button *motor_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
+extern GaugeTile *gaugeTile;
 
 // ==== Event callbacks ====
 void motor_override_cb(lv_event_t *e);

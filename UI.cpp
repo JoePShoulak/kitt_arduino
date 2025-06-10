@@ -3,6 +3,7 @@
 #include "button_panel.h"
 #include "colors.h"
 #include "config.h"
+#include "gauge_tile.h"
 #include "voice_synth.h"
 #include "voice_tile.h"
 
@@ -13,6 +14,7 @@ VoiceTile *voiceTile = nullptr;
 Button *motor_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
+GaugeTile *gaugeTile = nullptr;
 
 void UI::init() {
   canvas = lv_scr_act();
@@ -31,6 +33,7 @@ void UI::init() {
       btn->setCallback(voice_mode_cb);
   }
   rightPanel = ButtonPanel::createTile(tiles, 2, button_panel2);
+  gaugeTile = new GaugeTile(tiles, 3, "POWER");
   motor_btn = rightPanel->getButton(0);
   if (motor_btn) {
     motor_btn->setCallback(motor_override_cb);
