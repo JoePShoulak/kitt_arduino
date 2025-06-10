@@ -4,7 +4,7 @@
 #include <GigaAudio.h>
 
 static GigaAudio audio("USB DISK");
-static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav"};
+static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav", "joseph.wav"};
 static const int audio_file_count =
     sizeof(audio_files) / sizeof(audio_files[0]);
 static int current_audio_index = 0;

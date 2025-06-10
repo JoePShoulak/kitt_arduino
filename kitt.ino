@@ -26,10 +26,11 @@ void setup() {
 
   ui.init();
 
-  // audio_setup();
+  audio_setup();
 }
 
 void loop() {
   lv_timer_handler();
-  // audio_loop();
+  
+  audio_loop();
 }
