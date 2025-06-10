@@ -99,18 +99,21 @@ bool validate_voice_mode(lv_event_t *e) {
 
 Button *blackout_btn = nullptr;
 
-void turnDisplayOff() { analogWrite(BACKLIGHT_PIN, 0); }
+static bool backlight_enabled = true;
 
-void turnDisplayOn() { analogWrite(BACKLIGHT_PIN, 255); }
+void set_backlight(bool on) {
+  analogWrite(BACKLIGHT_PIN, on ? 255 : 0);
+  backlight_enabled = on;
+}
 
-void blackout_cb(lv_event_t *e) {
+void blackout_btn_cb(lv_event_t *e) {
   Button *self = static_cast<Button *>(lv_event_get_user_data(e));
   if (!self)
     return;
   if (self->isToggled()) {
-    turnDisplayOff();
+    set_backlight(false);
   } else {
-    turnDisplayOn();
+    set_backlight(true);
   }
 }
 
@@ -121,6 +124,6 @@ void blackout_touch_cb(lv_event_t *e) {
     return;
   if (lv_event_get_code(e) == LV_EVENT_PRESSED) {
     blackout_btn->handlePress();
-    turnDisplayOn();
+    set_backlight(true);
   }
 }

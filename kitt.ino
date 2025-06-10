@@ -21,7 +21,7 @@ void setup() {
   TouchDetector.begin();
 
   pinMode(BACKLIGHT_PIN, OUTPUT);
-  turnDisplayOn();
+  set_backlight(true);
 
   ui.init();
 

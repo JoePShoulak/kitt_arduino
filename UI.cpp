@@ -45,7 +45,7 @@ void UI::init() {
   rightPanel = ButtonPanel::createTile(tiles, 3, button_panel2);
   blackout_btn = rightPanel->getButton(1);
   if (blackout_btn) {
-    blackout_btn->setCallback(blackout_cb);
+    blackout_btn->setCallback(blackout_btn_cb);
   }
 
   static const char *const right_labels[] = {"BATTERY VOLTAGE",
