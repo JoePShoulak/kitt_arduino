@@ -19,7 +19,7 @@
 void null_btn(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    {"TURBO BOOST", null_btn, true, true}, {"MAP SYSTEM", null_btn, true},
+    {"TURBO BOOST", null_btn, false, true}, {"MAP SYSTEM", null_btn, true},
     {"PRINTER", null_btn, true},           {"VOLTAGE OUTPUT", null_btn, true},
     {"VITAL SCAN", null_btn, false},       {"EVADE", null_btn, false},
     {"RANGE BRITE", null_btn, false},      {"RADAR IMAGE", null_btn, false},

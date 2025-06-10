@@ -3,8 +3,7 @@
 #include "audio_helper.h"
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay_GFX.h>
-#define LV_CONF_INCLUDE_SIMPLE
-#include "lvgl_wrapper.h"
+#include <lvgl.h>
 #include <math.h>
 
 #include "config.h"
