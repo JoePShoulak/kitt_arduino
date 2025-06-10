@@ -9,14 +9,36 @@
 // config.h. Functions are grouped by purpose for clarity.
 
 lv_obj_t *blackout_overlay = nullptr;
+static bool blackout_first_release = false;
+static bool blackout_pressed_after = false;
 
 static void blackout_overlay_cb(lv_event_t *e) {
+  lv_event_code_t code = lv_event_get_code(e);
+  if (code == LV_EVENT_PRESSED) {
+    if (blackout_first_release)
+      blackout_pressed_after = true;
+    return;
+  }
+
+  if (code != LV_EVENT_RELEASED)
+    return;
+
+  if (!blackout_first_release) {
+    blackout_first_release = true;
+    return;
+  }
+
+  if (!blackout_pressed_after)
+    return;
+
   if (blackout_overlay) {
     lv_obj_del(blackout_overlay);
     blackout_overlay = nullptr;
   }
   blackout = false;
   backlight.set(255);
+  blackout_first_release = false;
+  blackout_pressed_after = false;
   if (blackout_btn && blackout_btn->isToggled()) {
     blackout_btn->handlePress();
   }
@@ -48,15 +70,19 @@ void blackout_cb(lv_event_t *e) {
     Serial.println("BLACKOUT engaged");
     blackout = true;
     backlight.set(0); // turn off backlight
+    blackout_first_release = false;
+    blackout_pressed_after = false;
     if (!blackout_overlay) {
       blackout_overlay = show_fullscreen_popup(nullptr);
       lv_obj_add_event_cb(blackout_overlay, blackout_overlay_cb,
-                          LV_EVENT_RELEASED, nullptr);
+                          LV_EVENT_ALL, nullptr);
     }
   } else {
     Serial.println("BLACKOUT disengaged");
     blackout = false;
     backlight.set(255); // restore brightness
+    blackout_first_release = false;
+    blackout_pressed_after = false;
     if (blackout_overlay) {
       lv_obj_del(blackout_overlay);
       blackout_overlay = nullptr;
