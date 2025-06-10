@@ -20,6 +20,9 @@ void setup() {
   tft.begin();          // Initialize Giga Display
   TouchDetector.begin();
 
+  pinMode(BACKLIGHT_PIN, OUTPUT);
+  turnDisplayOn();
+
   ui.init();
 
   // audio_setup();

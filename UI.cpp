@@ -25,6 +25,7 @@ void UI::init() {
   tiles = lv_tileview_create(canvas);
   lv_obj_set_style_bg_color(tiles, BLACK, 0);
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
+  lv_obj_add_event_cb(tiles, blackout_touch_cb, LV_EVENT_PRESSED, nullptr);
 
   static const char *const left_labels[] = {"RPM", "MOTOR CURRENT",
                                             "PERIPHERAL CURRENT"};
@@ -42,6 +43,10 @@ void UI::init() {
     }
   }
   rightPanel = ButtonPanel::createTile(tiles, 3, button_panel2);
+  blackout_btn = rightPanel->getButton(1);
+  if (blackout_btn) {
+    blackout_btn->setCallback(blackout_cb);
+  }
 
   static const char *const right_labels[] = {"BATTERY VOLTAGE",
                                              "BATTERY CURRENT",

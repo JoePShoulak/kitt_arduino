@@ -67,6 +67,13 @@ extern GaugeTile *leftGaugeTile;
 extern Button *motor_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
+extern Button *blackout_btn;
+
+#define BACKLIGHT_PIN D9
+void turnDisplayOff();
+void turnDisplayOn();
+void blackout_cb(lv_event_t *e);
+void blackout_touch_cb(lv_event_t *e);
 
 // ==== Event callbacks ====
 void motor_override_cb(lv_event_t *e);

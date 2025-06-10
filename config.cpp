@@ -96,3 +96,31 @@ bool validate_voice_mode(lv_event_t *e) {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
   return !(self && self->isToggled());
 }
+
+Button *blackout_btn = nullptr;
+
+void turnDisplayOff() { analogWrite(BACKLIGHT_PIN, 0); }
+
+void turnDisplayOn() { analogWrite(BACKLIGHT_PIN, 255); }
+
+void blackout_cb(lv_event_t *e) {
+  Button *self = static_cast<Button *>(lv_event_get_user_data(e));
+  if (!self)
+    return;
+  if (self->isToggled()) {
+    turnDisplayOff();
+  } else {
+    turnDisplayOn();
+  }
+}
+
+void blackout_touch_cb(lv_event_t *e) {
+  if (!blackout_btn || !blackout_btn->isToggled())
+    return;
+  if (lv_event_get_target(e) == blackout_btn->getLVButton())
+    return;
+  if (lv_event_get_code(e) == LV_EVENT_PRESSED) {
+    blackout_btn->handlePress();
+    turnDisplayOn();
+  }
+}
