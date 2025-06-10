@@ -65,5 +65,6 @@ void UI::init() {
   lv_obj_set_tile_id(tiles, 2, 0, LV_ANIM_OFF); // start on voice tile
 
   voice_anim_timer = lv_timer_create(voice_anim_cb, 50, nullptr);
-  gauge_anim_timer = lv_timer_create(gauge_anim_cb, 50, nullptr);
+  // Slow down gauge animations so they are less frenetic
+  gauge_anim_timer = lv_timer_create(gauge_anim_cb, 150, nullptr);
 }
