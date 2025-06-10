@@ -8,6 +8,7 @@ static lv_obj_t *create_seg(lv_obj_t *parent, int x, int y, int w, int h,
   lv_obj_set_pos(seg, x, y);
   lv_obj_set_size(seg, w, h);
   lv_obj_set_style_bg_color(seg, color_off, 0);
+  lv_obj_set_style_bg_opa(seg, LV_OPA_COVER, 0);
   lv_obj_set_style_border_width(seg, 0, 0);
   lv_obj_set_style_radius(seg, 2, 0);
   return seg;
