@@ -27,7 +27,7 @@ void UI::init() {
 
   static const char *const left_labels[] = {"RPM", "MOTOR CURRENT",
                                             "PERIPHERAL CURRENT"};
-  leftGaugeTile = new GaugeTile(tiles, 0, left_labels, 3);
+  leftGaugeTile = new GaugeTile(tiles, 0, left_labels, 3, true);
   ::leftGaugeTile = leftGaugeTile;
 
   leftPanel = ButtonPanel::createTile(tiles, 1, button_panel1);
