@@ -13,7 +13,7 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   lv_obj_set_flex_align(container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END,
                         LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_all(container, 0, 0);
-  lv_obj_set_style_pad_row(container, 4, 0);
+  lv_obj_set_style_pad_row(container, 0, 0);
   lv_obj_set_width(container, lv_pct(100));
 
   label_obj = lv_label_create(container);
@@ -30,6 +30,7 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   lv_obj_set_style_text_font(label_obj, &lv_font_montserrat_14, 0);
   lv_obj_set_style_text_align(label_obj, LV_TEXT_ALIGN_RIGHT, 0);
   lv_obj_set_width(label_obj, lv_pct(100));
+  lv_obj_set_style_pad_bottom(label_obj, 2, 0);
 
   lv_obj_t *row = lv_obj_create(container);
   lv_obj_remove_style_all(row);
