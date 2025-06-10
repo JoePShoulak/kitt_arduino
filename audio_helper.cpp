@@ -5,7 +5,8 @@
 #include <Arduino_USBHostMbed5.h>
 
 static GigaAudio audio("USB DISK");
-USBHostMSD msd;  // Mass Storage Device driver
+USBHostMSD msd; // Mass Storage Device driver
+static bool usb_available = false;
 static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav", "joseph.wav"};
 static const int audio_file_count =
     sizeof(audio_files) / sizeof(audio_files[0]);
@@ -25,11 +26,14 @@ static bool load_current_audio() {
 }
 
 void audio_setup() {
+  // attempt to connect once during setup
   if (msd.connect()) {
     Serial.println("USB Disk connected");
+    usb_available = true;
   } else {
     Serial.println("USB Disk not found");
-    return;
+    usb_available = false;
+    return; // skip audio initialisation when no drive is attached
   }
 
   current_audio_index = 0;
@@ -39,7 +43,22 @@ void audio_setup() {
 }
 
 void audio_loop() {
-  if (!msd.connect()) {
+  // reconnect if the drive has been inserted after startup
+  if (!msd.connected()) {
+    if (msd.connect()) {
+      Serial.println("USB Disk connected");
+      usb_available = true;
+      current_audio_index = 0;
+      if (load_current_audio()) {
+        audio.play();
+      }
+    } else {
+      usb_available = false;
+      return; // nothing to do without a drive
+    }
+  }
+
+  if (!usb_available) {
     return;
   }
   if (audio.isFinished()) {
