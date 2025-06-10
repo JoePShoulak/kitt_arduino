@@ -27,7 +27,9 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   buf[i] = '\0';
   lv_label_set_text(label_obj, buf);
   lv_obj_set_style_text_color(label_obj, WHITE, 0);
-  lv_obj_set_style_text_font(label_obj, &lv_font_montserrat_20, 0);
+  // lv_font_montserrat_20 isn't available in this setup. Use the default
+  // 14 pt font so the code builds everywhere.
+  lv_obj_set_style_text_font(label_obj, &lv_font_montserrat_14, 0);
   lv_obj_set_style_text_align(label_obj, LV_TEXT_ALIGN_RIGHT, 0);
   lv_obj_set_width(label_obj, lv_pct(100));
   lv_obj_set_style_pad_bottom(label_obj, 0, 0);

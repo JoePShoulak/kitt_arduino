@@ -63,8 +63,8 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   label = lv_label_create(container);
   lv_label_set_text(label, labelText ? labelText : "");
   lv_obj_set_style_text_color(label, WHITE, 0);
-  // Use a larger font for the MPH label
-  lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
+  // lv_font_montserrat_20 isn't available, fall back to the 14 pt font.
+  lv_obj_set_style_text_font(label, &lv_font_montserrat_14, 0);
   lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_LEFT, 0);
   lv_obj_set_width(label, LV_SIZE_CONTENT);
   // Place the label to the right of the digit row with some margin
