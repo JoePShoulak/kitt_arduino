@@ -33,7 +33,8 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   lv_obj_set_style_pad_bottom(label_obj, 0, 0);
   lv_obj_set_style_pad_right(label_obj, 0, 0);
   lv_obj_set_style_pad_top(label_obj, 0, 0);
-  lv_obj_set_style_translate_y(label_obj, 8, 0);
+  // Drop the label further so it sits immediately above the bar row
+  lv_obj_set_style_translate_y(label_obj, 16, 0);
 
   lv_obj_t *row = lv_obj_create(container);
   lv_obj_remove_style_all(row);
