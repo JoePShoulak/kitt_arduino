@@ -1,7 +1,8 @@
 #include "seven_segment.h"
 #include "colors.h"
 
-static const int DIGIT_WIDTH = 60;
+// Make the digits wider for a larger speedometer display
+static const int DIGIT_WIDTH = 80;
 
 
 static lv_obj_t *create_seg(lv_obj_t *parent, int x, int y, int w, int h,
@@ -19,7 +20,8 @@ static lv_obj_t *create_seg(lv_obj_t *parent, int x, int y, int w, int h,
 
 void SevenSegmentDisplay::createDigit(lv_obj_t *parent, int idx) {
   const int w = DIGIT_WIDTH;
-  const int h = 120;
+  // Increase the digit height as well
+  const int h = 160;
   const int t = 12;
   lv_color_t off = RED_DARK;
   lv_obj_t *digit = lv_obj_create(parent);
@@ -41,7 +43,8 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   container = lv_obj_create(parent);
   lv_obj_remove_style_all(container);
   lv_obj_set_width(container, lv_pct(100));
-  lv_obj_set_height(container, 180); // larger than before
+  // Give the container more vertical room for the larger digits
+  lv_obj_set_height(container, 220);
   lv_obj_set_layout(container, LV_LAYOUT_NONE);
   lv_obj_set_style_pad_all(container, 0, 0);
 

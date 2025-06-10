@@ -23,11 +23,15 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
 
   if (with_display) {
     display = new SevenSegmentDisplay(container);
+    // Leave extra space after the display so the gauges sit lower
+    lv_obj_set_style_pad_bottom(display->getObj(), SPACING * 2, 0);
   }
 
   gauges = new Gauge *[gauge_count];
   for (int i = 0; i < gauge_count; ++i) {
     gauges[i] = new Gauge(container, labels[i]);
+    // Shift the gauges downward slightly for better spacing
+    lv_obj_set_style_translate_y(gauges[i]->getObj(), 20, 0);
   }
 }
 
