@@ -44,7 +44,7 @@ void UI::init() {
                                              "BATTERY CURRENT",
                                              "SOLAR VOLTAGE",
                                              "SOLAR CURRENT",
-                                             "BATTERY VOLTAGE"};
+                                             "TEMPERATURE"};
   gaugeTile = new GaugeTile(tiles, 4, right_labels, 5);
   ::gaugeTile = gaugeTile;
   motor_btn = rightPanel->getButton(0);
