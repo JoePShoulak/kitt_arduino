@@ -32,8 +32,14 @@ void blackout_cb(lv_event_t *e) {
     return;
   if (self->isToggled()) {
     Serial.println("BLACKOUT engaged");
+    blackout = true;
+    blackout_released = false;
+    backlight.set(0); // turn off backlight
   } else {
     Serial.println("BLACKOUT disengaged");
+    blackout = false;
+    blackout_released = false;
+    backlight.set(255); // restore brightness
   }
 }
 
