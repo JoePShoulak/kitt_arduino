@@ -3,6 +3,7 @@
 
 #include "button.h"
 #include "indicator.h"
+#include <Arduino_GigaDisplay.h>
 
 // ==== Layout constants ====
 #define SPACING 20
@@ -68,6 +69,9 @@ extern Button *motor_btn;
 extern Button *blackout_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
+extern bool blackout;
+extern bool blackout_released;
+extern GigaDisplayBacklight backlight;
 
 // ==== Event callbacks ====
 void motor_override_cb(lv_event_t *e);
