@@ -10,16 +10,24 @@ static const int audio_file_count =
 static int current_audio_index = 0;
 
 static bool load_current_audio() {
-  if (!audio.load(const_cast<char *>(audio_files[current_audio_index]))) {
+  int attempts = 0;
+  while (attempts < audio_file_count) {
+    if (audio.load(const_cast<char *>(audio_files[current_audio_index]))) {
+      return true;
+    }
+
     if (audio.hasError()) {
       Serial.println(audio.errorMessage());
     } else {
       Serial.print("Cannot load WAV file ");
       Serial.println(audio_files[current_audio_index]);
     }
-    return false;
+
+    // Move to the next track and try again
+    current_audio_index = (current_audio_index + 1) % audio_file_count;
+    attempts++;
   }
-  return true;
+  return false;
 }
 
 void audio_setup() {
