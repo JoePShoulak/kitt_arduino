@@ -1,6 +1,7 @@
 #include "gauge.h"
 
 #include "config.h"
+#include <math.h>
 
 static constexpr int SEG_COUNT = 10;
 static constexpr int SEG_HEIGHT = 20; // px
