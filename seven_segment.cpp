@@ -39,12 +39,8 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   lv_obj_remove_style_all(container);
   lv_obj_set_width(container, lv_pct(100));
   lv_obj_set_height(container, 180); // larger than before
-  lv_obj_set_layout(container, LV_LAYOUT_FLEX);
-  lv_obj_set_flex_flow(container, LV_FLEX_FLOW_COLUMN);
-  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_CENTER,
-                        LV_FLEX_ALIGN_CENTER);
+  lv_obj_set_layout(container, LV_LAYOUT_NONE);
   lv_obj_set_style_pad_all(container, 0, 0);
-  lv_obj_set_style_pad_row(container, 8, 0);
 
   lv_obj_t *row = lv_obj_create(container);
   lv_obj_remove_style_all(row);
@@ -54,6 +50,8 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
                         LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_column(row, 12, 0);
   lv_obj_set_style_pad_all(row, 0, 0);
+  lv_obj_set_size(row, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+  lv_obj_align(row, LV_ALIGN_TOP_MID, 0, 0);
 
   for (int i = 0; i < 3; ++i) {
     createDigit(row, i);
@@ -62,11 +60,10 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   label = lv_label_create(container);
   lv_label_set_text(label, labelText ? labelText : "");
   lv_obj_set_style_text_color(label, WHITE, 0);
-  lv_obj_set_style_text_font(label, &lv_font_montserrat_14, 0);
+  lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
   lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_RIGHT, 0);
-  lv_obj_set_width(label, lv_pct(100));
-  lv_obj_set_style_pad_right(label, 0, 0);
-  lv_obj_set_style_pad_bottom(label, 0, 0);
+  lv_obj_set_width(label, LV_SIZE_CONTENT);
+  lv_obj_align(label, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
 
   setValue(0);
 }
