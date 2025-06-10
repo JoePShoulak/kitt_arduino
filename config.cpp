@@ -54,8 +54,7 @@ void blackout_cb(lv_event_t *e) {
     blackout_released = false;
     backlight.set(0); // turn off backlight
     if (!blackout_overlay) {
-      blackout_overlay =
-          show_fullscreen_popup(lv_scr_act());
+      blackout_overlay = show_fullscreen_popup(nullptr);
       lv_obj_add_event_cb(blackout_overlay, blackout_overlay_cb,
                           LV_EVENT_CLICKED, nullptr);
     }
