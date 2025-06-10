@@ -16,6 +16,7 @@ class UI {
   ButtonPanel *rightPanel = nullptr;
   GaugeTile *gaugeTile = nullptr;
   lv_timer_t *voice_anim_timer = nullptr;
+  lv_timer_t *gauge_anim_timer = nullptr;
 
 public:
   void init();
