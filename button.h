@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include "colors.h"
-#include <lvgl.h>
+#include "lvgl_wrapper.h"
 
 using button_callback = void (*)(lv_event_t *);
 using validate_callback = bool (*)(lv_event_t *);

@@ -4,7 +4,7 @@
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay_GFX.h>
 #define LV_CONF_INCLUDE_SIMPLE
-#include <lvgl.h>
+#include "lvgl_wrapper.h"
 #include <math.h>
 
 #include "config.h"

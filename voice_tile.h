@@ -4,7 +4,7 @@
 #include "button.h"
 #include "indicator.h"
 #include "voice_visualiser.h"
-#include <lvgl.h>
+#include "lvgl_wrapper.h"
 
 class VoiceTile {
   lv_obj_t *tile;

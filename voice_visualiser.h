@@ -1,7 +1,7 @@
 #ifndef VOICE_VISUALIZER_H
 #define VOICE_VISUALIZER_H
 
-#include <lvgl.h>
+#include "lvgl_wrapper.h"
 
 class VoiceVisualiser {
   lv_obj_t *viz;

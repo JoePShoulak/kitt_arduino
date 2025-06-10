@@ -1,7 +1,7 @@
 #ifndef GAUGE_H
 #define GAUGE_H
 
-#include <lvgl.h>
+#include "lvgl_wrapper.h"
 
 class Gauge {
   lv_obj_t *container;

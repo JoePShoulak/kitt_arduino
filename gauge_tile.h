@@ -1,7 +1,7 @@
 #ifndef GAUGE_TILE_H
 #define GAUGE_TILE_H
 
-#include <lvgl.h>
+#include "lvgl_wrapper.h"
 
 class Gauge;
 
