@@ -15,3 +15,6 @@ echo "Converting $INPUT → $OUTPUT"
 "$FFMPEG" -i "$INPUT" -ar 44100 -ac 1 -sample_fmt s16 "$OUTPUT"
 
 echo "Done!"
+
+# "C:\Users\joeps\Desktop\ffmpeg.exe" -i "C:\Users\joeps\Documents\Arduino\sketches\kitt\data\explode.mp3" -ar 44100 -ac 2 -sample_fmt s16 "C:\Users\joeps\Documents\Arduino\sketches\kitt\data\explode.wav"
+
