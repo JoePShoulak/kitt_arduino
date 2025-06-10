@@ -1,7 +1,7 @@
 #ifndef AUDIO_HELPER_H
 #define AUDIO_HELPER_H
 
-void audio_setup();
+bool audio_setup(unsigned long timeout_ms = 3000);
 void audio_loop();
 
 #endif

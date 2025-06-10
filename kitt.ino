@@ -16,6 +16,7 @@ GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
 GigaDisplayBacklight backlight;
 bool blackout = false;
+static bool audio_ready = false;
 
 void setup() {
   Serial.begin(115200); // Initialize Serial
@@ -26,11 +27,12 @@ void setup() {
 
   ui.init();
 
-  audio_setup();
+  audio_ready = audio_setup();
 }
 
 void loop() {
   lv_timer_handler();
   
-  audio_loop();
+  if (audio_ready)
+    audio_loop();
 }

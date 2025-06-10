@@ -23,15 +23,22 @@ static bool load_current_audio() {
   return true;
 }
 
-void audio_setup() {
+bool audio_setup(unsigned long timeout_ms) {
   current_audio_index = 0;
-  if (load_current_audio()) {
-    audio.play();
-    audio_enabled = true;
-  } else {
-    audio_enabled = false;
-    Serial.println("USB drive not found - audio disabled");
+  unsigned long start = millis();
+
+  while (millis() - start < timeout_ms) {
+    if (load_current_audio()) {
+      audio.play();
+      audio_enabled = true;
+      return true;
+    }
+    delay(100);
   }
+
+  audio_enabled = false;
+  Serial.println("USB drive not found - audio disabled");
+  return false;
 }
 
 void audio_loop() {
