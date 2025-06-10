@@ -4,6 +4,7 @@
 #ifndef LV_CONF_INCLUDE_SIMPLE
 #define LV_CONF_INCLUDE_SIMPLE
 #endif
+#include "lv_conf.h"
 #include <lvgl.h>
 
 #endif // LVGL_WRAPPER_H
