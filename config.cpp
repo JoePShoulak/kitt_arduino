@@ -8,6 +8,24 @@
 // This file implements the callbacks and validation logic declared in
 // config.h. Functions are grouped by purpose for clarity.
 
+lv_obj_t *blackout_overlay = nullptr;
+
+static void blackout_overlay_cb(lv_event_t *e) {
+  if (!blackout_released)
+    return;
+
+  if (blackout_overlay) {
+    lv_obj_del(blackout_overlay);
+    blackout_overlay = nullptr;
+  }
+  blackout = false;
+  blackout_released = false;
+  backlight.set(255);
+  if (blackout_btn && blackout_btn->isToggled()) {
+    blackout_btn->handlePress();
+  }
+}
+
 // ==== Basic callbacks ====
 void null_btn(lv_event_t *e) {
   Button *self = static_cast<Button *>(lv_event_get_user_data(e));
@@ -35,11 +53,21 @@ void blackout_cb(lv_event_t *e) {
     blackout = true;
     blackout_released = false;
     backlight.set(0); // turn off backlight
+    if (!blackout_overlay) {
+      blackout_overlay =
+          show_fullscreen_popup(lv_scr_act());
+      lv_obj_add_event_cb(blackout_overlay, blackout_overlay_cb,
+                          LV_EVENT_CLICKED, nullptr);
+    }
   } else {
     Serial.println("BLACKOUT disengaged");
     blackout = false;
     blackout_released = false;
     backlight.set(255); // restore brightness
+    if (blackout_overlay) {
+      lv_obj_del(blackout_overlay);
+      blackout_overlay = nullptr;
+    }
   }
 }
 

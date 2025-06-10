@@ -49,14 +49,6 @@ void loop() {
       }
     } else {
       release_pending = false;
-      if (blackout_released) {
-        blackout = false;
-        blackout_released = false;
-        backlight.set(255);
-        if (blackout_btn && blackout_btn->isToggled()) {
-          blackout_btn->handlePress();
-        }
-      }
     }
   }
 }

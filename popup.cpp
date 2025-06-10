@@ -67,3 +67,21 @@ lv_obj_t *show_error_popup(lv_obj_t *parent_tile, const char *msg) {
 
   return overlay;
 }
+
+lv_obj_t *show_fullscreen_popup(lv_obj_t *parent) {
+  if (!parent)
+    return nullptr;
+
+  lv_obj_t *overlay = lv_obj_create(parent);
+  lv_obj_remove_style_all(overlay);
+  lv_obj_set_size(overlay, lv_obj_get_width(parent), lv_obj_get_height(parent));
+  lv_obj_set_style_bg_color(overlay, BLACK, 0);
+  lv_obj_set_style_bg_opa(overlay, LV_OPA_COVER, 0);
+  lv_obj_set_style_pad_all(overlay, 0, 0);
+  lv_obj_set_style_radius(overlay, 0, 0);
+  lv_obj_set_style_border_width(overlay, 0, 0);
+  lv_obj_add_flag(overlay, LV_OBJ_FLAG_CLICKABLE);
+  lv_obj_center(overlay);
+
+  return overlay;
+}

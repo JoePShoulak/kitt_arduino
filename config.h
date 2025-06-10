@@ -72,6 +72,7 @@ extern Button *inverter_btn;
 extern bool blackout;
 extern bool blackout_released;
 extern GigaDisplayBacklight backlight;
+extern lv_obj_t *blackout_overlay;
 
 // ==== Event callbacks ====
 void motor_override_cb(lv_event_t *e);
