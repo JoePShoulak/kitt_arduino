@@ -70,7 +70,6 @@ extern Button *blackout_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
 extern bool blackout;
-extern bool blackout_released;
 extern GigaDisplayBacklight backlight;
 extern lv_obj_t *blackout_overlay;
 

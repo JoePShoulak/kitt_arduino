@@ -11,15 +11,11 @@
 lv_obj_t *blackout_overlay = nullptr;
 
 static void blackout_overlay_cb(lv_event_t *e) {
-  if (!blackout_released)
-    return;
-
   if (blackout_overlay) {
     lv_obj_del(blackout_overlay);
     blackout_overlay = nullptr;
   }
   blackout = false;
-  blackout_released = false;
   backlight.set(255);
   if (blackout_btn && blackout_btn->isToggled()) {
     blackout_btn->handlePress();
@@ -51,17 +47,15 @@ void blackout_cb(lv_event_t *e) {
   if (self->isToggled()) {
     Serial.println("BLACKOUT engaged");
     blackout = true;
-    blackout_released = false;
     backlight.set(0); // turn off backlight
     if (!blackout_overlay) {
       blackout_overlay = show_fullscreen_popup(nullptr);
       lv_obj_add_event_cb(blackout_overlay, blackout_overlay_cb,
-                          LV_EVENT_CLICKED, nullptr);
+                          LV_EVENT_RELEASED, nullptr);
     }
   } else {
     Serial.println("BLACKOUT disengaged");
     blackout = false;
-    blackout_released = false;
     backlight.set(255); // restore brightness
     if (blackout_overlay) {
       lv_obj_del(blackout_overlay);
