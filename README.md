@@ -10,7 +10,9 @@ It is currently used to experiment with a fun control panel for an augmented gol
   * **Left panel** – button grid in the KITT style.
   * **Center panel** – voice synthesiser display with indicators (default view).
   * **Right panel** – secondary button grid for practical controls.
-* Basic audio playback support from USB (see `audio_helper.*`).
+* Basic audio playback support from USB (see `audio_helper.*`). If no USB drive
+  is detected at startup, the rest of the demo runs without attempting to play
+  audio.
 
 The `ref` directory contains screenshots used for layout reference.
 

@@ -4,6 +4,7 @@
 #include <GigaAudio.h>
 
 static GigaAudio audio("USB DISK");
+static bool audio_enabled = false;
 static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav", "joseph.wav"};
 static const int audio_file_count =
     sizeof(audio_files) / sizeof(audio_files[0]);
@@ -26,10 +27,16 @@ void audio_setup() {
   current_audio_index = 0;
   if (load_current_audio()) {
     audio.play();
+    audio_enabled = true;
+  } else {
+    audio_enabled = false;
+    Serial.println("USB drive not found - audio disabled");
   }
 }
 
 void audio_loop() {
+  if (!audio_enabled)
+    return;
   if (audio.isFinished()) {
     current_audio_index = (current_audio_index + 1) % audio_file_count;
     if (load_current_audio()) {
