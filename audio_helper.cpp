@@ -2,10 +2,8 @@
 
 #include <Arduino.h>
 #include <GigaAudio.h>
-#include <Arduino_USBHostMbed5.h>
 
 static GigaAudio audio("USB DISK");
-USBHostMSD msd;  // Mass Storage Device driver
 static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav", "joseph.wav"};
 static const int audio_file_count =
     sizeof(audio_files) / sizeof(audio_files[0]);
@@ -25,13 +23,6 @@ static bool load_current_audio() {
 }
 
 void audio_setup() {
-  if (msd.connect()) {
-    Serial.println("USB Disk connected");
-  } else {
-    Serial.println("USB Disk not found");
-    return;
-  }
-
   current_audio_index = 0;
   if (load_current_audio()) {
     audio.play();
@@ -39,9 +30,6 @@ void audio_setup() {
 }
 
 void audio_loop() {
-  if (!msd.connect()) {
-    return;
-  }
   if (audio.isFinished()) {
     current_audio_index = (current_audio_index + 1) % audio_file_count;
     if (load_current_audio()) {
