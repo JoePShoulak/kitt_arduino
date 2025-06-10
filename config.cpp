@@ -26,6 +26,17 @@ void motor_override_cb(lv_event_t *e) {
   Serial.println("MOTOR override callback!");
 }
 
+void blackout_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  if (!self)
+    return;
+  if (self->isToggled()) {
+    Serial.println("BLACKOUT engaged");
+  } else {
+    Serial.println("BLACKOUT disengaged");
+  }
+}
+
 void voice_mode_cb(lv_event_t *e) {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
   if (!self || !self->isToggled() || !voiceTile)

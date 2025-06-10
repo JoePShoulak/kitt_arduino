@@ -65,11 +65,13 @@ extern VoiceTile *voiceTile;
 extern GaugeTile *gaugeTile;
 extern GaugeTile *leftGaugeTile;
 extern Button *motor_btn;
+extern Button *blackout_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
 
 // ==== Event callbacks ====
 void motor_override_cb(lv_event_t *e);
+void blackout_cb(lv_event_t *e);
 void voice_mode_cb(lv_event_t *e);
 bool validate_24v(lv_event_t *e);
 bool validate_motor(lv_event_t *e);

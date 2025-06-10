@@ -15,6 +15,7 @@ VoiceTile *voiceTile = nullptr;
 GaugeTile *gaugeTile = nullptr;
 GaugeTile *leftGaugeTile = nullptr;
 Button *motor_btn = nullptr;
+Button *blackout_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
 
@@ -54,6 +55,10 @@ void UI::init() {
   if (motor_btn) {
     motor_btn->setCallback(motor_override_cb);
     motor_btn->setValidate(validate_motor);
+  }
+  blackout_btn = rightPanel->getButton(1);
+  if (blackout_btn) {
+    blackout_btn->setCallback(blackout_cb);
   }
   btn24v = rightPanel->getButton(2);
   if (btn24v) {
