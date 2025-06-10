@@ -18,11 +18,15 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id) {
   lv_obj_set_style_pad_all(container, SPACING, 0);
   lv_obj_set_style_pad_row(container, SPACING, 0);
 
+  battery = new Gauge(container, "BATTERY");
   voltage = new Gauge(container, "VOLTAGE");
   current = new Gauge(container, "CURRENT");
+  temperature = new Gauge(container, "TEMPERATURE");
 }
 
 GaugeTile::~GaugeTile() {
+  delete battery;
   delete voltage;
   delete current;
+  delete temperature;
 }
