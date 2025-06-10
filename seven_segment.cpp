@@ -64,7 +64,8 @@ SevenSegmentDisplay::SevenSegmentDisplay(lv_obj_t *parent, const char *labelText
   lv_obj_set_style_text_font(label, &lv_font_montserrat_14, 0);
   lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_RIGHT, 0);
   lv_obj_set_width(label, LV_SIZE_CONTENT);
-  lv_obj_align(label, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
+  // Position the label so its bottom edge aligns with the digit row
+  lv_obj_align_to(label, row, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
 
   setValue(0);
 }
