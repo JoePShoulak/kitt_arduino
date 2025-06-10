@@ -91,3 +91,8 @@ bool validate_inverter(lv_event_t *e) {
   }
   return true;
 }
+
+bool validate_voice_mode(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  return !(self && self->isToggled());
+}

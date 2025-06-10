@@ -74,5 +74,6 @@ void voice_mode_cb(lv_event_t *e);
 bool validate_24v(lv_event_t *e);
 bool validate_motor(lv_event_t *e);
 bool validate_inverter(lv_event_t *e);
+bool validate_voice_mode(lv_event_t *e);
 
 #endif

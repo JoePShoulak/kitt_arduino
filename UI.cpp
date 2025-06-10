@@ -36,8 +36,10 @@ void UI::init() {
   ::voiceTile = voiceTile;
   for (int i = 0; i < 3; ++i) {
     Button *btn = voiceTile->getButton(i);
-    if (btn)
+    if (btn) {
       btn->setCallback(voice_mode_cb);
+      btn->setValidate(validate_voice_mode);
+    }
   }
   rightPanel = ButtonPanel::createTile(tiles, 3, button_panel2);
 
