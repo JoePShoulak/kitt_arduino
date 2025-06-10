@@ -3,7 +3,9 @@
 #include "colors.h"
 #include "config.h"
 
-GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id) {
+GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
+                     int count)
+    : gauge_count(count) {
   tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
   lv_obj_set_style_bg_color(tile, BLACK, 0);
 
@@ -18,15 +20,21 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id) {
   lv_obj_set_style_pad_all(container, SPACING, 0);
   lv_obj_set_style_pad_row(container, SPACING, 0);
 
-  battery = new Gauge(container, "BATTERY");
-  voltage = new Gauge(container, "VOLTAGE");
-  current = new Gauge(container, "CURRENT");
-  temperature = new Gauge(container, "TEMPERATURE");
+  gauges = new Gauge *[gauge_count];
+  for (int i = 0; i < gauge_count; ++i) {
+    gauges[i] = new Gauge(container, labels[i]);
+  }
 }
 
 GaugeTile::~GaugeTile() {
-  delete battery;
-  delete voltage;
-  delete current;
-  delete temperature;
+  for (int i = 0; i < gauge_count; ++i) {
+    delete gauges[i];
+  }
+  delete[] gauges;
+}
+
+Gauge *GaugeTile::getGauge(int idx) const {
+  if (idx < 0 || idx >= gauge_count)
+    return nullptr;
+  return gauges[idx];
 }

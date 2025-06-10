@@ -12,6 +12,7 @@ UI ui;
 // Global UI element pointers defined here
 VoiceTile *voiceTile = nullptr;
 GaugeTile *gaugeTile = nullptr;
+GaugeTile *leftGaugeTile = nullptr;
 Button *motor_btn = nullptr;
 Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
@@ -24,16 +25,27 @@ void UI::init() {
   lv_obj_set_style_bg_color(tiles, BLACK, 0);
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
-  leftPanel = ButtonPanel::createTile(tiles, 0, button_panel1);
-  voiceTile = new VoiceTile(tiles, 1, voice_buttons);
+  static const char *const left_labels[] = {"RPM", "MOTOR CURRENT",
+                                            "PERIPHERAL CURRENT"};
+  leftGaugeTile = new GaugeTile(tiles, 0, left_labels, 3);
+  ::leftGaugeTile = leftGaugeTile;
+
+  leftPanel = ButtonPanel::createTile(tiles, 1, button_panel1);
+  voiceTile = new VoiceTile(tiles, 2, voice_buttons);
   ::voiceTile = voiceTile;
   for (int i = 0; i < 3; ++i) {
     Button *btn = voiceTile->getButton(i);
     if (btn)
       btn->setCallback(voice_mode_cb);
   }
-  rightPanel = ButtonPanel::createTile(tiles, 2, button_panel2);
-  gaugeTile = new GaugeTile(tiles, 3);
+  rightPanel = ButtonPanel::createTile(tiles, 3, button_panel2);
+
+  static const char *const right_labels[] = {"BATTERY VOLTAGE",
+                                             "BATTERY CURRENT",
+                                             "SOLAR VOLTAGE",
+                                             "SOLAR CURRENT",
+                                             "BATTERY VOLTAGE"};
+  gaugeTile = new GaugeTile(tiles, 4, right_labels, 5);
   ::gaugeTile = gaugeTile;
   motor_btn = rightPanel->getButton(0);
   if (motor_btn) {
@@ -49,7 +61,7 @@ void UI::init() {
     inverter_btn->setValidate(validate_inverter);
   }
 
-  lv_obj_set_tile_id(tiles, 1, 0, LV_ANIM_OFF); // start on voice tile
+  lv_obj_set_tile_id(tiles, 2, 0, LV_ANIM_OFF); // start on voice tile
 
   voice_anim_timer = lv_timer_create(voice_anim_cb, 50, nullptr);
 }

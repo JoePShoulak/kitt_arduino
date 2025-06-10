@@ -10,6 +10,7 @@ class GaugeTile;
 class UI {
   lv_obj_t *canvas = nullptr;
   lv_obj_t *tiles = nullptr;
+  GaugeTile *leftGaugeTile = nullptr;
   ButtonPanel *leftPanel = nullptr;
   VoiceTile *voiceTile = nullptr;
   ButtonPanel *rightPanel = nullptr;
@@ -22,6 +23,7 @@ public:
   ButtonPanel *getLeftPanel() const { return leftPanel; }
   ButtonPanel *getRightPanel() const { return rightPanel; }
   GaugeTile *getGaugeTile() const { return gaugeTile; }
+  GaugeTile *getLeftGaugeTile() const { return leftGaugeTile; }
 };
 
 extern UI ui;

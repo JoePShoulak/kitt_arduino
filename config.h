@@ -63,6 +63,7 @@ class GaugeTile;
 
 extern VoiceTile *voiceTile;
 extern GaugeTile *gaugeTile;
+extern GaugeTile *leftGaugeTile;
 extern Button *motor_btn;
 extern Button *btn24v;
 extern Button *inverter_btn;
