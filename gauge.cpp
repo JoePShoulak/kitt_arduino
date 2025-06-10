@@ -7,7 +7,10 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   lv_obj_remove_style_all(container);
   lv_obj_set_layout(container, LV_LAYOUT_FLEX);
   lv_obj_set_flex_flow(container, LV_FLEX_FLOW_COLUMN);
-  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_END,
+  // Place children from the top of the container so the label appears above
+  // the row of bars. Align cross axis to the end so the gauge bars stick to
+  // the right edge while the label uses right text alignment.
+  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END,
                         LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_all(container, 0, 0);
   lv_obj_set_style_pad_row(container, 4, 0);
@@ -32,7 +35,9 @@ Gauge::Gauge(lv_obj_t *parent, const char *label) {
   lv_obj_remove_style_all(row);
   lv_obj_set_layout(row, LV_LAYOUT_FLEX);
   lv_obj_set_flex_flow(row, LV_FLEX_FLOW_ROW);
-  lv_obj_set_flex_align(row, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_END,
+  // Align the row's children from left to right but keep them anchored to the
+  // bottom of the row so the segments sit neatly in a line.
+  lv_obj_set_flex_align(row, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END,
                         LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_column(row, 2, 0);
   lv_obj_set_style_pad_row(row, 0, 0);
