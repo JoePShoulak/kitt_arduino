@@ -24,6 +24,12 @@ static bool load_audio(const char *file) {
 void audio_play(const char *file) {
   if (!file)
     return;
+
+  if (audio.isPlaying()) {
+    Serial.println("Audio is already playing; ignoring new request.");
+    return;
+  }
+
   if (load_audio(file)) {
     audio.play();
   }

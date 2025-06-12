@@ -15,8 +15,6 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col,
     : label(data.label), callback(data.callback), validate(dummy_validate),
       toggleable(data.toggleable), severe(data.severe),
       sound_on(data.audio_on), sound_off(data.audio_off) {
-  Serial.print("Creating Button: ");
-  Serial.println(label);
 
   // determine colors based on behaviour
   if (toggleable) {
@@ -61,8 +59,6 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col,
     : label(data.label), callback(data.callback), validate(dummy_validate),
       toggleable(data.toggleable), severe(data.severe),
       sound_on(data.audio_on), sound_off(data.audio_off) {
-  Serial.print("Creating Button: ");
-  Serial.println(label);
 
   color_off = override_off;
   color_on = override_on;
