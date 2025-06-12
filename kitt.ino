@@ -1,6 +1,5 @@
 // kitt.ino
 
-#include "audio_helper.h"
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay_GFX.h>
 #include <Arduino_GigaDisplay.h>
@@ -29,6 +28,4 @@ void setup() {
 
 void loop() {
   lv_timer_handler();
-  
-  audio_loop();
 }

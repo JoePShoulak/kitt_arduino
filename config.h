@@ -33,7 +33,7 @@ const ButtonData button_panel1[BUTTON_COUNT] = {
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
     {"MOTOR", null_btn, true, true, true},
-    {"BLACKOUT", null_btn, true, true},
+    {"EVADE", null_btn, true, true},
     {"24V MODE", null_btn, true, true},
     {"INVERTER", null_btn, true, true},
     {"GPS", null_btn, true, false, true},

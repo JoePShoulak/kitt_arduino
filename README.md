@@ -12,8 +12,7 @@ It is currently used to experiment with a fun control panel for an augmented gol
   * **Right panel** – secondary button grid for practical controls.
 * Basic audio playback support from USB. The INTRO, EXPLODE, JOSEPH and SHOE
   buttons on the left panel each load and play a single track once (see
-  `audio_helper.*`). `audio_loop()` only maintains playback state after one of
-  these buttons triggers audio playback.
+  `audio_helper.*`).
 
 The `ref` directory contains screenshots used for layout reference.
 
