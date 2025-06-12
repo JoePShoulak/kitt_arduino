@@ -23,9 +23,10 @@ void intro_btn_cb(lv_event_t *e);
 void explode_btn_cb(lv_event_t *e);
 void joseph_btn_cb(lv_event_t *e);
 void shoe_btn_cb(lv_event_t *e);
+void turbo_btn_cb(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    {"TURBO BOOST", null_btn, false, true}, {"MAP SYSTEM", null_btn, true},
+    {"TURBO BOOST", turbo_btn_cb, false, true}, {"MAP SYSTEM", null_btn, true},
     {"PRINTER", null_btn, true},           {"VOLTAGE OUTPUT", null_btn, true},
     {"INTRO", intro_btn_cb, false},        {"EXPLODE", explode_btn_cb, false},
     {"JOSEPH", joseph_btn_cb, false},      {"SHOE", shoe_btn_cb, false},
