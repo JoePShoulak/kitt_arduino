@@ -23,5 +23,8 @@ void audio_play_file(const char *filename) {
 void audio_stop() { audio.stop(); }
 
 void audio_loop() {
-  // Playback stops automatically when the file ends
+  // Poll library so buffered playback can continue
+  if (audio.isFinished()) {
+    audio.stop();
+  }
 }
