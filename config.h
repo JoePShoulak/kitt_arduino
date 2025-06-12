@@ -18,12 +18,16 @@
 #define PANEL_GRID_HEIGHT (PANEL_BUTTON_SIZE * (BUTTON_COUNT / 2) + SPACING * 6)
 
 void null_btn(lv_event_t *e);
+void intro_cb(lv_event_t *e);
+void explode_cb(lv_event_t *e);
+void shoe_cb(lv_event_t *e);
+void joseph_cb(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", null_btn, false, true}, {"MAP SYSTEM", null_btn, true},
     {"PRINTER", null_btn, true},           {"VOLTAGE OUTPUT", null_btn, true},
-    {"VITAL SCAN", null_btn, false},       {"EVADE", null_btn, false},
-    {"RANGE BRITE", null_btn, false},      {"RADAR IMAGE", null_btn, false},
+    {"INTRO", intro_cb, false},            {"EXPLODE", explode_cb, false},
+    {"SHOE", shoe_cb, false},              {"JOSEPH", joseph_cb, false},
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {

@@ -4,6 +4,7 @@
 #include "config.h"
 #include "popup.h"
 #include "voice_tile.h"
+#include "audio_helper.h"
 
 // This file implements the callbacks and validation logic declared in
 // config.h. Functions are grouped by purpose for clarity.
@@ -57,6 +58,14 @@ void null_btn(lv_event_t *e) {
     Serial.println(self->getLabel());
   }
 }
+
+void intro_cb(lv_event_t *) { audio_play_file("intro.wav"); }
+
+void explode_cb(lv_event_t *) { audio_play_file("explode.wav"); }
+
+void shoe_cb(lv_event_t *) { audio_play_file("shoe.wav"); }
+
+void joseph_cb(lv_event_t *) { audio_play_file("joseph.wav"); }
 
 void motor_override_cb(lv_event_t *e) {
   Serial.println("MOTOR override callback!");

@@ -3,5 +3,7 @@
 
 void audio_setup();
 void audio_loop();
+void audio_play_file(const char *filename);
+void audio_stop();
 
 #endif
