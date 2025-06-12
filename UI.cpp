@@ -20,6 +20,8 @@ Button *btn24v = nullptr;
 Button *inverter_btn = nullptr;
 
 void UI::init() {
+  Serial.print("Initializing UI...");
+
   canvas = lv_scr_act();
   lv_obj_set_style_bg_color(canvas, BLACK, 0);
 
@@ -74,4 +76,6 @@ void UI::init() {
   voice_anim_timer = lv_timer_create(voice_anim_cb, 50, nullptr);
   // Slow down gauge animations so they are less frenetic
   gauge_anim_timer = lv_timer_create(gauge_anim_cb, 150, nullptr);
+
+  Serial.println(" done!");
 }

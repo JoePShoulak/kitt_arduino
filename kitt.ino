@@ -15,6 +15,7 @@
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
 GigaDisplayBacklight backlight;
+bool blackout = false;
 
 void setup() {
   Serial.begin(115200); // Initialize Serial
@@ -22,8 +23,9 @@ void setup() {
   tft.begin();          // Initialize Giga Display
   TouchDetector.begin();
   backlight.begin();
-
   ui.init();
+
+  Serial.println();
 }
 
 void loop() {

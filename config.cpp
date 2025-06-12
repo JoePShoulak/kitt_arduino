@@ -61,7 +61,7 @@ void null_btn(lv_event_t *e) {
 
 void intro_btn_cb(lv_event_t *e) {
   Serial.println("INTRO clip requested");
-  audio_setup();
+  audio_play("intro.wav");
 }
 
 void explode_btn_cb(lv_event_t *e) {

@@ -29,8 +29,6 @@ void audio_play(const char *file) {
   }
 }
 
-void audio_setup() { audio_play("intro.wav"); }
-
 void audio_loop() {
   if (!audio_loaded)
     return;
