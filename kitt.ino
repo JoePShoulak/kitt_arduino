@@ -30,6 +30,5 @@ void setup() {
 
 void loop() {
   lv_timer_handler();
-  
   audio_loop();
 }

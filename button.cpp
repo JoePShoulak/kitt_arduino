@@ -56,8 +56,6 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col,
                lv_color_t override_on)
     : label(data.label), callback(data.callback), validate(dummy_validate),
       toggleable(data.toggleable), severe(data.severe) {
-  Serial.print("Creating Button: ");
-  Serial.println(label);
 
   color_off = override_off;
   color_on = override_on;

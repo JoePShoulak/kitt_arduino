@@ -22,16 +22,25 @@ static bool load_audio(const char *file) {
 }
 
 void audio_play(const char *file) {
-  if (!file)
+  if (!file) {
     return;
+  }
+
+  if (audio.isPlaying()) {
+    Serial.println("!-> Audio is already playing; request ignored.");
+    return;
+  }
+
   if (load_audio(file)) {
     audio.play();
   }
 }
 
 void audio_loop() {
-  if (!audio_loaded)
+  if (!audio_loaded) {
     return;
+  }
+
   if (!reported && audio.isFinished()) {
     reported = true;
     Serial.println("Audio finished.");
