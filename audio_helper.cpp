@@ -4,33 +4,36 @@
 #include <GigaAudio.h>
 
 static GigaAudio audio("USB DISK");
-static const char *audio_file = "intro.wav"; // single track to play
 static bool audio_loaded = false;
-
-static bool load_audio() {
-  if (!audio.load(const_cast<char *>(audio_file))) {
+static bool reported = false;
+static bool load_audio(const char *file) {
+  if (!audio.load(const_cast<char *>(file))) {
     if (audio.hasError()) {
       Serial.println(audio.errorMessage());
     } else {
       Serial.print("Cannot load WAV file ");
-      Serial.println(audio_file);
+      Serial.println(file);
     }
     return false;
   }
   audio_loaded = true;
+  reported = false;
   return true;
 }
 
-void audio_setup() {
-  if (load_audio()) {
+void audio_play(const char *file) {
+  if (!file)
+    return;
+  if (load_audio(file)) {
     audio.play();
   }
 }
 
+void audio_setup() { audio_play("intro.wav"); }
+
 void audio_loop() {
   if (!audio_loaded)
     return;
-  static bool reported = false;
   if (!reported && audio.isFinished()) {
     reported = true;
     Serial.println("Audio finished.");

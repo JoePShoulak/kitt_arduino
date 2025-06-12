@@ -64,6 +64,21 @@ void intro_btn_cb(lv_event_t *e) {
   audio_setup();
 }
 
+void explode_btn_cb(lv_event_t *e) {
+  Serial.println("EXPLODE clip requested");
+  audio_play("explode.wav");
+}
+
+void joseph_btn_cb(lv_event_t *e) {
+  Serial.println("JOSEPH clip requested");
+  audio_play("joseph.wav");
+}
+
+void shoe_btn_cb(lv_event_t *e) {
+  Serial.println("SHOE clip requested");
+  audio_play("shoe.wav");
+}
+
 void motor_override_cb(lv_event_t *e) {
   Serial.println("MOTOR override callback!");
 }
