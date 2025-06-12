@@ -132,6 +132,8 @@ void Button::eventHandler(lv_event_t *e) {
           }
           if (callback)
             callback(e);
+        } else {
+          audio_play("error.wav");
         }
         long_press_handled = true;
         if (!toggleable)
@@ -151,6 +153,8 @@ void Button::eventHandler(lv_event_t *e) {
       }
       if (callback)
         callback(e);
+    } else {
+      audio_play("error.wav");
     }
   }
 }
