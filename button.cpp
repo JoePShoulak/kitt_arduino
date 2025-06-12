@@ -1,4 +1,5 @@
 #include "button.h"
+#include "audio_helper.h"
 #include <Arduino.h>
 
 static void btn_event_cb(lv_event_t *e) {
@@ -119,6 +120,8 @@ void Button::eventHandler(lv_event_t *e) {
           handlePress();
           if (callback)
             callback(e);
+        } else {
+          audio_play("error.wav");
         }
         long_press_handled = true;
         if (!toggleable)
@@ -132,6 +135,8 @@ void Button::eventHandler(lv_event_t *e) {
       handlePress();
       if (callback)
         callback(e);
+    } else {
+      audio_play("error.wav");
     }
   }
 }

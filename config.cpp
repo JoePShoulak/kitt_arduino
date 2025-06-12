@@ -79,6 +79,55 @@ void shoe_btn_cb(lv_event_t *e) {
   audio_play("shoe.wav");
 }
 
+void theme_btn_cb(lv_event_t *e) {
+  Serial.println("THEME clip requested");
+  audio_play("theme.wav");
+}
+
+void auto_cruise_btn_cb(lv_event_t *e) {
+  Serial.println("AUTO CRUISE clip requested");
+  audio_play("auto_cruise.wav");
+  voice_mode_cb(e);
+}
+
+void normal_cruise_btn_cb(lv_event_t *e) {
+  Serial.println("NORMAL CRUISE clip requested");
+  audio_play("normal_cruise.wav");
+  voice_mode_cb(e);
+}
+
+void pursuit_btn_cb(lv_event_t *e) {
+  Serial.println("PURSUIT clip requested");
+  audio_play("pursuit.wav");
+  voice_mode_cb(e);
+}
+
+static void toggle_sound(Button *self, const char *on_clip, const char *off_clip) {
+  if (!self)
+    return;
+  audio_play(self->isToggled() ? on_clip : off_clip);
+}
+
+void gps_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "gps_on.wav", "gps_off.wav");
+}
+
+void radio_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "radio_on.wav", "radio_off.wav");
+}
+
+void usb_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "usb_on.wav", "usb_off.wav");
+}
+
+void lighting_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "lighting_on.wav", "lighting_off.wav");
+}
+
 void motor_override_cb(lv_event_t *e) {
   Serial.println("MOTOR override callback!");
 }
