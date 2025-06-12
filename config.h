@@ -24,24 +24,31 @@ void explode_btn_cb(lv_event_t *e);
 void joseph_btn_cb(lv_event_t *e);
 void shoe_btn_cb(lv_event_t *e);
 void theme_btn_cb(lv_event_t *e);
+void turbo_boost_btn_cb(lv_event_t *e);
 void auto_cruise_btn_cb(lv_event_t *e);
 void normal_cruise_btn_cb(lv_event_t *e);
 void pursuit_btn_cb(lv_event_t *e);
+void evade_btn_cb(lv_event_t *e);
+void btn24v_cb(lv_event_t *e);
+void inverter_btn_cb(lv_event_t *e);
 void gps_btn_cb(lv_event_t *e);
 void radio_btn_cb(lv_event_t *e);
 void usb_btn_cb(lv_event_t *e);
 void lighting_btn_cb(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    {"TURBO BOOST", null_btn, false, true}, {"MAP SYSTEM", null_btn, true},
+    {"TURBO BOOST", turbo_boost_btn_cb, false, true},
+    {"MAP SYSTEM", null_btn, true},
     {"PRINTER", null_btn, true},            {"THEME", theme_btn_cb, false},
     {"INTRO", intro_btn_cb, false},         {"EXPLODE", explode_btn_cb, false},
     {"JOSEPH", joseph_btn_cb, false},       {"SHOE", shoe_btn_cb, false},
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    {"MOTOR", null_btn, true, true, true},  {"EVADE", null_btn, true, true},
-    {"24V MODE", null_btn, true, true},     {"INVERTER", null_btn, true, true},
+    {"MOTOR", motor_override_cb, true, true, true},
+    {"EVADE", evade_btn_cb, true, true},
+    {"24V MODE", btn24v_cb, true, true},
+    {"INVERTER", inverter_btn_cb, true, true},
     {"GPS", gps_btn_cb, true, false, true},   {"RADIO", radio_btn_cb, true, false, true},
     {"USB", usb_btn_cb, true, false, true},   {"LIGHTING", lighting_btn_cb, true},
 };

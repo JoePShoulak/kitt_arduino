@@ -84,6 +84,11 @@ void theme_btn_cb(lv_event_t *e) {
   audio_play("theme.wav");
 }
 
+void turbo_boost_btn_cb(lv_event_t *e) {
+  Serial.println("TURBO BOOST clip requested");
+  audio_play("turbo_boost.wav");
+}
+
 void auto_cruise_btn_cb(lv_event_t *e) {
   Serial.println("AUTO CRUISE clip requested");
   audio_play("auto_cruise.wav");
@@ -100,6 +105,11 @@ void pursuit_btn_cb(lv_event_t *e) {
   Serial.println("PURSUIT clip requested");
   audio_play("pursuit.wav");
   voice_mode_cb(e);
+}
+
+void evade_btn_cb(lv_event_t *e) {
+  Serial.println("EVADE clip requested");
+  audio_play("evade.wav");
 }
 
 static void toggle_sound(Button *self, const char *on_clip, const char *off_clip) {
@@ -128,8 +138,20 @@ void lighting_btn_cb(lv_event_t *e) {
   toggle_sound(self, "lighting_on.wav", "lighting_off.wav");
 }
 
+void btn24v_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "24V_on.wav", "24v_off.wav");
+}
+
+void inverter_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "inverter_on.wav", "inverter_off.wav");
+}
+
 void motor_override_cb(lv_event_t *e) {
-  Serial.println("MOTOR override callback!");
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  Serial.println("MOTOR clip requested");
+  toggle_sound(self, "motor_on.wav", "motor_off.wav");
 }
 
 void blackout_cb(lv_event_t *e) {
