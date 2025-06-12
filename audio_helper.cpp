@@ -4,18 +4,15 @@
 #include <GigaAudio.h>
 
 static GigaAudio audio("USB DISK");
-static const char *audio_files[] = {"intro.wav", "explode.wav", "shoe.wav", "joseph.wav"};
-static const int audio_file_count =
-    sizeof(audio_files) / sizeof(audio_files[0]);
-static int current_audio_index = 0;
+static const char *audio_file = "intro.wav"; // single track to play
 
-static bool load_current_audio() {
-  if (!audio.load(const_cast<char *>(audio_files[current_audio_index]))) {
+static bool load_audio() {
+  if (!audio.load(const_cast<char *>(audio_file))) {
     if (audio.hasError()) {
       Serial.println(audio.errorMessage());
     } else {
       Serial.print("Cannot load WAV file ");
-      Serial.println(audio_files[current_audio_index]);
+      Serial.println(audio_file);
     }
     return false;
   }
@@ -23,18 +20,15 @@ static bool load_current_audio() {
 }
 
 void audio_setup() {
-  current_audio_index = 0;
-  if (load_current_audio()) {
+  if (load_audio()) {
     audio.play();
   }
 }
 
 void audio_loop() {
-  if (audio.isFinished()) {
-    current_audio_index = (current_audio_index + 1) % audio_file_count;
-    if (load_current_audio()) {
-      audio.play();
-      Serial.println("Restarting . . .");
-    }
+  static bool reported = false;
+  if (!reported && audio.isFinished()) {
+    reported = true;
+    Serial.println("Audio finished.");
   }
 }
