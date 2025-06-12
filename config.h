@@ -50,9 +50,9 @@ const ButtonData button_panel2[BUTTON_COUNT] = {
 
 // ==== Voice tile configuration ====
 const ButtonData voice_buttons[3] = {
-    {"AUTO CRUISE", null_btn, true, true},
-    {"NORMAL CRUISE", null_btn, true, true, true},
-    {"PURSUIT", null_btn, true, true},
+    {"AUTO CRUISE", null_btn, true, true, false, "auto_cruise.wav"},
+    {"NORMAL CRUISE", null_btn, true, true, true, "normal_cruise.wav"},
+    {"PURSUIT", null_btn, true, true, false, "pursuit.wav"},
 };
 
 // ==== Visualiser configuration ====
