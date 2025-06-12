@@ -5,6 +5,7 @@
 
 static GigaAudio audio("USB DISK");
 static const char *audio_file = "intro.wav"; // single track to play
+static bool audio_loaded = false;
 
 static bool load_audio() {
   if (!audio.load(const_cast<char *>(audio_file))) {
@@ -16,6 +17,7 @@ static bool load_audio() {
     }
     return false;
   }
+  audio_loaded = true;
   return true;
 }
 
@@ -26,6 +28,8 @@ void audio_setup() {
 }
 
 void audio_loop() {
+  if (!audio_loaded)
+    return;
   static bool reported = false;
   if (!reported && audio.isFinished()) {
     reported = true;

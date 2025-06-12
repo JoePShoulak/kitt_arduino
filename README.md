@@ -11,7 +11,8 @@ It is currently used to experiment with a fun control panel for an augmented gol
   * **Center panel** – voice synthesiser display with indicators (default view).
   * **Right panel** – secondary button grid for practical controls.
 * Basic audio playback support from USB. The INTRO button on the left panel
-  plays a single track once (see `audio_helper.*`).
+  loads and plays a single track once (see `audio_helper.*`). `audio_loop()`
+  only maintains playback state after the INTRO button triggers `audio_setup()`.
 
 The `ref` directory contains screenshots used for layout reference.
 
