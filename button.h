@@ -13,6 +13,8 @@ struct ButtonData {
   bool toggleable;
   bool severe = false; // hold for one second before triggering if true
   bool start_active = false;
+  const char *audio_on = nullptr;  // optional wav to play when toggled on
+  const char *audio_off = nullptr; // optional wav to play when toggled off
 };
 
 class Button {
@@ -45,6 +47,9 @@ private:
 
   lv_color_t color_off;
   lv_color_t color_on;
+
+  const char *sound_on = nullptr;
+  const char *sound_off = nullptr;
 
   static const uint16_t LONG_PRESS_DURATION = 1000; // ms
   bool severe = false;

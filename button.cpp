@@ -1,4 +1,5 @@
 #include "button.h"
+#include "audio_helper.h"
 #include <Arduino.h>
 
 static void btn_event_cb(lv_event_t *e) {
@@ -12,7 +13,8 @@ static bool dummy_validate(lv_event_t *) { return true; }
 Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col,
                uint8_t grid_row)
     : label(data.label), callback(data.callback), validate(dummy_validate),
-      toggleable(data.toggleable), severe(data.severe) {
+      toggleable(data.toggleable), severe(data.severe),
+      sound_on(data.audio_on), sound_off(data.audio_off) {
   Serial.print("Creating Button: ");
   Serial.println(label);
 
@@ -57,7 +59,8 @@ Button::Button(lv_obj_t *parent_grid, const ButtonData &data, uint8_t grid_col,
                uint8_t grid_row, lv_color_t override_off,
                lv_color_t override_on)
     : label(data.label), callback(data.callback), validate(dummy_validate),
-      toggleable(data.toggleable), severe(data.severe) {
+      toggleable(data.toggleable), severe(data.severe),
+      sound_on(data.audio_on), sound_off(data.audio_off) {
   Serial.print("Creating Button: ");
   Serial.println(label);
 
@@ -121,6 +124,12 @@ void Button::eventHandler(lv_event_t *e) {
       if (elapsed >= LONG_PRESS_DURATION) {
         if (!validate || validate(e)) {
           handlePress();
+          if (toggleable) {
+            if (toggled && sound_on)
+              audio_play(sound_on);
+            else if (!toggled && sound_off)
+              audio_play(sound_off);
+          }
           if (callback)
             callback(e);
         }
@@ -134,6 +143,12 @@ void Button::eventHandler(lv_event_t *e) {
   } else if (code == LV_EVENT_CLICKED && !severe) {
     if (!validate || validate(e)) {
       handlePress();
+      if (toggleable) {
+        if (toggled && sound_on)
+          audio_play(sound_on);
+        else if (!toggled && sound_off)
+          audio_play(sound_off);
+      }
       if (callback)
         callback(e);
     }
