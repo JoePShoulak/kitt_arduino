@@ -81,7 +81,7 @@ void shoe_btn_cb(lv_event_t *e) {
 
 void turbo_btn_cb(lv_event_t *e) {
   Serial.println("TURBO BOOST clip requested");
-  audio_play("test.wav");
+  audio_play("turbo_boost.wav");
 }
 
 void motor_override_cb(lv_event_t *e) {

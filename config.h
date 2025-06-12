@@ -26,17 +26,22 @@ void shoe_btn_cb(lv_event_t *e);
 void turbo_btn_cb(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
-    {"TURBO BOOST", turbo_btn_cb, false, true}, {"MAP SYSTEM", null_btn, true},
-    {"PRINTER", null_btn, true},           {"VOLTAGE OUTPUT", null_btn, true},
-    {"INTRO", intro_btn_cb, false},        {"EXPLODE", explode_btn_cb, false},
-    {"JOSEPH", joseph_btn_cb, false},      {"SHOE", shoe_btn_cb, false},
+    {"TURBO BOOST", turbo_btn_cb, false, true, false, "turbo_boost.wav"},
+    {"MAP SYSTEM", null_btn, true},
+    {"PRINTER", null_btn, true},
+    {"VOLTAGE OUTPUT", null_btn, true},
+    {"INTRO", intro_btn_cb, false},
+    {"EXPLODE", explode_btn_cb, false},
+    {"JOSEPH", joseph_btn_cb, false},
+    {"SHOE", shoe_btn_cb, false},
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {
-    {"MOTOR", null_btn, true, true, true},
-    {"EVADE", null_btn, true, true},
-    {"24V MODE", null_btn, true, true},
-    {"INVERTER", null_btn, true, true},
+    {"MOTOR", null_btn, true, true, true, "motor_on.wav", "motor_off.wav"},
+    {"EVADE", null_btn, true, true, false, "evade.wav"},
+    {"24V MODE", null_btn, true, true, false, "24v_on.wav", "24v_off.wav"},
+    {"INVERTER", null_btn, true, true, false, "inverter_on.wav",
+     "inverter_off.wav"},
     {"GPS", null_btn, true, false, true},
     {"RADIO", null_btn, true, false, true},
     {"USB", null_btn, true, false, true},
