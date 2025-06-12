@@ -4,6 +4,7 @@
 #include "config.h"
 #include "popup.h"
 #include "voice_tile.h"
+#include "audio_helper.h"
 
 // This file implements the callbacks and validation logic declared in
 // config.h. Functions are grouped by purpose for clarity.
@@ -56,6 +57,11 @@ void null_btn(lv_event_t *e) {
     }
     Serial.println(self->getLabel());
   }
+}
+
+void intro_btn_cb(lv_event_t *e) {
+  Serial.println("INTRO clip requested");
+  audio_setup();
 }
 
 void motor_override_cb(lv_event_t *e) {

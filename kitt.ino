@@ -25,8 +25,6 @@ void setup() {
   backlight.begin();
 
   ui.init();
-
-  audio_setup();
 }
 
 void loop() {

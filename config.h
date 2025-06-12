@@ -19,11 +19,13 @@
 
 void null_btn(lv_event_t *e);
 
+void intro_btn_cb(lv_event_t *e);
+
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", null_btn, false, true}, {"MAP SYSTEM", null_btn, true},
     {"PRINTER", null_btn, true},           {"VOLTAGE OUTPUT", null_btn, true},
-    {"VITAL SCAN", null_btn, false},       {"EVADE", null_btn, false},
-    {"RANGE BRITE", null_btn, false},      {"RADAR IMAGE", null_btn, false},
+    {"INTRO", intro_btn_cb, false},        {"EXPLODE", null_btn, false},
+    {"JOSEPH", null_btn, false},           {"SHOE", null_btn, false},
 };
 
 const ButtonData button_panel2[BUTTON_COUNT] = {

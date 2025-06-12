@@ -10,8 +10,8 @@ It is currently used to experiment with a fun control panel for an augmented gol
   * **Left panel** – button grid in the KITT style.
   * **Center panel** – voice synthesiser display with indicators (default view).
   * **Right panel** – secondary button grid for practical controls.
-* Basic audio playback support from USB. A single track is loaded on startup
-  and played once (see `audio_helper.*`).
+* Basic audio playback support from USB. The INTRO button on the left panel
+  plays a single track once (see `audio_helper.*`).
 
 The `ref` directory contains screenshots used for layout reference.
 
