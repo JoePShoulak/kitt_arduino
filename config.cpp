@@ -79,6 +79,52 @@ void shoe_btn_cb(lv_event_t *e) {
   audio_play("shoe.wav");
 }
 
+void theme_btn_cb(lv_event_t *e) {
+  Serial.println("THEME clip requested");
+  audio_play("theme.wav");
+}
+
+void auto_cruise_btn_cb(lv_event_t *e) {
+  voice_mode_cb(e);
+  audio_play("auto_cruise.wav");
+}
+
+void normal_cruise_btn_cb(lv_event_t *e) {
+  voice_mode_cb(e);
+  audio_play("normal_cruise.wav");
+}
+
+void pursuit_btn_cb(lv_event_t *e) {
+  voice_mode_cb(e);
+  audio_play("pursuit.wav");
+}
+
+static void play_toggle_clip(Button *btn, const char *on_clip, const char *off_clip) {
+  if (!btn)
+    return;
+  audio_play(btn->isToggled() ? on_clip : off_clip);
+}
+
+void gps_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  play_toggle_clip(self, "gps_on.wav", "gps_off.wav");
+}
+
+void radio_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  play_toggle_clip(self, "radio_on.wav", "radio_off.wav");
+}
+
+void usb_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  play_toggle_clip(self, "usb_on.wav", "usb_off.wav");
+}
+
+void lighting_btn_cb(lv_event_t *e) {
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  play_toggle_clip(self, "lighting_on.wav", "lighting_off.wav");
+}
+
 void motor_override_cb(lv_event_t *e) {
   Serial.println("MOTOR override callback!");
 }
@@ -135,6 +181,7 @@ bool validate_24v(lv_event_t *e) {
       lv_obj_t *tile = lv_obj_get_parent(grid);
       show_error_popup(tile, "Cannot activate 24V MODE while MOTOR is ON");
     }
+    audio_play("error.wav");
     return false;
   }
   if (self->isToggled() && inverter_btn && inverter_btn->isToggled()) {
@@ -144,6 +191,7 @@ bool validate_24v(lv_event_t *e) {
       lv_obj_t *tile = lv_obj_get_parent(grid);
       show_error_popup(tile, "Cannot deactivate 24V MODE while INVERTER is ON");
     }
+    audio_play("error.wav");
     return false;
   }
   return true;
@@ -158,6 +206,7 @@ bool validate_motor(lv_event_t *e) {
       lv_obj_t *tile = lv_obj_get_parent(grid);
       show_error_popup(tile, "Cannot activate MOTOR while 24V MODE is ON");
     }
+    audio_play("error.wav");
     return false;
   }
   return true;
@@ -172,6 +221,7 @@ bool validate_inverter(lv_event_t *e) {
       lv_obj_t *tile = lv_obj_get_parent(grid);
       show_error_popup(tile, "Cannot activate INVERTER while 24V MODE is OFF");
     }
+    audio_play("error.wav");
     return false;
   }
   return true;
@@ -179,5 +229,9 @@ bool validate_inverter(lv_event_t *e) {
 
 bool validate_voice_mode(lv_event_t *e) {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
-  return !(self && self->isToggled());
+  if (self && self->isToggled()) {
+    audio_play("error.wav");
+    return false;
+  }
+  return true;
 }
