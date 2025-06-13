@@ -3,6 +3,7 @@
 #include "config.h"
 #include "voice_tile.h"
 #include "audio_helper.h"
+#include <GigaAudio.h>
 #include <stdlib.h>
 
 void voice_anim_cb(lv_timer_t *t) {
@@ -10,8 +11,9 @@ void voice_anim_cb(lv_timer_t *t) {
   static float target = 0.f;
   static int hold = 0;
   static bool was_playing = false;
-  (void)t;
-  bool playing = audio_is_playing();
+  GigaAudio *audio =
+      t ? static_cast<GigaAudio *>(lv_timer_get_user_data(t)) : nullptr;
+  bool playing = audio ? audio->isPlaying() : audio_is_playing();
 
   if (!playing) {
     if (was_playing && voiceTile) {

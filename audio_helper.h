@@ -1,6 +1,11 @@
 #ifndef AUDIO_HELPER_H
 #define AUDIO_HELPER_H
 
+#include <GigaAudio.h>
+
+// Provide the audio instance used by the helper functions
+void audio_init(GigaAudio &audio);
+
 // Play the specified WAV file once
 void audio_play(const char *file);
 // Maintains playback state if audio_setup() or audio_play() was called

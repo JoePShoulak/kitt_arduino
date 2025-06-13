@@ -7,6 +7,7 @@
 #include "voice_tile.h"
 #include "gauge_tile.h"
 #include "gauge_anim.h"
+#include <GigaAudio.h>
 
 UI ui;
 
@@ -19,7 +20,7 @@ Button *blackout_btn = nullptr;
 Button *btn48v = nullptr;
 Button *inverter_btn = nullptr;
 
-void UI::init() {
+void UI::init(GigaAudio &audio) {
   Serial.print("Initializing UI...");
 
   canvas = lv_scr_act();
@@ -72,7 +73,7 @@ void UI::init() {
 
   lv_obj_set_tile_id(tiles, 2, 0, LV_ANIM_OFF); // start on voice tile
 
-  voice_anim_timer = lv_timer_create(voice_anim_cb, 50, nullptr);
+  voice_anim_timer = lv_timer_create(voice_anim_cb, 50, &audio);
   // Slow down gauge animations so they are less frenetic
   gauge_anim_timer = lv_timer_create(gauge_anim_cb, 150, nullptr);
 

@@ -2,6 +2,7 @@
 #define UI_H
 
 #include "lvgl_wrapper.h"
+#include <GigaAudio.h>
 
 class ButtonPanel;
 class VoiceTile;
@@ -19,7 +20,7 @@ class UI {
   lv_timer_t *gauge_anim_timer = nullptr;
 
 public:
-  void init();
+  void init(GigaAudio &audio);
   VoiceTile *getVoiceTile() const { return voiceTile; }
   ButtonPanel *getLeftPanel() const { return leftPanel; }
   ButtonPanel *getRightPanel() const { return rightPanel; }
