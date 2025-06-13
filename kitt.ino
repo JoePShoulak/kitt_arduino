@@ -27,7 +27,7 @@ void setup() {
       voiceTile->getIndicator(0)->getLVObj()) {
     lv_obj_t *aud_obj = voiceTile->getIndicator(0)->getLVObj();
     lv_obj_add_flag(aud_obj, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_add_event_cb(aud_obj, aud_indicator_cb, LV_EVENT_CLICKED, nullptr);
+    lv_obj_add_event_cb(aud_obj, aud_indicator_cb, LV_EVENT_PRESSED, nullptr);
   }
 
   Serial.println();
