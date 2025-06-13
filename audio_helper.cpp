@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <GigaAudio.h>
 
-static GigaAudio audio("USB DISK");
+GigaAudio audio("USB DISK");
 static bool audio_loaded = false;
 static bool reported = false;
 static bool load_audio(const char *file) {
