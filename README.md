@@ -28,6 +28,10 @@ Install the following libraries using the Arduino Library Manager before compili
 
 These provide support for the display, the capacitive touch interface, the graphics widgets and the audio helper respectively.
 
+The UI components are grouped into the **KITTUI** library located under
+`lib/KITTUI`. Include headers using the `<KITTUI/...>` path when adding new
+files.
+
 ## Board Setup
 
 Use the **Arduino GIGA R1** board package. The sketches assume the official GIGA Display Shield is attached.

@@ -11,7 +11,8 @@ I got a lot of help from AI and friends on this project. The following is my bes
 
 ### Brief
 
-Helpers generally assist with offloading some code out of the `kitt.ino` file to keep it neat and tidy
+Helpers generally assist with offloading some code out of the `kitt.ino` file to keep it neat and tidy. Most UI helpers now live in the
+`lib/KITTUI` library so they can be reused more easily.
 
 ### Audio Helper
 
@@ -38,7 +39,7 @@ I think the AI created this in order to try to get fonts to work. I think it can
 
 ### UI
 
-A wrapper class for all UI functionality just to keep all the initializations and logic in the same file and seperate from kitt.ino which would already be way too long and busy if we had not broken out as much as we do (even if it might be a bit overboard).
+A wrapper class for all UI functionality just to keep all the initializations and logic in the same file and separate from `kitt.ino`. The UI code is part of the `KITTUI` library under `lib/KITTUI`.
 
 ### Voice Synth
 
@@ -84,4 +85,5 @@ This is the speedometer, but it could be used generally as something else, I sup
 
 ### Voice Visualizer
 
-The object on the main screen that animates when audio plays. Currently filled with dummy animation, but later to be updated by real sensor data. 
+The object on the main screen that animates when audio plays. Currently filled with dummy animation, but later to be updated by real sensor data.
+It is implemented in the `KITTUI` library.

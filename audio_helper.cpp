@@ -1,6 +1,6 @@
 #include "audio_helper.h"
 #include "config.h"
-#include "voice_tile.h"
+#include <KITTUI/voice_tile.h>
 
 #include <Arduino.h>
 #include <GigaAudio.h>
