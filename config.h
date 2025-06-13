@@ -48,8 +48,8 @@ bool validate_voice_mode(lv_event_t *e);
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, false, true},
     {"THEME", theme_btn_cb, false},
-    {"MICHELLE", michelle_btn_cb, false},   {"SHAWN", shawn_btn_cb, false},
     {"INTRO", intro_btn_cb, false},         {"EXPLODE", explode_btn_cb, false},
+    {"MICHELLE", michelle_btn_cb, false},   {"SHAWN", shawn_btn_cb, false},
     {"JOSEPH", joseph_btn_cb, false},       {"SHOE", shoe_btn_cb, false},
 };
 
