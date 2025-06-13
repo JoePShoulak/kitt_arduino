@@ -1,7 +1,7 @@
 #include "voice_synth.h"
 
 #include "config.h"
-#include "voice_tile.h"
+#include <KITT_UI/voice_tile.h>
 #include "audio_helper.h"
 #include <stdlib.h>
 

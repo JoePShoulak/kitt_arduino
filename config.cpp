@@ -1,9 +1,9 @@
 #include <Arduino.h> // for Serial
 
-#include "button.h"
+#include <KITT_UI/button.h>
 #include "config.h"
-#include "popup.h"
-#include "voice_tile.h"
+#include <KITT_UI/popup.h>
+#include <KITT_UI/voice_tile.h>
 #include "audio_helper.h"
 
 // This file implements the callbacks and validation logic declared in
