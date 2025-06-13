@@ -211,21 +211,21 @@ bool validate_48v(lv_event_t *e) {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
   if (!self)
     return true;
-  if (!self->isToggled() && motor_btn && motor_btn->isToggled()) {
-    Serial.println("ERROR: Cannot activate 48V MODE while MOTOR is ON");
+  if (self->isToggled() && motor_btn && motor_btn->isToggled()) {
+    Serial.println("ERROR: Cannot deactivate 48V MODE while MOTOR is ON");
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     if (grid) {
       lv_obj_t *tile = lv_obj_get_parent(grid);
-      show_error_popup(tile, "Cannot activate 48V MODE while MOTOR is ON");
+      show_error_popup(tile, "Cannot deactivate 48V MODE while MOTOR is ON");
     }
     return false;
   }
-  if (self->isToggled() && inverter_btn && inverter_btn->isToggled()) {
-    Serial.println("ERROR: Cannot deactivate 48V MODE while INVERTER is ON");
+  if (!self->isToggled() && inverter_btn && inverter_btn->isToggled()) {
+    Serial.println("ERROR: Cannot activate 48V MODE while INVERTER is ON");
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     if (grid) {
       lv_obj_t *tile = lv_obj_get_parent(grid);
-      show_error_popup(tile, "Cannot deactivate 48V MODE while INVERTER is ON");
+      show_error_popup(tile, "Cannot activate 48V MODE while INVERTER is ON");
     }
     return false;
   }
