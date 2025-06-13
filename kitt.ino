@@ -12,7 +12,7 @@
 #include <UI.h>
 
 GigaDisplay_GFX tft; // Init tft
-Arduino_GigaDisplayTouch TouchDetector;
+Arduino_GigaDisplayTouch TouchDetector;   
 GigaDisplayBacklight backlight;
 bool blackout = false;
 
