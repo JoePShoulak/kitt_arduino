@@ -29,8 +29,7 @@ void audio_play(const char *file) {
   }
 
   if (audio.isPlaying()) {
-    Serial.println("!-> Audio is already playing; request ignored.");
-    return;
+    audio.stop();
   }
 
   if (load_audio(file)) {
@@ -64,6 +63,6 @@ void audio_stop() {
     if (voiceTile->getIndicator(0))
       voiceTile->getIndicator(0)->toggle(false);
     if (voiceTile->getVisualiser())
-      voiceTile->getVisualiser()->startFade();
+      voiceTile->getVisualiser()->setLevel(0.f);
   }
 }

@@ -78,10 +78,15 @@ const ButtonData voice_buttons[3] = {
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
 static const IndicatorData indicators[8] = {
-    {"AUD", ORANGE_DARK, ORANGE}, {"OIL", ORANGE_DARK, ORANGE},
-    {"P1", RED_DARK, RED},        {"P2", RED_DARK, RED},
-    {"S1", ORANGE_DARK, ORANGE},  {"S2", ORANGE_DARK, ORANGE},
-    {"P3", RED_DARK, RED},        {"P4", RED_DARK, RED}};
+    {"AUD", ORANGE_DARK, ORANGE},
+    {"LTS", ORANGE_DARK, ORANGE},
+    {"B1", RED_DARK, RED},       
+    {"B2", RED_DARK, RED},
+
+    {"GPS", ORANGE_DARK, ORANGE}, 
+    {"RAD", ORANGE_DARK, ORANGE},
+    {"CUR", RED_DARK, RED},       
+    {"TMP", RED_DARK, RED}};
 
 // ==== Global UI references ====
 class VoiceTile;

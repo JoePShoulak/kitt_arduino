@@ -65,7 +65,6 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id,
 
   // start with no volume
   visualiser->setLevel(0.0f);
-  this->indicators[2]->toggle(true);
 
   buttons[0] = new Button(grid, button_data[0], 1, 1, ORANGE_DARK, ORANGE);
   buttons[1] = new Button(grid, button_data[1], 1, 2, GREEN_DARK, GREEN);
