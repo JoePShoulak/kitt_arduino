@@ -13,9 +13,9 @@ void voice_anim_cb(lv_timer_t *t) {
 
   if (!audio_is_playing()) {
     target = 0.f;
-    level += (target - level) * 0.25f;
+    level = 0.f;
     if (voiceTile && voiceTile->getVisualiser())
-      voiceTile->getVisualiser()->setLevel(level);
+      voiceTile->getVisualiser()->setLevel(0.f);
     return;
   }
 
