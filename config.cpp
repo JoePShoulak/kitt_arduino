@@ -152,7 +152,7 @@ void lighting_btn_cb(lv_event_t *e) {
 
 void btn48v_cb(lv_event_t *e) {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
-  toggle_sound(self, "24V_on.wav", "24v_off.wav");
+  toggle_sound(self, "24V_off.wav", "24v_on.wav");
 }
 
 void inverter_btn_cb(lv_event_t *e) {
