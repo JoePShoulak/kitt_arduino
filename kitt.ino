@@ -25,8 +25,9 @@ void setup() {
   ui.init(audio);
   if (voiceTile && voiceTile->getIndicator(0) &&
       voiceTile->getIndicator(0)->getLVObj()) {
-    lv_obj_add_event_cb(voiceTile->getIndicator(0)->getLVObj(), aud_indicator_cb,
-                        LV_EVENT_PRESSED, nullptr);
+    lv_obj_t *aud_obj = voiceTile->getIndicator(0)->getLVObj();
+    lv_obj_add_flag(aud_obj, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(aud_obj, aud_indicator_cb, LV_EVENT_PRESSED, nullptr);
   }
 
   Serial.println();

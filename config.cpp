@@ -17,9 +17,11 @@ void aud_indicator_cb(lv_event_t *e) {
   if (!e)
     return;
   lv_event_code_t code = lv_event_get_code(e);
-  if (code != LV_EVENT_PRESSED)
+  if (code != LV_EVENT_PRESSED && code != LV_EVENT_CLICKED)
     return;
   audio_stop();
+  if (voiceTile && voiceTile->getVisualiser())
+    voiceTile->getVisualiser()->startFade();
 }
 
 static void blackout_overlay_cb(lv_event_t *e) {
