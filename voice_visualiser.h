@@ -20,6 +20,7 @@ public:
   VoiceVisualiser(lv_obj_t *parent);
   void set_cols_active(float ratio_norm);
   void setLevel(float lvl);
+  void startFade();
   lv_obj_t *getObject() const { return viz; }
 };
 

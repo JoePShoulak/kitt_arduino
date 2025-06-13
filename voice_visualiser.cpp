@@ -96,6 +96,13 @@ void VoiceVisualiser::setLevel(float lvl) {
   last_update = lv_tick_get();
 }
 
+void VoiceVisualiser::startFade() {
+  if (level > 0.f) {
+    fading = true;
+    last_update = lv_tick_get();
+  }
+}
+
 void VoiceVisualiser::timer_cb(lv_timer_t *t) {
   auto self = static_cast<VoiceVisualiser *>(lv_timer_get_user_data(t));
   if (!self)

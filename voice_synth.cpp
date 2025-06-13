@@ -17,6 +17,8 @@ void voice_anim_cb(lv_timer_t *t) {
     if (was_playing && voiceTile) {
       if (voiceTile->getIndicator(0))
         voiceTile->getIndicator(0)->toggle(false);
+      if (voiceTile->getVisualiser())
+        voiceTile->getVisualiser()->startFade();
     }
     was_playing = false;
     target = 0.f;

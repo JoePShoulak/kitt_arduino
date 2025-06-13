@@ -63,5 +63,7 @@ void audio_stop() {
   if (voiceTile) {
     if (voiceTile->getIndicator(0))
       voiceTile->getIndicator(0)->toggle(false);
+    if (voiceTile->getVisualiser())
+      voiceTile->getVisualiser()->startFade();
   }
 }
