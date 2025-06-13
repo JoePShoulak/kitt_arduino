@@ -24,6 +24,7 @@ VoiceVisualiser::VoiceVisualiser(lv_obj_t *parent) {
   make_column(2, 19);
 
   timer = lv_timer_create(timer_cb, 50, this); // 20 FPS update
+  last_update = lv_tick_get();
 }
 
 void VoiceVisualiser::make_column(int id, int count) {
@@ -91,11 +92,28 @@ void VoiceVisualiser::setLevel(float lvl) {
   if (lvl > 1.f)
     lvl = 1.f;
   level = lvl;
+  fading = false;
+  last_update = lv_tick_get();
 }
 
 void VoiceVisualiser::timer_cb(lv_timer_t *t) {
   auto self = static_cast<VoiceVisualiser *>(lv_timer_get_user_data(t));
   if (!self)
     return;
+  uint32_t now = lv_tick_get();
+  if (!self->fading) {
+    if (now - self->last_update > 150 && self->level > 0.2f) {
+      self->fading = true;
+    }
+  } else {
+    if (self->level > 0.01f) {
+      self->level -= 0.08f; // fade speed ~600ms total
+      if (self->level < 0.f)
+        self->level = 0.f;
+    } else {
+      self->level = 0.f;
+      self->fading = false;
+    }
+  }
   self->set_cols_active(self->level);
 }

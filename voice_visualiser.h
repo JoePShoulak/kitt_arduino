@@ -10,6 +10,8 @@ class VoiceVisualiser {
 
   lv_timer_t *timer = nullptr;
   float level = 0.f; // normalised 0..1 value
+  bool fading = false;
+  uint32_t last_update = 0; // lv_tick timestamp of last level update
 
   void make_column(int id, int count);
   static void timer_cb(lv_timer_t *t);
