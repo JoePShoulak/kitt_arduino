@@ -121,6 +121,7 @@ void pursuit_btn_cb(lv_event_t *e) {
 void evade_btn_cb(lv_event_t *e) {
   Serial.println("EVADE clip requested");
   audio_play("evade.wav");
+  blackout_cb(e);
 }
 
 static void toggle_sound(Button *self, const char *on_clip, const char *off_clip) {
