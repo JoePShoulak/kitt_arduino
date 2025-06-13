@@ -59,7 +59,7 @@ void UI::init() {
   }
   blackout_btn = rightPanel->getButton(1);
   if (blackout_btn) {
-    blackout_btn->setCallback(blackout_cb);
+    blackout_btn->setCallback(evade_btn_cb);
   }
   btn24v = rightPanel->getButton(2);
   if (btn24v) {

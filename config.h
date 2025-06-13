@@ -23,6 +23,8 @@ void intro_btn_cb(lv_event_t *e);
 void explode_btn_cb(lv_event_t *e);
 void joseph_btn_cb(lv_event_t *e);
 void shoe_btn_cb(lv_event_t *e);
+void michelle_btn_cb(lv_event_t *e);
+void shawn_btn_cb(lv_event_t *e);
 void theme_btn_cb(lv_event_t *e);
 void turbo_boost_btn_cb(lv_event_t *e);
 void auto_cruise_btn_cb(lv_event_t *e);
@@ -45,8 +47,8 @@ bool validate_voice_mode(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, false, true},
-    {"MAP SYSTEM", null_btn, true},
-    {"PRINTER", null_btn, true},            {"THEME", theme_btn_cb, false},
+    {"THEME", theme_btn_cb, false},
+    {"MICHELLE", michelle_btn_cb, false},   {"SHAWN", shawn_btn_cb, false},
     {"INTRO", intro_btn_cb, false},         {"EXPLODE", explode_btn_cb, false},
     {"JOSEPH", joseph_btn_cb, false},       {"SHOE", shoe_btn_cb, false},
 };

@@ -79,6 +79,16 @@ void shoe_btn_cb(lv_event_t *e) {
   audio_play("shoe.wav");
 }
 
+void michelle_btn_cb(lv_event_t *e) {
+  Serial.println("MICHELLE clip requested");
+  audio_play("michelle.wav");
+}
+
+void shawn_btn_cb(lv_event_t *e) {
+  Serial.println("SHAWN clip requested");
+  audio_play("shawn.wav");
+}
+
 void theme_btn_cb(lv_event_t *e) {
   Serial.println("THEME clip requested");
   audio_play("theme.wav");
