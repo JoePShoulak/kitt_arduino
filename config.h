@@ -1,8 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "ui/button.h"
-#include "ui/indicator.h"
+#include <button.h>
+#include <indicator.h>
 #include <Arduino_GigaDisplay.h>
 
 // ==== Layout constants ====

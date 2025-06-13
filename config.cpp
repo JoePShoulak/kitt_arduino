@@ -1,9 +1,9 @@
 #include <Arduino.h> // for Serial
 
-#include "ui/button.h"
+#include <button.h>
 #include "config.h"
-#include "ui/popup.h"
-#include "ui/voice_tile.h"
+#include <popup.h>
+#include <voice_tile.h>
 #include "audio_helper.h"
 
 // This file implements the callbacks and validation logic declared in
