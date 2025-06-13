@@ -13,6 +13,15 @@ lv_obj_t *blackout_overlay = nullptr;
 static bool blackout_first_release = false;
 static bool blackout_pressed_after = false;
 
+void aud_indicator_cb(lv_event_t *e) {
+  if (!e)
+    return;
+  lv_event_code_t code = lv_event_get_code(e);
+  if (code != LV_EVENT_PRESSED)
+    return;
+  audio_stop();
+}
+
 static void blackout_overlay_cb(lv_event_t *e) {
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_PRESSED) {

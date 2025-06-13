@@ -23,6 +23,11 @@ void setup() {
   TouchDetector.begin();
   backlight.begin();
   ui.init(audio);
+  if (voiceTile && voiceTile->getIndicator(0) &&
+      voiceTile->getIndicator(0)->getLVObj()) {
+    lv_obj_add_event_cb(voiceTile->getIndicator(0)->getLVObj(), aud_indicator_cb,
+                        LV_EVENT_PRESSED, nullptr);
+  }
 
   Serial.println();
 }

@@ -44,6 +44,7 @@ bool validate_48v(lv_event_t *e);
 bool validate_motor(lv_event_t *e);
 bool validate_inverter(lv_event_t *e);
 bool validate_voice_mode(lv_event_t *e);
+void aud_indicator_cb(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, false, true},
