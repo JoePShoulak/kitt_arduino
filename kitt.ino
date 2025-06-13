@@ -5,7 +5,6 @@
 #include <Arduino_GigaDisplay_GFX.h>
 #include <Arduino_GigaDisplay.h>
 #include <lvgl.h>
-#include <math.h>
 
 #include "config.h"
 #include "popup.h"
