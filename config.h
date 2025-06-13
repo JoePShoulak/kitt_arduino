@@ -35,6 +35,13 @@ void gps_btn_cb(lv_event_t *e);
 void radio_btn_cb(lv_event_t *e);
 void usb_btn_cb(lv_event_t *e);
 void lighting_btn_cb(lv_event_t *e);
+void motor_override_cb(lv_event_t *e);
+void blackout_cb(lv_event_t *e);
+void voice_mode_cb(lv_event_t *e);
+bool validate_24v(lv_event_t *e);
+bool validate_motor(lv_event_t *e);
+bool validate_inverter(lv_event_t *e);
+bool validate_voice_mode(lv_event_t *e);
 
 const ButtonData button_panel1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, false, true},
@@ -88,14 +95,5 @@ extern Button *inverter_btn;
 extern bool blackout;
 extern GigaDisplayBacklight backlight;
 extern lv_obj_t *blackout_overlay;
-
-// ==== Event callbacks ====
-void motor_override_cb(lv_event_t *e);
-void blackout_cb(lv_event_t *e);
-void voice_mode_cb(lv_event_t *e);
-bool validate_24v(lv_event_t *e);
-bool validate_motor(lv_event_t *e);
-bool validate_inverter(lv_event_t *e);
-bool validate_voice_mode(lv_event_t *e);
 
 #endif
