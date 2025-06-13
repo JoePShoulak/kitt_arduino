@@ -16,7 +16,7 @@ GaugeTile *gaugeTile = nullptr;
 GaugeTile *leftGaugeTile = nullptr;
 Button *motor_btn = nullptr;
 Button *blackout_btn = nullptr;
-Button *btn24v = nullptr;
+Button *btn48v = nullptr;
 Button *inverter_btn = nullptr;
 
 void UI::init() {
@@ -61,9 +61,9 @@ void UI::init() {
   if (blackout_btn) {
     blackout_btn->setCallback(evade_btn_cb);
   }
-  btn24v = rightPanel->getButton(2);
-  if (btn24v) {
-    btn24v->setValidate(validate_24v);
+  btn48v = rightPanel->getButton(2);
+  if (btn48v) {
+    btn48v->setValidate(validate_48v);
   }
   inverter_btn = rightPanel->getButton(3);
   if (inverter_btn) {

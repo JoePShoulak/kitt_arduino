@@ -31,7 +31,7 @@ void auto_cruise_btn_cb(lv_event_t *e);
 void normal_cruise_btn_cb(lv_event_t *e);
 void pursuit_btn_cb(lv_event_t *e);
 void evade_btn_cb(lv_event_t *e);
-void btn24v_cb(lv_event_t *e);
+void btn48v_cb(lv_event_t *e);
 void inverter_btn_cb(lv_event_t *e);
 void gps_btn_cb(lv_event_t *e);
 void radio_btn_cb(lv_event_t *e);
@@ -40,7 +40,7 @@ void lighting_btn_cb(lv_event_t *e);
 void motor_override_cb(lv_event_t *e);
 void blackout_cb(lv_event_t *e);
 void voice_mode_cb(lv_event_t *e);
-bool validate_24v(lv_event_t *e);
+bool validate_48v(lv_event_t *e);
 bool validate_motor(lv_event_t *e);
 bool validate_inverter(lv_event_t *e);
 bool validate_voice_mode(lv_event_t *e);
@@ -56,7 +56,7 @@ const ButtonData button_panel1[BUTTON_COUNT] = {
 const ButtonData button_panel2[BUTTON_COUNT] = {
     {"MOTOR", motor_override_cb, true, true, true},
     {"EVADE", evade_btn_cb, true, true},
-    {"24V MODE", btn24v_cb, true, true},
+    {"48V MODE", btn48v_cb, true, true, true},
     {"INVERTER", inverter_btn_cb, true, true},
     {"GPS", gps_btn_cb, true, false, true},   {"RADIO", radio_btn_cb, true, false, true},
     {"USB", usb_btn_cb, true, false, true},   {"LIGHTING", lighting_btn_cb, true},
@@ -97,7 +97,7 @@ extern GaugeTile *gaugeTile;
 extern GaugeTile *leftGaugeTile;
 extern Button *motor_btn;
 extern Button *blackout_btn;
-extern Button *btn24v;
+extern Button *btn48v;
 extern Button *inverter_btn;
 extern bool blackout;
 extern GigaDisplayBacklight backlight;
