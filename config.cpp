@@ -13,6 +13,10 @@ lv_obj_t *blackout_overlay = nullptr;
 static bool blackout_first_release = false;
 static bool blackout_pressed_after = false;
 
+// Helper used by many callbacks to play the appropriate on/off sound
+static void toggle_sound(Button *self, const char *on_clip,
+                         const char *off_clip);
+
 static void blackout_overlay_cb(lv_event_t *e) {
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_PRESSED) {
@@ -117,10 +121,12 @@ void pursuit_btn_cb(lv_event_t *e) {
   voice_mode_cb(e);
 }
 
-// Triggered when the EVADE button is pressed; simply play the audio clip.
+// Triggered when the EVADE button is pressed; toggles blackout and plays the
+// appropriate audio clip depending on the new state.
 void evade_btn_cb(lv_event_t *e) {
   Serial.println("EVADE clip requested");
-  audio_play("evade.wav");
+  auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  toggle_sound(self, "evade_on.wav", "evade_off.wav");
   blackout_cb(e);
 }
 
