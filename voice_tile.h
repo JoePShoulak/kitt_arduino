@@ -8,6 +8,7 @@
 
 class VoiceTile {
   lv_obj_t *tile;
+  lv_obj_t *grid;
   VoiceVisualiser *visualiser;
   Indicator *indicators[8];
   Button *buttons[3];
@@ -23,6 +24,7 @@ public:
   Button *getButton(int index) const {
     return (index >= 0 && index < 3) ? buttons[index] : nullptr;
   }
+  lv_obj_t *getGrid() const { return grid; }
 
   ~VoiceTile();
 };

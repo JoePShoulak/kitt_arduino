@@ -46,3 +46,14 @@ void audio_loop() {
     Serial.println("Audio finished.");
   }
 }
+
+bool audio_is_playing() { return audio.isPlaying(); }
+
+void audio_stop() {
+  if (!audio_loaded)
+    return;
+  if (audio.isPlaying())
+    audio.stop();
+  audio_loaded = false;
+  reported = false;
+}

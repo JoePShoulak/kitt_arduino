@@ -2,6 +2,7 @@
 
 #include "config.h"
 #include "voice_tile.h"
+#include "audio_helper.h"
 #include <stdlib.h>
 
 void voice_anim_cb(lv_timer_t *t) {
@@ -9,6 +10,14 @@ void voice_anim_cb(lv_timer_t *t) {
   static float target = 0.f;
   static int hold = 0;
   (void)t;
+
+  if (!audio_is_playing()) {
+    target = 0.f;
+    level += (target - level) * 0.25f;
+    if (voiceTile && voiceTile->getVisualiser())
+      voiceTile->getVisualiser()->setLevel(level);
+    return;
+  }
 
   if (--hold <= 0) {
     if (target > 0.05f) {
