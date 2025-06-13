@@ -18,6 +18,7 @@ class Indicator {
 public:
   Indicator(const IndicatorData &data, lv_obj_t *parent);
   void toggle(bool on);
+  lv_obj_t *getObj() const { return indicator; }
 };
 
 #endif

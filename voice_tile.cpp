@@ -2,9 +2,8 @@
 #include "config.h"
 #include "audio_helper.h"
 
-static void grid_event_cb(lv_event_t *e) {
-  lv_event_code_t code = lv_event_get_code(e);
-  if (code == LV_EVENT_PRESSED) {
+static void aud_event_cb(lv_event_t *e) {
+  if (lv_event_get_code(e) == LV_EVENT_PRESSED) {
     audio_stop();
   }
 }
@@ -22,8 +21,6 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id,
   // Disable scrolling inside the grid container
   lv_obj_clear_flag(grid, LV_OBJ_FLAG_SCROLLABLE);
   lv_obj_set_scrollbar_mode(grid, LV_SCROLLBAR_MODE_OFF);
-  lv_obj_add_event_cb(grid, grid_event_cb, LV_EVENT_PRESSED, nullptr);
-  lv_obj_add_flag(grid, LV_OBJ_FLAG_CLICKABLE);
   lv_obj_set_layout(grid, LV_LAYOUT_GRID);
   lv_obj_set_size(grid, GRID_WIDTH, GRID_HEIGHT);
   lv_obj_center(grid);
@@ -59,14 +56,15 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id,
     }
   }
 
-  visualiser = new VoiceVisualiser(grid);
-  lv_obj_add_event_cb(visualiser->getObject(), grid_event_cb, LV_EVENT_PRESSED,
+  // Hidden audio stop on AUD indicator
+  lv_obj_add_event_cb(indicators[0]->getObj(), aud_event_cb, LV_EVENT_PRESSED,
                       nullptr);
-  lv_obj_add_flag(visualiser->getObject(), LV_OBJ_FLAG_CLICKABLE);
+  lv_obj_add_flag(indicators[0]->getObj(), LV_OBJ_FLAG_CLICKABLE);
+
+  visualiser = new VoiceVisualiser(grid);
 
   // start with no volume
   visualiser->setLevel(0.0f);
-  this->indicators[0]->toggle(true);
   this->indicators[2]->toggle(true);
 
   buttons[0] = new Button(grid, button_data[0], 1, 1, ORANGE_DARK, ORANGE);

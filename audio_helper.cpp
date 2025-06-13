@@ -1,4 +1,6 @@
 #include "audio_helper.h"
+#include "config.h"
+#include "voice_tile.h"
 
 #include <Arduino.h>
 #include <GigaAudio.h>
@@ -33,6 +35,8 @@ void audio_play(const char *file) {
 
   if (load_audio(file)) {
     audio.play();
+    if (voiceTile && voiceTile->getIndicator(0))
+      voiceTile->getIndicator(0)->toggle(true);
   }
 }
 
@@ -56,4 +60,10 @@ void audio_stop() {
     audio.stop();
   audio_loaded = false;
   reported = false;
+  if (voiceTile) {
+    if (voiceTile->getIndicator(0))
+      voiceTile->getIndicator(0)->toggle(false);
+    if (voiceTile->getVisualiser())
+      voiceTile->getVisualiser()->setLevel(0.f);
+  }
 }

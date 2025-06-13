@@ -78,7 +78,7 @@ const ButtonData voice_buttons[3] = {
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
 static const IndicatorData indicators[8] = {
-    {"AIR", ORANGE_DARK, ORANGE}, {"OIL", ORANGE_DARK, ORANGE},
+    {"AUD", ORANGE_DARK, ORANGE}, {"OIL", ORANGE_DARK, ORANGE},
     {"P1", RED_DARK, RED},        {"P2", RED_DARK, RED},
     {"S1", ORANGE_DARK, ORANGE},  {"S2", ORANGE_DARK, ORANGE},
     {"P3", RED_DARK, RED},        {"P4", RED_DARK, RED}};
