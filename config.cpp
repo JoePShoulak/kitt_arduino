@@ -107,6 +107,7 @@ void pursuit_btn_cb(lv_event_t *e) {
   voice_mode_cb(e);
 }
 
+// Triggered when the EVADE button is pressed; simply play the audio clip.
 void evade_btn_cb(lv_event_t *e) {
   Serial.println("EVADE clip requested");
   audio_play("evade.wav");
