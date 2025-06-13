@@ -7,9 +7,9 @@
 #include <lvgl.h>
 
 #include "config.h"
-#include "popup.h"
-#include "voice_synth.h"
-#include "UI.h"
+#include "ui/popup.h"
+#include "ui/voice_synth.h"
+#include "ui/UI.h"
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;
