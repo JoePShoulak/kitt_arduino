@@ -25,7 +25,7 @@ Install the following libraries using the Arduino Library Manager before compili
 * `Arduino_GigaDisplayTouch`
 * `LVGL`
 * `GigaAudio` (for audio playback)
-* `KITT_UI` (included under `libraries/kitt_ui`)
+* `KITT_UI` (included under `libraries/KITT_UI`)
 
 These provide support for the display, the capacitive touch interface, the graphics widgets and the audio helper respectively.
 
