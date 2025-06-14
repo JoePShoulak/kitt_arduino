@@ -9,7 +9,7 @@
 #include "config.h"
 #include <popup.h>
 #include <voice_synth.h>
-#include <UI.h>
+#include "UI.h"
 
 GigaDisplay_GFX tft; // Init tft
 Arduino_GigaDisplayTouch TouchDetector;   
