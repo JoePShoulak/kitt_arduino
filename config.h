@@ -45,7 +45,7 @@ bool validate_motor(lv_event_t *e);
 bool validate_inverter(lv_event_t *e);
 bool validate_voice_mode(lv_event_t *e);
 
-const ButtonData button_panel1[BUTTON_COUNT] = {
+const ButtonData button_tile1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, false, true},
     {"THEME", theme_btn_cb, false},
     {"INTRO", intro_btn_cb, false},         {"EXPLODE", explode_btn_cb, false},
@@ -53,7 +53,7 @@ const ButtonData button_panel1[BUTTON_COUNT] = {
     {"JOSEPH", joseph_btn_cb, false},       {"SHOE", shoe_btn_cb, false},
 };
 
-const ButtonData button_panel2[BUTTON_COUNT] = {
+const ButtonData button_tile2[BUTTON_COUNT] = {
     {"MOTOR", motor_override_cb, true, true, true},
     {"EVADE", evade_btn_cb, true, true},
     {"48V MODE", btn48v_cb, true, true, true},

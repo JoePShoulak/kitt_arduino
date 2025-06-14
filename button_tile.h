@@ -1,26 +1,26 @@
-// button_panel.h
+// button_tile.h
 
-#ifndef BUTTON_PANEL_H
-#define BUTTON_PANEL_H
+#ifndef button_tile_H
+#define button_tile_H
 
 #include "button.h"
 #include "config.h"
 #include <lvgl.h>
 
-class ButtonPanel {
+class ButtonTile {
   Button *buttons[BUTTON_COUNT];
 
 public:
-  ButtonPanel(lv_obj_t *parent, ButtonData const *config);
+  ButtonTile(lv_obj_t *parent, ButtonData const *config);
 
-  static ButtonPanel *createTile(lv_obj_t *tileview, int row_id,
+  static ButtonTile *createTile(lv_obj_t *tileview, int row_id,
                                  ButtonData const *config);
 
   Button *getButton(uint8_t index) {
     return index < BUTTON_COUNT ? buttons[index] : nullptr;
   }
 
-  ~ButtonPanel();
+  ~ButtonTile();
 };
 
 #endif

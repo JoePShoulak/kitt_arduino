@@ -2,7 +2,7 @@
 
 #include <colors.h>
 #include <config.h>
-#include "button_panel.h"
+#include "button_tile.h"
 #include "animations.h"
 #include "voice_tile.h"
 #include "gauge_tile.h"
@@ -33,7 +33,7 @@ void UI::init(GigaAudio &audio) {
   leftGaugeTile = new GaugeTile(tiles, 0, left_labels, 3, true);
   ::leftGaugeTile = leftGaugeTile;
 
-  leftPanel = ButtonPanel::createTile(tiles, 1, button_panel1);
+  leftPanel = ButtonTile::createTile(tiles, 1, button_tile1);
   voiceTile = new VoiceTile(tiles, 2, voice_buttons, &audio);
   ::voiceTile = voiceTile;
   for (int i = 0; i < 3; ++i) {
@@ -42,7 +42,7 @@ void UI::init(GigaAudio &audio) {
       btn->setValidate(validate_voice_mode);
     }
   }
-  rightPanel = ButtonPanel::createTile(tiles, 3, button_panel2);
+  rightPanel = ButtonTile::createTile(tiles, 3, button_tile2);
 
   static const char *const right_labels[] = {"BATTERY VOLTAGE",
                                              "BATTERY CURRENT",

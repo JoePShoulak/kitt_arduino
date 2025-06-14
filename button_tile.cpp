@@ -1,9 +1,9 @@
-// button_panel.cpp
+// button_tile.cpp
 
-#include "button_panel.h"
+#include "button_tile.h"
 #include <lvgl.h>
 
-ButtonPanel::ButtonPanel(lv_obj_t *parent, ButtonData const *config) {
+ButtonTile::ButtonTile(lv_obj_t *parent, ButtonData const *config) {
   // Calculate sizing
   int button_size = PANEL_BUTTON_SIZE; // ~136 px
   int grid_width = PANEL_GRID_WIDTH;
@@ -34,15 +34,15 @@ ButtonPanel::ButtonPanel(lv_obj_t *parent, ButtonData const *config) {
   }
 };
 
-ButtonPanel::~ButtonPanel() {
+ButtonTile::~ButtonTile() {
   for (int i = 0; i < BUTTON_COUNT; ++i) {
     delete buttons[i];
   }
 }
 
-ButtonPanel *ButtonPanel::createTile(lv_obj_t *tileview, int row_id,
+ButtonTile *ButtonTile::createTile(lv_obj_t *tileview, int row_id,
                                      ButtonData const *config) {
   auto *tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
   lv_obj_set_style_bg_color(tile, BLACK, 0);
-  return new ButtonPanel(tile, config);
+  return new ButtonTile(tile, config);
 }
