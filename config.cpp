@@ -13,13 +13,13 @@ lv_obj_t *blackout_overlay = nullptr;
 static bool blackout_first_release = false;
 static bool blackout_pressed_after = false;
 
-// Stop all audio when the AUD indicator is tapped.  Trigger the
+// Stop all audio when the AUD indicator is pressed. Trigger the
 // voice visualiser fade for a smooth shutdown of the animation.
 void aud_indicator_cb(lv_event_t *e) {
   if (!e)
     return;
   lv_event_code_t code = lv_event_get_code(e);
-  if (code != LV_EVENT_CLICKED)
+  if (code != LV_EVENT_PRESSED && code != LV_EVENT_CLICKED)
     return;
   audio_stop();
   if (voiceTile && voiceTile->getVisualiser())
