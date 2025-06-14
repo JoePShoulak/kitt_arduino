@@ -1,14 +1,14 @@
 // kitt.ino
 
 #include "audio_helper.h"
-#include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay_GFX.h>
+#include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay.h>
 #include <lvgl.h>
 
 #include "config.h"
 #include <popup.h>
-#include <animations.h>
+#include "animations.h"
 #include "UI.h"
 
 GigaDisplay_GFX tft; // Init tft

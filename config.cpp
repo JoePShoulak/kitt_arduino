@@ -3,7 +3,7 @@
 #include <button.h>
 #include "config.h"
 #include <popup.h>
-#include <voice_tile.h>
+#include "voice_tile.h"
 #include "audio_helper.h"
 
 // This file implements the callbacks and validation logic declared in
