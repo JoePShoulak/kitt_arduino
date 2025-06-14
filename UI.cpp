@@ -3,10 +3,9 @@
 #include <button_panel.h>
 #include <colors.h>
 #include <config.h>
-#include <voice_synth.h>
+#include <animations.h>
 #include <voice_tile.h>
 #include <gauge_tile.h>
-#include <gauge_anim.h>
 
 UI ui;
 

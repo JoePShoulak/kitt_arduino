@@ -8,7 +8,7 @@
 
 #include "config.h"
 #include <popup.h>
-#include <voice_synth.h>
+#include <animations.h>
 #include "UI.h"
 
 GigaDisplay_GFX tft; // Init tft
