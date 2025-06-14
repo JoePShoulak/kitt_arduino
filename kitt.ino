@@ -1,17 +1,13 @@
 // kitt.ino
 
-#include "audio_helper.h"
 #include <Arduino_GigaDisplay_GFX.h>
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay.h>
 #include <lvgl.h>
-
-#include "config.h"
-#include <popup.h>
-#include "animations.h"
+#include "audio_helper.h"
 #include "UI.h"
 
-GigaDisplay_GFX tft; // Init tft
+GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;   
 GigaDisplayBacklight backlight;
 bool blackout = false;
@@ -23,8 +19,6 @@ void setup() {
   TouchDetector.begin();
   backlight.begin();
   ui.init(audio);
-
-  Serial.println();
 }
 
 void loop() {

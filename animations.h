@@ -1,7 +1,7 @@
 #ifndef ANIMATIONS_H
 #define ANIMATIONS_H
 
-#include "lvgl_wrapper.h"
+#include <lvgl.h>
 #include "config.h"
 
 // Forward declaration from the GigaAudio library

@@ -1,7 +1,7 @@
 #ifndef UI_H
 #define UI_H
 
-#include <lvgl_wrapper.h>
+#include <lvgl.h>
 #include <GigaAudio.h>
 
 class ButtonPanel;

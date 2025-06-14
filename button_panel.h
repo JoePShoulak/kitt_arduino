@@ -5,7 +5,7 @@
 
 #include "button.h"
 #include "config.h"
-#include "lvgl_wrapper.h"
+#include <lvgl.h>
 
 class ButtonPanel {
   Button *buttons[BUTTON_COUNT];
