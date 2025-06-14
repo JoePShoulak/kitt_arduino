@@ -1,8 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <button.h>
-#include <indicator.h>
+#include <KITT_UI/button.h>
+#include <KITT_UI/indicator.h>
 #include <Arduino_GigaDisplay.h>
 
 // ==== Layout constants ====
