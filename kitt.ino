@@ -23,12 +23,12 @@ void setup()
   TouchDetector.begin();
   backlight.begin();
   ui.init(audio);
-  audio_play("ready.wav");
+  audio_play("ready.wav"); // also inits the audio
 }
 
 void loop()
 {
   lv_timer_handler();
-  audio_loop();
+  audio.update();
   scanner.update();
 }
