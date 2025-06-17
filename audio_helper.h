@@ -5,14 +5,9 @@
 
 extern GigaAudio audio;
 
-// Play the specified WAV file once
 void audio_play(const char *file);
-// Maintains playback state if audio_setup() or audio_play() was called
-// Does not restart the audio track automatically
 void audio_loop();
-// Returns true if audio is currently playing
 bool audio_is_playing();
-// Stop playback immediately
 void audio_stop();
 
 bool load_audio(const char *file);
