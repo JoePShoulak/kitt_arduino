@@ -1,18 +1,19 @@
 // kitt.ino
 
-#define SCANNER_DATA_PIN 6
-#include "Scanner.h"
 #include <Arduino_GigaDisplay_GFX.h>
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay.h>
 #include <lvgl.h>
+
+#define SCANNER_DATA_PIN 6
+#include "Scanner.h"
 #include "audio_helper.h"
 #include "UI.h"
 
 GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;
 GigaDisplayBacklight backlight;
-Scanner scanner(10, CRGB::Red);
+Scanner scanner(10);
 
 void setup()
 {
