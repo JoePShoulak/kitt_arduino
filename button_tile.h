@@ -7,16 +7,17 @@
 #include "config.h"
 #include <lvgl.h>
 
-class ButtonTile {
+class ButtonTile
+{
   Button *buttons[BUTTON_COUNT];
 
 public:
   ButtonTile(lv_obj_t *parent, ButtonData const *config);
 
-  static ButtonTile *createTile(lv_obj_t *tileview, int row_id,
-                                 ButtonData const *config);
+  static ButtonTile *createTile(lv_obj_t *tileview, int row_id, ButtonData const *config);
 
-  Button *getButton(uint8_t index) {
+  Button *getButton(uint8_t index)
+  {
     return index < BUTTON_COUNT ? buttons[index] : nullptr;
   }
 

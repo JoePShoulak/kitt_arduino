@@ -6,7 +6,8 @@
 
 GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
                      int count, bool with_display)
-    : gauge_count(count), display(nullptr) {
+    : gauge_count(count), display(nullptr)
+{
   tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
   lv_obj_set_style_bg_color(tile, BLACK, 0);
   // Prevent the tile itself from scrolling
@@ -27,7 +28,8 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
   lv_obj_set_style_pad_all(container, SPACING, 0);
   lv_obj_set_style_pad_row(container, SPACING, 0);
 
-  if (with_display) {
+  if (with_display)
+  {
     display = new SevenSegmentDisplay(container);
     // Leave extra space after the display so the gauges sit lower
     lv_obj_clear_flag(display->getObj(), LV_OBJ_FLAG_SCROLLABLE);
@@ -36,15 +38,18 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
   }
 
   gauges = new Gauge *[gauge_count];
-  for (int i = 0; i < gauge_count; ++i) {
+  for (int i = 0; i < gauge_count; ++i)
+  {
     gauges[i] = new Gauge(container, labels[i]);
     // Shift the gauges downward slightly for better spacing
     lv_obj_set_style_translate_y(gauges[i]->getObj(), 20, 0);
   }
 }
 
-GaugeTile::~GaugeTile() {
-  for (int i = 0; i < gauge_count; ++i) {
+GaugeTile::~GaugeTile()
+{
+  for (int i = 0; i < gauge_count; ++i)
+  {
     delete gauges[i];
   }
   delete[] gauges;
@@ -52,7 +57,8 @@ GaugeTile::~GaugeTile() {
     delete display;
 }
 
-Gauge *GaugeTile::getGauge(int idx) const {
+Gauge *GaugeTile::getGauge(int idx) const
+{
   if (idx < 0 || idx >= gauge_count)
     return nullptr;
   return gauges[idx];
