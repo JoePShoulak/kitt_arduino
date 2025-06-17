@@ -1,5 +1,7 @@
 // kitt.ino
 
+#define SCANNER_DATA_PIN 6
+#include "Scanner.h"
 #include <Arduino_GigaDisplay_GFX.h>
 #include <Arduino_GigaDisplayTouch.h>
 #include <Arduino_GigaDisplay.h>
@@ -8,20 +10,24 @@
 #include "UI.h"
 
 GigaDisplay_GFX tft;
-Arduino_GigaDisplayTouch TouchDetector;   
+Arduino_GigaDisplayTouch TouchDetector;
 GigaDisplayBacklight backlight;
-bool blackout = false;
+Scanner scanner(10, CRGB::Red);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200); // Initialize Serial
   lv_init();            // Initialize LVGL
   tft.begin();          // Initialize Giga Display
   TouchDetector.begin();
   backlight.begin();
   ui.init(audio);
+  audio_play("ready.wav");
 }
 
-void loop() {
+void loop()
+{
   lv_timer_handler();
   audio_loop();
+  scanner.update();
 }

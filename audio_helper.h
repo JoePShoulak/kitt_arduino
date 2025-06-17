@@ -15,4 +15,6 @@ bool audio_is_playing();
 // Stop playback immediately
 void audio_stop();
 
+bool load_audio(const char *file);
+
 #endif
