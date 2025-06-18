@@ -5,9 +5,9 @@
 #include <button.h>
 #include <gauge.h>
 #include <indicator.h>
+#include <config.h>
 #include "callbacks.h"
 #include "validators.h"
-#include <config.h>
 
 const GaugeData left_gauges[3] = {
     {"TACH", "RPM", 0, 6000, GaugeMode::NORMAL},
@@ -62,19 +62,5 @@ static const IndicatorData indicators[8] = {
     {"RAD", ORANGE_DARK, ORANGE},
     {"CUR", RED_DARK, RED},
     {"TMP", RED_DARK, RED}};
-
-// ==== Global UI references ====
-class VoiceTile;
-class GaugeTile;
-
-extern VoiceTile *voiceTile;
-extern GaugeTile *rightGaugeTile;
-extern GaugeTile *leftGaugeTile;
-extern Button *motor_btn;
-extern Button *blackout_btn;
-extern Button *btn48v;
-extern Button *inverter_btn;
-extern GigaDisplayBacklight backlight;
-extern lv_obj_t *blackout_overlay;
 
 #endif

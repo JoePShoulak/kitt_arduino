@@ -1,8 +1,8 @@
 // button_tile.cpp
 
-#include "button_tile.h"
 #include <lvgl.h>
 #include <config.h>
+#include "button_tile.h"
 
 ButtonTile::ButtonTile(lv_obj_t *parent, ButtonData const *config)
 {

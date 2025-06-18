@@ -6,9 +6,9 @@
 #include <lvgl.h>
 
 #define SCANNER_DATA_PIN 6
-#include "Scanner.h"
-#include "audio_helper.h"
-#include "UI.h"
+#include "src/hardware/Scanner.h"
+#include "src/helpers/audio_helper.h"
+#include "src/UI.h"
 
 GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;

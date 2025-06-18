@@ -1,9 +1,8 @@
-#include "voice_tile.h"
-
 #include <GigaAudio.h>
-#include "audio_helper.h"
-#include "config.h"
 #include <config.h>
+#include "../helpers/audio_helper.h"
+#include "../config/data.h"
+#include "voice_tile.h"
 
 static void aud_ind_cb(lv_event_t *e)
 {

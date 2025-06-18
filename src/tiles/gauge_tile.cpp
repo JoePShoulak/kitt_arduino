@@ -1,9 +1,9 @@
-#include "gauge_tile.h"
-#include "gauge.h"
-#include "seven_segment.h"
-#include "colors.h"
-#include "config.h"
+#include <gauge.h>
+#include <seven_segment.h>
+#include <colors.h>
 #include <config.h>
+#include "../config/data.h"
+#include "gauge_tile.h"
 
 GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, GaugeData const *data, int count, bool with_display)
     : gauge_count(count), display(nullptr)

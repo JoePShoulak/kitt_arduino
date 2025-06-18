@@ -1,11 +1,10 @@
-#include "callbacks.h"
-
 #include <Arduino.h>
 #include <button.h>
 #include <popup.h>
-#include "config.h"
-#include "voice_tile.h"
-#include "audio_helper.h"
+#include "../tiles/voice_tile.h"
+#include "../helpers/audio_helper.h"
+#include "globals.h"
+#include "callbacks.h"
 
 lv_obj_t *blackout_overlay = nullptr;
 static bool blackout_first_release = false;

@@ -1,11 +1,10 @@
 #include "UI.h"
 
 #include <colors.h>
-#include "button_tile.h"
-#include "animations.h"
-#include "voice_tile.h"
-#include "gauge_tile.h"
-#include "validators.h"
+#include "tiles/button_tile.h"
+#include "tiles/voice_tile.h"
+#include "tiles/gauge_tile.h"
+#include "misc/animations.h"
 
 UI ui;
 

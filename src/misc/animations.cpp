@@ -2,10 +2,11 @@
 
 #include <GigaAudio.h>
 #include <Arduino.h>
-#include "gauge_tile.h"
+#include "../tiles/gauge_tile.h"
+#include "../tiles/voice_tile.h"
+#include "../config/globals.h"
 #include "gauge.h"
 #include "seven_segment.h"
-#include "voice_tile.h"
 
 int drunken_walk(int val, int max_step, int max_val, int min_val = 0)
 {
@@ -17,27 +18,15 @@ void gauge_anim_cb(lv_timer_t *t)
 {
   static int speed_val = 0;
 
-  if (leftGaugeTile)
-  {
-    for (int i = 0; i < 3; ++i)
-    {
-      Gauge *g = leftGaugeTile->getGauge(i);
-      g->drunken_walk();
-    }
+  for (int i = 0; i < 3; ++i)
+    leftGaugeTile->getGauge(i)->drunken_walk();
 
-    SevenSegmentDisplay *disp = leftGaugeTile->getSevenSegmentDisplay();
-    speed_val = drunken_walk(speed_val, 3, 999);
-    disp->setValue(speed_val);
-  }
+  for (int i = 0; i < 5; ++i)
+    rightGaugeTile->getGauge(i)->drunken_walk();
 
-  if (rightGaugeTile)
-  {
-    for (int i = 0; i < 5; ++i)
-    {
-      Gauge *g = rightGaugeTile->getGauge(i);
-      g->drunken_walk();
-    }
-  }
+  SevenSegmentDisplay *disp = leftGaugeTile->getSevenSegmentDisplay();
+  speed_val = drunken_walk(speed_val, 3, 999);
+  disp->setValue(speed_val);
 }
 
 void voice_anim_cb(lv_timer_t *t)

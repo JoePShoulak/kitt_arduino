@@ -6,7 +6,7 @@
 #endif // SCANNER_DATA_PIN
 
 #include <FastLED.h>
-#include "Buffer.h"
+#include "../misc/Buffer.h"
 
 class Scanner
 {

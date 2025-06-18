@@ -3,9 +3,9 @@
 #ifndef button_tile_H
 #define button_tile_H
 
-#include "button.h"
-#include "config.h"
 #include <lvgl.h>
+#include <button.h>
+#include "../config/data.h"
 
 class ButtonTile
 {

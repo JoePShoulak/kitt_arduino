@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include <button.h>
-#include "config.h"
 #include <popup.h>
-#include "audio_helper.h"
+#include <button.h>
+#include "../helpers/audio_helper.h"
+#include "globals.h"
 #include "validators.h"
 
 bool validate_always(lv_event_t *e) { return true; }
