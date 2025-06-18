@@ -5,7 +5,7 @@
 #include "audio_helper.h"
 #include "validators.h"
 
-bool null_validate(lv_event_t *e) { return true; }
+bool validate_always(lv_event_t *e) { return true; }
 
 bool validate_48v(lv_event_t *e)
 {

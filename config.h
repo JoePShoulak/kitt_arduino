@@ -24,25 +24,25 @@ const GaugeData right_gauges[5] = {
 };
 
 const ButtonData button_tile1[BUTTON_COUNT] = {
-    {"TURBO BOOST", turbo_boost_btn_cb, null_validate, false, true},
-    {"THEME", theme_btn_cb, null_validate, false},
-    {"INTRO", intro_btn_cb, null_validate, false},
-    {"EXPLODE", explode_btn_cb, null_validate, false},
-    {"MICHELLE", michelle_btn_cb, null_validate, false},
-    {"SHAWN", shawn_btn_cb, null_validate, false},
-    {"JOSEPH", joseph_btn_cb, null_validate, false},
-    {"SHOE", shoe_btn_cb, null_validate, false},
+    {"TURBO BOOST", turbo_boost_btn_cb, validate_always, false, true},
+    {"THEME", theme_btn_cb, validate_always, false},
+    {"INTRO", intro_btn_cb, validate_always, false},
+    {"EXPLODE", explode_btn_cb, validate_always, false},
+    {"MICHELLE", michelle_btn_cb, validate_always, false},
+    {"SHAWN", shawn_btn_cb, validate_always, false},
+    {"JOSEPH", joseph_btn_cb, validate_always, false},
+    {"SHOE", shoe_btn_cb, validate_always, false},
 };
 
 const ButtonData button_tile2[BUTTON_COUNT] = {
     {"MOTOR", motor_override_cb, validate_motor, true, true, true},
-    {"EVADE", evade_btn_cb, null_validate, false, true},
+    {"EVADE", evade_btn_cb, validate_always, false, true},
     {"48V MODE", btn48v_cb, validate_48v, true, true, true},
     {"INVERTER", inverter_btn_cb, validate_inverter, true, true},
-    {"GPS", gps_btn_cb, null_validate, true, false, true},
-    {"RADIO", radio_btn_cb, null_validate, true, false, true},
-    {"USB", usb_btn_cb, null_validate, true, false, true},
-    {"LIGHTING", lighting_btn_cb, null_validate, true},
+    {"GPS", gps_btn_cb, validate_always, true, false, true},
+    {"RADIO", radio_btn_cb, validate_always, true, false, true},
+    {"USB", usb_btn_cb, validate_always, true, false, true},
+    {"LIGHTING", lighting_btn_cb, validate_always, true},
 };
 
 // ==== Voice tile configuration ====

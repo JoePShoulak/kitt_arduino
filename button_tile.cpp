@@ -14,8 +14,7 @@ ButtonTile::ButtonTile(lv_obj_t *parent, ButtonData const *config)
 
   // Define grid - 2 columns of PANEL_BUTTON_SIZE, 5 rows of PANEL_BUTTON_SIZE
   static lv_coord_t col_dsc[] = {PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t row_dsc[] = {PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE,
-                                 PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t row_dsc[] = {PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, PANEL_BUTTON_SIZE, LV_GRID_TEMPLATE_LAST};
   lv_obj_set_grid_dsc_array(grid, col_dsc, row_dsc);
 
   // Set equal padding around grid and between buttons
@@ -31,6 +30,7 @@ ButtonTile *ButtonTile::createTile(lv_obj_t *tileview, int row_id, ButtonData co
 {
   auto *tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
   lv_obj_set_style_bg_color(tile, BLACK, 0);
+
   return new ButtonTile(tile, config);
 }
 

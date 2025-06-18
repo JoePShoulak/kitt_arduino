@@ -14,28 +14,7 @@ static bool blackout_first_release = false;
 
 static void toggle_sound(Button *self, const char *on_clip, const char *off_clip)
 {
-  if (!self)
-    return;
-
   audio_play(self->isToggled() ? on_clip : off_clip);
-}
-
-// ==== Default button ====
-void null_btn(lv_event_t *e)
-{
-  Button *self = static_cast<Button *>(lv_event_get_user_data(e));
-
-  if (self->isToggleable())
-  {
-    Serial.print("Button ");
-    Serial.print(self->isToggled() ? "On: " : "Off: ");
-  }
-  else
-  {
-    Serial.print("Button pressed: ");
-  }
-
-  Serial.println(self->getLabel());
 }
 
 // ==== Left button panel ====

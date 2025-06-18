@@ -3,9 +3,6 @@
 
 #include <lvgl.h>
 
-// Default button
-void null_btn(lv_event_t *e);
-
 // Left button panel
 void turbo_boost_btn_cb(lv_event_t *e);
 void theme_btn_cb(lv_event_t *e);
