@@ -63,9 +63,9 @@ const ButtonData button_tile2[BUTTON_COUNT] = {
 
 // ==== Voice tile configuration ====
 const ButtonData voice_buttons[3] = {
-    {"AUTO CRUISE", auto_cruise_btn_cb, validate_cruise_mode, true},
-    {"NORMAL CRUISE", normal_cruise_btn_cb, validate_cruise_mode, true, false, true},
-    {"PURSUIT", pursuit_btn_cb, validate_cruise_mode, true},
+    {"AUTO CRUISE", auto_cruise_btn_cb, validate_cruise_mode, true, true},
+    {"NORMAL CRUISE", normal_cruise_btn_cb, validate_cruise_mode, true, true, true},
+    {"PURSUIT", pursuit_btn_cb, validate_cruise_mode, true, true},
 };
 
 static const IndicatorData indicators[8] = {
