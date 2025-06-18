@@ -3,6 +3,7 @@
 #include "seven_segment.h"
 #include "colors.h"
 #include "config.h"
+#include <config.h>
 
 GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels, int count, bool with_display)
     : gauge_count(count), display(nullptr)

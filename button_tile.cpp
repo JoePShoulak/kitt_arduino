@@ -2,6 +2,7 @@
 
 #include "button_tile.h"
 #include <lvgl.h>
+#include <config.h>
 
 ButtonTile::ButtonTile(lv_obj_t *parent, ButtonData const *config)
 {
