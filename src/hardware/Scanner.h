@@ -13,6 +13,9 @@ class Scanner
 public:
   Scanner(int led_count, CRGB color = CRGB::Red, int scan_delay = 100);
   void update();
+  void stop();
+  void start();
+  void begin(bool start_off = false);
   ~Scanner();
 
 private:
@@ -21,6 +24,7 @@ private:
   int dir = 1;
   int scan_delay; // in milliseconds
   unsigned long lastUpdate = 0;
+  bool _stopped = false;
 
   CRGB color;
   CRGB *leds;
@@ -34,8 +38,31 @@ Scanner::Scanner(int LED_count, CRGB color, int scan_delay)
   FastLED.addLeds<NEOPIXEL, SCANNER_DATA_PIN>(leds, LED_count);
 }
 
+void Scanner::begin(bool start_off)
+{
+  _stopped = start_off;
+}
+
+void Scanner::stop()
+{
+  _stopped = true;
+
+  for (int i = 0; i < LED_count; i++)
+    leds[i] = CRGB::Black;
+
+  FastLED.show();
+}
+
+void Scanner::start()
+{
+  _stopped = false;
+}
+
 void Scanner::update()
 {
+  if (_stopped)
+    return;
+
   unsigned long now = millis();
   if (now - lastUpdate < scan_delay)
     return;

@@ -10,6 +10,8 @@
 #include "src/helpers/audio_helper.h"
 #include "src/UI.h"
 
+#include "src/tiles/button_tile.h"
+
 GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;
 GigaDisplayBacklight backlight;
@@ -23,11 +25,16 @@ void setup()
   TouchDetector.begin();
   backlight.begin();
   ui.init(audio);
+  scanner.begin(true);
   audio_play("ready.wav"); // also inits the audio
 }
 
 void loop()
 {
+  // check states
+  ui.getRightPanel()->getButton(7)->isToggled() ? scanner.start() : scanner.stop();
+
+  // update
   lv_timer_handler();
   audio.update();
   scanner.update();

@@ -23,7 +23,6 @@ bool validate_48v(lv_event_t *e)
 
   if (!self->isToggled() && inverter_btn && inverter_btn->isToggled())
   {
-    Serial.println("ERROR: Cannot activate 48V MODE while INVERTER is ON");
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
     show_error_popup(tile, "Cannot activate 48V MODE while INVERTER is ON");
