@@ -15,8 +15,6 @@ int drunken_walk(int val, int max_step, int max_val, int min_val = 0)
 
 void gauge_anim_cb(lv_timer_t *t)
 {
-  static int left_vals[3] = {0};
-  static int right_vals[5] = {0};
   static int speed_val = 0;
 
   if (leftGaugeTile)
@@ -24,8 +22,7 @@ void gauge_anim_cb(lv_timer_t *t)
     for (int i = 0; i < 3; ++i)
     {
       Gauge *g = leftGaugeTile->getGauge(i);
-      left_vals[i] = drunken_walk(left_vals[i], 3, 10);
-      g->setValue(left_vals[i] / 10.0f);
+      g->drunken_walk();
     }
 
     SevenSegmentDisplay *disp = leftGaugeTile->getSevenSegmentDisplay();
@@ -38,8 +35,7 @@ void gauge_anim_cb(lv_timer_t *t)
     for (int i = 0; i < 5; ++i)
     {
       Gauge *g = rightGaugeTile->getGauge(i);
-      right_vals[i] = drunken_walk(right_vals[i], 3, 10);
-      g->setValue(right_vals[i] / 10.0f);
+      g->drunken_walk();
     }
   }
 }
