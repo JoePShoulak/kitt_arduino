@@ -19,22 +19,34 @@
 #define PANEL_GRID_WIDTH (PANEL_BUTTON_SIZE * 2 + SPACING * 3)
 #define PANEL_GRID_HEIGHT (PANEL_BUTTON_SIZE * (BUTTON_COUNT / 2) + SPACING * 6)
 
+// ==== Visualiser configuration ====
+#define CIRCLE_DIAMETER 60
+#define COLUMN_WIDTH (CIRCLE_DIAMETER * 6 / 5)
+#define CENTER_WIDTH ((480 - CIRCLE_DIAMETER * 2 - SPACING * 4) * 9 / 10)
+#define GRID_WIDTH (COLUMN_WIDTH * 2 + CENTER_WIDTH + SPACING * 4)
+#define BUTTON_HEIGHT 85
+#define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
 const ButtonData button_tile1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, false, true},
     {"THEME", theme_btn_cb, false},
-    {"INTRO", intro_btn_cb, false},         {"EXPLODE", explode_btn_cb, false},
-    {"MICHELLE", michelle_btn_cb, false},   {"SHAWN", shawn_btn_cb, false},
-    {"JOSEPH", joseph_btn_cb, false},       {"SHOE", shoe_btn_cb, false},
+    {"INTRO", intro_btn_cb, false},
+    {"EXPLODE", explode_btn_cb, false},
+    {"MICHELLE", michelle_btn_cb, false},
+    {"SHAWN", shawn_btn_cb, false},
+    {"JOSEPH", joseph_btn_cb, false},
+    {"SHOE", shoe_btn_cb, false},
 };
 
 const ButtonData button_tile2[BUTTON_COUNT] = {
     {"MOTOR", motor_override_cb, true, true, true},
-    {"EVADE", evade_btn_cb, true, true},
+    {"EVADE", evade_btn_cb, false, true},
     {"48V MODE", btn48v_cb, true, true, true},
     {"INVERTER", inverter_btn_cb, true, true},
-    {"GPS", gps_btn_cb, true, false, true},   {"RADIO", radio_btn_cb, true, false, true},
-    {"USB", usb_btn_cb, true, false, true},   {"LIGHTING", lighting_btn_cb, true},
+    {"GPS", gps_btn_cb, true, false, true},
+    {"RADIO", radio_btn_cb, true, false, true},
+    {"USB", usb_btn_cb, true, false, true},
+    {"LIGHTING", lighting_btn_cb, true},
 };
 
 // ==== Voice tile configuration ====
@@ -44,23 +56,15 @@ const ButtonData voice_buttons[3] = {
     {"PURSUIT", pursuit_btn_cb, true, true},
 };
 
-// ==== Visualiser configuration ====
-#define CIRCLE_DIAMETER 60
-#define COLUMN_WIDTH (CIRCLE_DIAMETER * 6 / 5)
-#define CENTER_WIDTH ((480 - CIRCLE_DIAMETER * 2 - SPACING * 4) * 9 / 10)
-#define GRID_WIDTH (COLUMN_WIDTH * 2 + CENTER_WIDTH + SPACING * 4)
-#define BUTTON_HEIGHT 85
-#define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
-
 static const IndicatorData indicators[8] = {
     {"AUD", ORANGE_DARK, ORANGE},
     {"LTS", ORANGE_DARK, ORANGE},
-    {"B1", RED_DARK, RED},       
+    {"B1", RED_DARK, RED},
     {"B2", RED_DARK, RED},
 
-    {"GPS", ORANGE_DARK, ORANGE}, 
+    {"GPS", ORANGE_DARK, ORANGE},
     {"RAD", ORANGE_DARK, ORANGE},
-    {"CUR", RED_DARK, RED},       
+    {"CUR", RED_DARK, RED},
     {"TMP", RED_DARK, RED}};
 
 // ==== Global UI references ====
@@ -74,7 +78,6 @@ extern Button *motor_btn;
 extern Button *blackout_btn;
 extern Button *btn48v;
 extern Button *inverter_btn;
-extern bool blackout;
 extern GigaDisplayBacklight backlight;
 extern lv_obj_t *blackout_overlay;
 

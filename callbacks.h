@@ -3,7 +3,7 @@
 
 #include <lvgl.h>
 
-// Default button callback
+// Default button
 void null_btn(lv_event_t *e);
 
 // Left button panel
@@ -16,7 +16,7 @@ void shawn_btn_cb(lv_event_t *e);
 void joseph_btn_cb(lv_event_t *e);
 void shoe_btn_cb(lv_event_t *e);
 
-// Right Button Panel
+// Right button panel
 void motor_override_cb(lv_event_t *e);
 void evade_btn_cb(lv_event_t *e);
 void btn48v_cb(lv_event_t *e);
@@ -33,6 +33,6 @@ void normal_cruise_btn_cb(lv_event_t *e);
 void pursuit_btn_cb(lv_event_t *e);
 
 // Misc
-void blackout_cb(lv_event_t *e);
+void blackout_overlay_cb(lv_event_t *e);
 
 #endif

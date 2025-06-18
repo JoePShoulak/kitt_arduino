@@ -1,11 +1,11 @@
 #include "UI.h"
 
 #include <colors.h>
-#include <config.h>
 #include "button_tile.h"
 #include "animations.h"
 #include "voice_tile.h"
 #include "gauge_tile.h"
+#include "validators.h"
 
 UI ui;
 
@@ -18,7 +18,8 @@ Button *blackout_btn = nullptr;
 Button *btn48v = nullptr;
 Button *inverter_btn = nullptr;
 
-void UI::init(GigaAudio &audio) {
+void UI::init(GigaAudio &audio)
+{
   Serial.print("Initializing UI...");
 
   canvas = lv_scr_act();
@@ -36,9 +37,11 @@ void UI::init(GigaAudio &audio) {
   leftPanel = ButtonTile::createTile(tiles, 1, button_tile1);
   voiceTile = new VoiceTile(tiles, 2, voice_buttons, &audio);
   ::voiceTile = voiceTile;
-  for (int i = 0; i < 3; ++i) {
+  for (int i = 0; i < 3; ++i)
+  {
     Button *btn = voiceTile->getButton(i);
-    if (btn) {
+    if (btn)
+    {
       btn->setValidate(validate_voice_mode);
     }
   }
@@ -52,20 +55,24 @@ void UI::init(GigaAudio &audio) {
   gaugeTile = new GaugeTile(tiles, 4, right_labels, 5);
   ::gaugeTile = gaugeTile;
   motor_btn = rightPanel->getButton(0);
-  if (motor_btn) {
+  if (motor_btn)
+  {
     motor_btn->setCallback(motor_override_cb);
     motor_btn->setValidate(validate_motor);
   }
   blackout_btn = rightPanel->getButton(1);
-  if (blackout_btn) {
+  if (blackout_btn)
+  {
     blackout_btn->setCallback(evade_btn_cb);
   }
   btn48v = rightPanel->getButton(2);
-  if (btn48v) {
+  if (btn48v)
+  {
     btn48v->setValidate(validate_48v);
   }
   inverter_btn = rightPanel->getButton(3);
-  if (inverter_btn) {
+  if (inverter_btn)
+  {
     inverter_btn->setValidate(validate_inverter);
   }
 
