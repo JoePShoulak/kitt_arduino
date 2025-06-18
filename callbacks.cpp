@@ -139,9 +139,7 @@ void voice_mode_cb(lv_event_t *e)
 // Misc
 void blackout_overlay_cb(lv_event_t *e)
 {
-  lv_event_code_t code = lv_event_get_code(e);
-
-  if (code == LV_EVENT_RELEASED && !blackout_first_release)
+  if (lv_event_get_code(e) == LV_EVENT_RELEASED && !blackout_first_release)
   {
     blackout_first_release = true;
   }
