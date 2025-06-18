@@ -1,8 +1,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include <button.h>
 #include <Arduino_GigaDisplay.h>
+#include <button.h>
 
 class VoiceTile;
 class GaugeTile;

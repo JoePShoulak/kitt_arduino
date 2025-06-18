@@ -1,7 +1,7 @@
 #include "animations.h"
 
-#include <GigaAudio.h>
 #include <Arduino.h>
+#include <GigaAudio.h>
 #include "../tiles/gauge_tile.h"
 #include "../tiles/voice_tile.h"
 #include "../config/globals.h"
