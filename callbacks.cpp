@@ -7,7 +7,6 @@
 #include "voice_tile.h"
 #include "audio_helper.h"
 
-bool blackout = false;
 lv_obj_t *blackout_overlay = nullptr;
 static bool blackout_first_release = false;
 
@@ -59,7 +58,6 @@ void evade_btn_cb(lv_event_t *e)
 {
   audio_play("evade_on.wav");
 
-  blackout = true;
   backlight.set(0);
   blackout_first_release = false;
   blackout_overlay = show_fullscreen_popup(nullptr);
@@ -148,7 +146,6 @@ void blackout_overlay_cb(lv_event_t *e)
   {
     lv_obj_del(blackout_overlay);
     blackout_overlay = nullptr;
-    blackout = false;
     backlight.set(255);
     blackout_first_release = false;
   }
