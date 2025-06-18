@@ -3,22 +3,25 @@
 
 #include <Arduino_GigaDisplay.h>
 #include <button.h>
+#include <gauge.h>
 #include <indicator.h>
 #include "callbacks.h"
 #include "validators.h"
 #include <config.h>
 
-static const char *const left_labels[] = {
-    "RPM",
-    "MOTOR CURRENT",
-    "PERIPHERAL CURRENT"};
+const GaugeData left_gauges[3] = {
+    {"TACH", "RPM"},
+    {"MOTOR CURRENT", "A"},
+    {"PERIPHERAL CURRENT", "A"},
+};
 
-static const char *const right_labels[] = {
-    "BATTERY VOLTAGE",
-    "BATTERY CURRENT",
-    "SOLAR VOLTAGE",
-    "SOLAR CURRENT",
-    "TEMPERATURE"};
+const GaugeData right_gauges[5] = {
+    {"BATTERY VOLTAGE", "V"},
+    {"BATTERY CURRENT", "A"},
+    {"SOLAR VOLTAGE", "V"},
+    {"SOLAR CURRENT", "A"},
+    {"TEMPERATURE", "C"},
+};
 
 const ButtonData button_tile1[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, null_validate, false, true},

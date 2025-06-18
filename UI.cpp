@@ -29,8 +29,8 @@ void UI::init(GigaAudio &audio)
   lv_obj_set_style_bg_color(tiles, BLACK, 0);
   lv_obj_set_scrollbar_mode(tiles, LV_SCROLLBAR_MODE_OFF);
 
-  leftGaugeTile = new GaugeTile(tiles, 0, left_labels, 3, true);
-  rightGaugeTile = new GaugeTile(tiles, 4, right_labels, 5);
+  leftGaugeTile = new GaugeTile(tiles, 0, left_gauges, 3, true);
+  rightGaugeTile = new GaugeTile(tiles, 4, right_gauges, 5);
   ::leftGaugeTile = leftGaugeTile;
   ::rightGaugeTile = rightGaugeTile;
 
