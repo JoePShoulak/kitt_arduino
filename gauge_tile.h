@@ -4,21 +4,20 @@
 #include <lvgl.h>
 
 class Gauge;
-
 class SevenSegmentDisplay;
 
-class GaugeTile {
+class GaugeTile
+{
   lv_obj_t *tile;
   Gauge **gauges;
   int gauge_count;
   SevenSegmentDisplay *display;
 
 public:
-  GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
-            int count, bool with_display = false);
+  GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels, int count, bool with_display = false);
   ~GaugeTile();
   Gauge *getGauge(int idx) const;
-  SevenSegmentDisplay *getDisplay() const { return display; }
+  SevenSegmentDisplay *getSevenSegmentDisplay() const { return display; }
   lv_obj_t *getTile() const { return tile; }
 };
 

@@ -4,8 +4,7 @@
 #include "colors.h"
 #include "config.h"
 
-GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
-                     int count, bool with_display)
+GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels, int count, bool with_display)
     : gauge_count(count), display(nullptr)
 {
   tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
@@ -23,8 +22,7 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
   lv_obj_center(container);
   lv_obj_set_layout(container, LV_LAYOUT_FLEX);
   lv_obj_set_flex_flow(container, LV_FLEX_FLOW_COLUMN);
-  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START,
-                        LV_FLEX_ALIGN_CENTER);
+  lv_obj_set_flex_align(container, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
   lv_obj_set_style_pad_all(container, SPACING, 0);
   lv_obj_set_style_pad_row(container, SPACING, 0);
 
@@ -48,18 +46,19 @@ GaugeTile::GaugeTile(lv_obj_t *tileview, int row_id, const char *const *labels,
 
 GaugeTile::~GaugeTile()
 {
-  for (int i = 0; i < gauge_count; ++i)
-  {
-    delete gauges[i];
-  }
-  delete[] gauges;
   if (display)
     delete display;
+
+  for (int i = 0; i < gauge_count; ++i)
+    delete gauges[i];
+
+  delete[] gauges;
 }
 
 Gauge *GaugeTile::getGauge(int idx) const
 {
   if (idx < 0 || idx >= gauge_count)
     return nullptr;
+
   return gauges[idx];
 }

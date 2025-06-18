@@ -28,7 +28,7 @@ void gauge_anim_cb(lv_timer_t *t)
       g->setValue(left_vals[i] / 10.0f);
     }
 
-    SevenSegmentDisplay *disp = leftGaugeTile->getDisplay();
+    SevenSegmentDisplay *disp = leftGaugeTile->getSevenSegmentDisplay();
     speed_val = drunken_walk(speed_val, 3, 999);
     disp->setValue(speed_val);
   }
