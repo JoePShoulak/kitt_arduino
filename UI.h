@@ -9,14 +9,15 @@ class VoiceTile;
 class GaugeTile;
 class GigaAudio;
 
-class UI {
+class UI
+{
   lv_obj_t *canvas = nullptr;
   lv_obj_t *tiles = nullptr;
   GaugeTile *leftGaugeTile = nullptr;
   ButtonTile *leftPanel = nullptr;
   VoiceTile *voiceTile = nullptr;
   ButtonTile *rightPanel = nullptr;
-  GaugeTile *gaugeTile = nullptr;
+  GaugeTile *rightGaugeTile = nullptr;
   lv_timer_t *voice_anim_timer = nullptr;
   lv_timer_t *gauge_anim_timer = nullptr;
 
@@ -26,7 +27,7 @@ public:
   ButtonTile *getLeftPanel() const { return leftPanel; }
   ButtonTile *getRightPanel() const { return rightPanel; }
   GaugeTile *getLeftGaugeTile() const { return leftGaugeTile; }
-  GaugeTile *getRightGaugeTile() const { return gaugeTile; }
+  GaugeTile *getRightGaugeTile() const { return rightGaugeTile; }
 };
 
 extern UI ui;

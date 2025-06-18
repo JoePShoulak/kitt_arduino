@@ -17,6 +17,7 @@ static void toggle_sound(Button *self, const char *on_clip, const char *off_clip
 {
   if (!self)
     return;
+
   audio_play(self->isToggled() ? on_clip : off_clip);
 }
 
@@ -24,19 +25,18 @@ static void toggle_sound(Button *self, const char *on_clip, const char *off_clip
 void null_btn(lv_event_t *e)
 {
   Button *self = static_cast<Button *>(lv_event_get_user_data(e));
-  if (self)
+
+  if (self->isToggleable())
   {
-    if (self->isToggleable())
-    {
-      Serial.print("Button ");
-      Serial.print(self->isToggled() ? "On: " : "Off: ");
-    }
-    else
-    {
-      Serial.print("Button pressed: ");
-    }
-    Serial.println(self->getLabel());
+    Serial.print("Button ");
+    Serial.print(self->isToggled() ? "On: " : "Off: ");
   }
+  else
+  {
+    Serial.print("Button pressed: ");
+  }
+
+  Serial.println(self->getLabel());
 }
 
 // ==== Left button panel ====
@@ -106,24 +106,25 @@ void inverter_btn_cb(lv_event_t *e)
 void auto_cruise_btn_cb(lv_event_t *e)
 {
   audio_play("auto_cruise.wav");
-  voice_mode_cb(e);
+  cruise_mode_cb(e);
 }
 
 void normal_cruise_btn_cb(lv_event_t *e)
 {
   audio_play("normal_cruise.wav");
-  voice_mode_cb(e);
+  cruise_mode_cb(e);
 }
 
 void pursuit_btn_cb(lv_event_t *e)
 {
   audio_play("pursuit.wav");
-  voice_mode_cb(e);
+  cruise_mode_cb(e);
 }
 
-void voice_mode_cb(lv_event_t *e)
+void cruise_mode_cb(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
+
   if (!self->isToggled())
     return;
 

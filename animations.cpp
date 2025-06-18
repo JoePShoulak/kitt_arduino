@@ -33,11 +33,11 @@ void gauge_anim_cb(lv_timer_t *t)
     disp->setValue(speed_val);
   }
 
-  if (gaugeTile)
+  if (rightGaugeTile)
   {
     for (int i = 0; i < 5; ++i)
     {
-      Gauge *g = gaugeTile->getGauge(i);
+      Gauge *g = rightGaugeTile->getGauge(i);
       right_vals[i] = drunken_walk(right_vals[i], 3, 10);
       g->setValue(right_vals[i] / 10.0f);
     }

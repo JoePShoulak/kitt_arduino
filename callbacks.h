@@ -27,7 +27,7 @@ void usb_btn_cb(lv_event_t *e);
 void lighting_btn_cb(lv_event_t *e);
 
 // Voice panel
-void voice_mode_cb(lv_event_t *e);
+void cruise_mode_cb(lv_event_t *e);
 void auto_cruise_btn_cb(lv_event_t *e);
 void normal_cruise_btn_cb(lv_event_t *e);
 void pursuit_btn_cb(lv_event_t *e);

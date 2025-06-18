@@ -27,33 +27,45 @@
 #define BUTTON_HEIGHT 85
 #define VISUALISER_HEIGHT (GRID_HEIGHT - BUTTON_HEIGHT * 3 - SPACING * 5)
 
+static const char *const left_labels[] = {
+    "RPM",
+    "MOTOR CURRENT",
+    "PERIPHERAL CURRENT"};
+
+static const char *const right_labels[] = {
+    "BATTERY VOLTAGE",
+    "BATTERY CURRENT",
+    "SOLAR VOLTAGE",
+    "SOLAR CURRENT",
+    "TEMPERATURE"};
+
 const ButtonData button_tile1[BUTTON_COUNT] = {
-    {"TURBO BOOST", turbo_boost_btn_cb, false, true},
-    {"THEME", theme_btn_cb, false},
-    {"INTRO", intro_btn_cb, false},
-    {"EXPLODE", explode_btn_cb, false},
-    {"MICHELLE", michelle_btn_cb, false},
-    {"SHAWN", shawn_btn_cb, false},
-    {"JOSEPH", joseph_btn_cb, false},
-    {"SHOE", shoe_btn_cb, false},
+    {"TURBO BOOST", turbo_boost_btn_cb, null_validate, false, true},
+    {"THEME", theme_btn_cb, null_validate, false},
+    {"INTRO", intro_btn_cb, null_validate, false},
+    {"EXPLODE", explode_btn_cb, null_validate, false},
+    {"MICHELLE", michelle_btn_cb, null_validate, false},
+    {"SHAWN", shawn_btn_cb, null_validate, false},
+    {"JOSEPH", joseph_btn_cb, null_validate, false},
+    {"SHOE", shoe_btn_cb, null_validate, false},
 };
 
 const ButtonData button_tile2[BUTTON_COUNT] = {
-    {"MOTOR", motor_override_cb, true, true, true},
-    {"EVADE", evade_btn_cb, false, true},
-    {"48V MODE", btn48v_cb, true, true, true},
-    {"INVERTER", inverter_btn_cb, true, true},
-    {"GPS", gps_btn_cb, true, false, true},
-    {"RADIO", radio_btn_cb, true, false, true},
-    {"USB", usb_btn_cb, true, false, true},
-    {"LIGHTING", lighting_btn_cb, true},
+    {"MOTOR", motor_override_cb, validate_motor, true, true, true},
+    {"EVADE", evade_btn_cb, null_validate, false, true},
+    {"48V MODE", btn48v_cb, validate_48v, true, true, true},
+    {"INVERTER", inverter_btn_cb, validate_inverter, true, true},
+    {"GPS", gps_btn_cb, null_validate, true, false, true},
+    {"RADIO", radio_btn_cb, null_validate, true, false, true},
+    {"USB", usb_btn_cb, null_validate, true, false, true},
+    {"LIGHTING", lighting_btn_cb, null_validate, true},
 };
 
 // ==== Voice tile configuration ====
 const ButtonData voice_buttons[3] = {
-    {"AUTO CRUISE", auto_cruise_btn_cb, true, true},
-    {"NORMAL CRUISE", normal_cruise_btn_cb, true, true, true},
-    {"PURSUIT", pursuit_btn_cb, true, true},
+    {"AUTO CRUISE", auto_cruise_btn_cb, validate_cruise_mode, true},
+    {"NORMAL CRUISE", normal_cruise_btn_cb, validate_cruise_mode, true, false, true},
+    {"PURSUIT", pursuit_btn_cb, validate_cruise_mode, true},
 };
 
 static const IndicatorData indicators[8] = {
@@ -72,7 +84,7 @@ class VoiceTile;
 class GaugeTile;
 
 extern VoiceTile *voiceTile;
-extern GaugeTile *gaugeTile;
+extern GaugeTile *rightGaugeTile;
 extern GaugeTile *leftGaugeTile;
 extern Button *motor_btn;
 extern Button *blackout_btn;
