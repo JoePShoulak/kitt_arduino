@@ -40,6 +40,12 @@ void UI::init(GigaAudio &audio)
   leftPanel = ButtonTile::createTile(tiles, 1, button_tile1);
   rightPanel = ButtonTile::createTile(tiles, 3, button_tile2);
 
+  // Provide global access for validation callbacks
+  motor_btn = rightPanel->getButton(0);
+  blackout_btn = rightPanel->getButton(1);
+  btn48v = rightPanel->getButton(2);
+  inverter_btn = rightPanel->getButton(3);
+
   lv_obj_set_tile_id(tiles, 2, 0, LV_ANIM_OFF); // start on voice tile
 
   voice_anim_timer = lv_timer_create(voice_anim_cb, 50, &audio);
