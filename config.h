@@ -10,17 +10,17 @@
 #include <config.h>
 
 const GaugeData left_gauges[3] = {
-    {"TACH", "RPM", 0, 1000, false},
-    {"MOTOR CURRENT", "A", 0, 10, false},
-    {"PERIPHERAL CURRENT", "A", 0, 5, false},
+    {"TACH", "RPM", 0, 6000, GaugeMode::NORMAL},
+    {"MOTOR CURRENT", "A", 0, 10, GaugeMode::NORMAL},
+    {"PERIPHERAL CURRENT", "A", 0, 5, GaugeMode::NORMAL},
 };
 
 const GaugeData right_gauges[5] = {
-    {"BATTERY VOLTAGE", "V", 0, 60, false},
-    {"BATTERY CURRENT", "A", 0, 20, false},
-    {"TIME REMAINING", "H", 0, 10, true},
-    {"CONNECTION STRENGTH", "db", -120, -50, true},
-    {"TEMPERATURE", "C", 0, 100, false},
+    {"BATTERY VOLTAGE", "V", 0, 60, GaugeMode::NORMAL},
+    {"BATTERY CURRENT", "A", 0, 20, GaugeMode::NORMAL},
+    {"TIME REMAINING", "H", 0, 10, GaugeMode::REVERSED},
+    {"CONNECTION STRENGTH", "db", -135, -35, GaugeMode::REVERSED},
+    {"TEMPERATURE", "C", 0, 100, GaugeMode::CENTERED},
 };
 
 const ButtonData button_tile1[BUTTON_COUNT] = {
