@@ -2,10 +2,11 @@
 SKETCH_NAME := kitt.ino
 BOARD := arduino:mbed_giga:giga
 PORT := COM3
+BAUD := 115200
 BUILD_DIR := build
 
 # ===== COMMANDS =====
-all: compile upload
+all: compile upload monitor
 
 compile:
 	@echo ">>> Compiling..."
@@ -22,3 +23,7 @@ clean:
 convert:
 	@echo ">>> Running MP3-to-WAV conversion script..."
 	@scripts/convert.sh
+
+monitor:
+	@echo ">>> Opening Serial Monitor..."
+	arduino-cli monitor -p $(PORT) --config $(BAUD)

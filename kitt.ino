@@ -9,6 +9,7 @@
 #include "src/hardware/Scanner.h"
 #include "src/helpers/audio_helper.h"
 #include "src/UI.h"
+#include "src/helpers/ble_helper.h"
 
 #include "src/tiles/button_tile.h"
 
@@ -26,6 +27,8 @@ void setup()
   backlight.begin();
   ui.init(audio);
   scanner.begin(true);
+  ble_start();
+
   audio_play("ready.wav"); // also inits the audio
 }
 
@@ -38,4 +41,5 @@ void loop()
   lv_timer_handler();
   audio.update();
   scanner.update();
+  ble_update();
 }
