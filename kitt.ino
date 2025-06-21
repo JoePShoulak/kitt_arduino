@@ -10,7 +10,6 @@
 #include "src/helpers/audio_helper.h"
 #include "src/UI.h"
 #include "src/helpers/ble_helper.h"
-
 #include "src/tiles/button_tile.h"
 
 GigaDisplay_GFX tft;

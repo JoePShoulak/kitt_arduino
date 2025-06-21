@@ -58,7 +58,7 @@ static const IndicatorData indicators[8] = {
     {"B1", RED_DARK, RED},
     {"B2", RED_DARK, RED},
 
-    {"GPS", ORANGE_DARK, ORANGE},
+    {"BLE", ORANGE_DARK, ORANGE},
     {"RAD", ORANGE_DARK, ORANGE},
     {"CUR", RED_DARK, RED},
     {"TMP", RED_DARK, RED}};

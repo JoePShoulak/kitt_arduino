@@ -2,6 +2,9 @@
 
 #include <ArduinoBLE.h>
 
+#include "../config/globals.h"
+#include "../tiles/voice_tile.h"
+
 #define POLLING_RATE 5000
 
 BLEService kittService(BLE_UUID_SERVICE);
@@ -40,6 +43,8 @@ void ble_update()
     return;
 
   lastUpdated = now;
+
+  voiceTile->getIndicator(4)->toggle(central.connected());
 
   if (central.connected())
   {
