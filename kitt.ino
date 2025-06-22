@@ -13,10 +13,8 @@
 void setup()
 {
   serial_init();
-
   print_init_status("BLE", ble_init());
   print_init_status("UI", ui.init());
-
   audio_init(); // must come after ui to init some ui elements with audio refs. Should come last because of ready clip. (void)
 }
 
@@ -25,6 +23,5 @@ void loop()
   lv_timer_handler(); // handles ui timers
   audio.update();     // needed for audio to play correctly
   ble_update();       // sends dummmy BLE data for now, for testing
-
   hardware.update();
 }

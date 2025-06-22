@@ -1,7 +1,7 @@
 # ===== CONFIGURATION =====
 SKETCH_NAME := kitt.ino
 BOARD := arduino:mbed_giga:giga
-PORT := COM3
+PORT := COM7
 BAUD := 115200
 BUILD_DIR := build
 
