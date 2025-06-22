@@ -107,7 +107,7 @@ void cruise_mode_cb(lv_event_t *e)
 
   for (int i = 0; i < 3; ++i)
   {
-    Button *other = ui.voiceTile->getButton(i);
+    Button *other = ui.voiceTile->buttons[i];
 
     if (other != self && other->isToggled())
       other->handlePress();

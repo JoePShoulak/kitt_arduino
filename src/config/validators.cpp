@@ -12,7 +12,7 @@ bool validate_48v(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
 
-  if (self->isToggled() && ui.rightButtonTile->getButton(0)->isToggled())
+  if (self->isToggled() && ui.rightButtonTile->button(0)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
@@ -22,7 +22,7 @@ bool validate_48v(lv_event_t *e)
     return false;
   }
 
-  if (!self->isToggled() && ui.rightButtonTile->getButton(3)->isToggled())
+  if (!self->isToggled() && ui.rightButtonTile->button(3)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
@@ -39,7 +39,7 @@ bool validate_motor(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
 
-  if (!self->isToggled() && !ui.rightButtonTile->getButton(2)->isToggled())
+  if (!self->isToggled() && !ui.rightButtonTile->button(2)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
@@ -56,7 +56,7 @@ bool validate_inverter(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
 
-  if (!self->isToggled() && ui.rightButtonTile->getButton(2)->isToggled())
+  if (!self->isToggled() && ui.rightButtonTile->button(2)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);

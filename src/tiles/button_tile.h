@@ -9,15 +9,14 @@
 
 class ButtonTile
 {
-  Button *buttons[BUTTON_COUNT];
-
 public:
   ButtonTile(lv_obj_t *parent, ButtonData const *config);
   ~ButtonTile();
 
   static ButtonTile *createTile(lv_obj_t *tileview, int row_id, ButtonData const *config);
+  Button *buttons[BUTTON_COUNT];
 
-  Button *getButton(uint8_t index) { return index < BUTTON_COUNT ? buttons[index] : nullptr; }
+  Button *button(uint8_t index) { return index < BUTTON_COUNT ? buttons[index] : nullptr; }
 };
 
 #endif

@@ -41,8 +41,8 @@ void voice_anim_cb(lv_timer_t *t)
   {
     if (was_playing)
     {
-      ui.voiceTile->getIndicator(0)->toggle(false);
-      ui.voiceTile->getVisualiser()->startFade();
+      ui.voiceTile->indicators[0]->toggle(false);
+      ui.voiceTile->visualiser->startFade();
     }
 
     was_playing = false;
@@ -54,7 +54,7 @@ void voice_anim_cb(lv_timer_t *t)
 
   if (!was_playing)
   {
-    ui.voiceTile->getIndicator(0)->toggle(true);
+    ui.voiceTile->indicators[0]->toggle(true);
     was_playing = true;
   }
 
@@ -74,5 +74,5 @@ void voice_anim_cb(lv_timer_t *t)
 
   level += (target - level) * 0.25f; // smooth towards target
 
-  ui.voiceTile->getVisualiser()->setLevel(level);
+  ui.voiceTile->visualiser->setLevel(level);
 }

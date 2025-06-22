@@ -31,7 +31,7 @@ void setup()
 void loop()
 {
   // check states
-  ui.rightButtonTile->getButton(7)->isToggled() ? scanner.start() : scanner.stop();
+  ui.rightButtonTile->button(7)->isToggled() ? scanner.start() : scanner.stop();
 
   // update
   lv_timer_handler();
