@@ -13,7 +13,7 @@ BLEStringCharacteristic voltageChar(BLE_UUID_DATA, BLERead | BLENotify, 20);
 
 int lastUpdated;
 
-void ble_start()
+void ble_init()
 {
   if (!BLE.begin())
     Serial.println("BLE init failed");

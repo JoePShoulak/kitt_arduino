@@ -5,7 +5,7 @@
 #define BLE_UUID_ERROR "1982C0DE-D00D-1123-BEEF-C0DEBA5ECBAD"
 #define BLE_UUID_DATA "1982C0DE-D00D-1123-BEEF-C0DEBA5EDA70"
 
-void ble_start();
+void ble_init();
 void ble_update();
 
 #endif

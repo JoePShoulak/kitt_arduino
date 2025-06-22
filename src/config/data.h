@@ -75,9 +75,9 @@ enum RIGHT_BUTTONS
 };
 
 const ButtonData right_buttons[BUTTON_COUNT] = {
-    {"MOTOR", motor_override_cb, validate_motor, true, true, true},
+    {"MOTOR", motor_override_cb, validate_motor, true, true},
     {"EVADE", evade_btn_cb, validate_always, false, true},
-    {"48V MODE", btn48v_cb, validate_48v, true, true, true},
+    {"48V MODE", btn48v_cb, validate_48v, true, true},
     {"INVERTER", inverter_btn_cb, validate_inverter, true, true},
     {"GPS", gps_btn_cb, validate_always, true, false, true},
     {"RADIO", radio_btn_cb, validate_always, true, false, true},

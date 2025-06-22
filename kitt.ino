@@ -5,38 +5,31 @@
 #include <Arduino_GigaDisplay.h>
 #include <lvgl.h>
 
-#define SCANNER_DATA_PIN 6
-#include "src/hardware/Scanner.h"
 #include "src/helpers/audio_helper.h"
 #include "src/helpers/ble_helper.h"
 #include "src/ui/UI.h"
 #include "src/config/data.h"
+#include "src/hardware/Scanner.h"
 
 GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;
-Scanner scanner(10);
 
 void setup()
 {
   Serial.begin(115200); // Initialize Serial
   tft.begin();          // Initialize Giga Display
   TouchDetector.begin();
+  ble_init();
   ui.init();
-  audio_init();
-  scanner.begin(true);
-  ble_start();
-
-  audio_play("ready.wav"); // also inits the audio
+  audio_init(); // must come after ui, as it inits some of its elements with audio refs
 }
 
 void loop()
 {
-  // check states
-  ui.rightButtonTile->buttons[RIGHT_BUTTONS::lighting]->isToggled() ? scanner.start() : scanner.stop();
+  lv_timer_handler(); // handles ui timers
+  audio.update();     // needed for audio to play correctly
+  ble_update();       // sends dummmy BLE data for now, for testing
 
-  // update
-  lv_timer_handler();
-  audio.update();
-  scanner.update();
-  ble_update();
+  if (scanner.running())
+    scanner.update(); // animates the scanner, if on
 }

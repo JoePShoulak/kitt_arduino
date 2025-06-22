@@ -28,7 +28,15 @@ monitor:
 	@echo ">>> Opening Serial Monitor..."
 	arduino-cli monitor -p $(PORT) --config $(BAUD)
 
+loc:
+	@echo ">>> Counting lines of code..."
+	@files=$$(find . -type f \( -name "*.h" -o -name "*.cpp" \)); \
+	count=$$(echo "$$files" | wc -l); \
+	lines=$$(cat $$files | wc -l); \
+	echo "$$lines lines across $$count files"
+
 # Project specific
 convert:
 	@echo ">>> Running MP3-to-WAV conversion script..."
 	@scripts/convert.sh
+	

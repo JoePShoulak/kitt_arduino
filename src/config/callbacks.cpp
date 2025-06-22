@@ -4,6 +4,7 @@
 #include <button.h>
 #include <popup.h>
 
+#include "../hardware/Scanner.h"
 #include "../ui/UI.h"
 #include "../ui/tiles/voice_tile.h"
 #include "../helpers/audio_helper.h"
@@ -64,6 +65,7 @@ void usb_btn_cb(lv_event_t *e)
 void lighting_btn_cb(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
+  self->isToggled() ? scanner.start() : scanner.stop();
   toggle_sound(self, "lighting_on.wav", "lighting_off.wav");
 }
 
