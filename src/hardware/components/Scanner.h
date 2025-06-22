@@ -3,13 +3,12 @@
 
 #include <FastLED.h>
 
-#include "../misc/Buffer.h"
+#include "../../misc/Buffer.h"
 
 class Scanner
 {
 public:
   Scanner();
-  ~Scanner();
 
   void start();
   void stop();
@@ -26,7 +25,5 @@ private:
   CRGB *_leds;
   Buffer _trail = Buffer(4);
 };
-
-extern Scanner scanner;
 
 #endif // SCANNER_H

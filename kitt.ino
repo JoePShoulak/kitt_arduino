@@ -9,7 +9,7 @@
 #include "src/helpers/ble_helper.h"
 #include "src/ui/UI.h"
 #include "src/config/data.h"
-#include "src/hardware/Scanner.h"
+#include "src/hardware/Hardware.h"
 
 GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;
@@ -30,6 +30,5 @@ void loop()
   audio.update();     // needed for audio to play correctly
   ble_update();       // sends dummmy BLE data for now, for testing
 
-  if (scanner.running())
-    scanner.update(); // animates the scanner, if on
+  hardware.update();
 }

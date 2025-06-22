@@ -4,15 +4,11 @@
 #define LED_COUNT 10
 #define SCAN_DELAY 100
 
-Scanner scanner;
-
-Scanner::Scanner() : _index(0), _dir(1)
+Scanner::Scanner()
 {
   _leds = new CRGB[LED_COUNT]; // allocate memory
   FastLED.addLeds<NEOPIXEL, SCANNER_DATA_PIN>(_leds, LED_COUNT);
 }
-
-Scanner::~Scanner() { delete[] _leds; }
 
 void Scanner::start() { _running = true; }
 
