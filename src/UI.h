@@ -3,10 +3,12 @@
 
 #include <lvgl.h>
 #include <GigaAudio.h>
+#include <Arduino_GigaDisplay.h>
 
-class ButtonTile;
-class VoiceTile;
-class GaugeTile;
+#include "tiles/button_tile.h"
+#include "tiles/voice_tile.h"
+#include "tiles/gauge_tile.h"
+
 class GigaAudio;
 
 class UI
@@ -14,23 +16,19 @@ class UI
   lv_obj_t *canvas = nullptr;
   lv_obj_t *tiles = nullptr;
 
-  GaugeTile *leftGaugeTile = nullptr;
-  GaugeTile *rightGaugeTile = nullptr;
-  ButtonTile *leftPanel = nullptr;
-  ButtonTile *rightPanel = nullptr;
-  VoiceTile *voiceTile = nullptr;
-
   lv_timer_t *voice_anim_timer = nullptr;
   lv_timer_t *gauge_anim_timer = nullptr;
 
 public:
-  void init(GigaAudio &audio);
+  GaugeTile *leftGaugeTile;
+  GaugeTile *rightGaugeTile;
+  ButtonTile *leftButtonTile = nullptr;
+  ButtonTile *rightButtonTile = nullptr;
+  VoiceTile *voiceTile;
+  lv_obj_t *blackout_overlay;
+  GigaDisplayBacklight backlight;
 
-  VoiceTile *getVoiceTile() const { return voiceTile; }
-  ButtonTile *getLeftPanel() const { return leftPanel; }
-  ButtonTile *getRightPanel() const { return rightPanel; }
-  GaugeTile *getLeftGaugeTile() const { return leftGaugeTile; }
-  GaugeTile *getRightGaugeTile() const { return rightGaugeTile; }
+  void init(GigaAudio &audio);
 };
 
 extern UI ui;

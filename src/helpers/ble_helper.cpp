@@ -2,8 +2,8 @@
 
 #include <ArduinoBLE.h>
 
-#include "../config/globals.h"
 #include "../tiles/voice_tile.h"
+#include "../UI.h"
 
 #define POLLING_RATE 5000
 
@@ -44,7 +44,7 @@ void ble_update()
 
   lastUpdated = now;
 
-  voiceTile->getIndicator(4)->toggle(central.connected());
+  ui.voiceTile->getIndicator(4)->toggle(central.connected());
 
   if (central.connected())
   {

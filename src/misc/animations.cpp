@@ -4,9 +4,9 @@
 #include <GigaAudio.h>
 #include "../tiles/gauge_tile.h"
 #include "../tiles/voice_tile.h"
-#include "../config/globals.h"
 #include "gauge.h"
 #include "seven_segment.h"
+#include "../UI.h"
 
 int drunken_walk(int val, int max_step, int max_val, int min_val = 0)
 {
@@ -19,12 +19,12 @@ void gauge_anim_cb(lv_timer_t *t)
   static int speed_val = 0;
 
   for (int i = 0; i < 3; ++i)
-    leftGaugeTile->getGauge(i)->drunken_walk();
+    ui.leftGaugeTile->getGauge(i)->drunken_walk();
 
   for (int i = 0; i < 5; ++i)
-    rightGaugeTile->getGauge(i)->drunken_walk();
+    ui.rightGaugeTile->getGauge(i)->drunken_walk();
 
-  SevenSegmentDisplay *disp = leftGaugeTile->getSevenSegmentDisplay();
+  SevenSegmentDisplay *disp = ui.leftGaugeTile->getSevenSegmentDisplay();
   speed_val = drunken_walk(speed_val, 3, 999);
   disp->setValue(speed_val);
 }
@@ -41,8 +41,8 @@ void voice_anim_cb(lv_timer_t *t)
   {
     if (was_playing)
     {
-      voiceTile->getIndicator(0)->toggle(false);
-      voiceTile->getVisualiser()->startFade();
+      ui.voiceTile->getIndicator(0)->toggle(false);
+      ui.voiceTile->getVisualiser()->startFade();
     }
 
     was_playing = false;
@@ -54,7 +54,7 @@ void voice_anim_cb(lv_timer_t *t)
 
   if (!was_playing)
   {
-    voiceTile->getIndicator(0)->toggle(true);
+    ui.voiceTile->getIndicator(0)->toggle(true);
     was_playing = true;
   }
 
@@ -74,5 +74,5 @@ void voice_anim_cb(lv_timer_t *t)
 
   level += (target - level) * 0.25f; // smooth towards target
 
-  voiceTile->getVisualiser()->setLevel(level);
+  ui.voiceTile->getVisualiser()->setLevel(level);
 }

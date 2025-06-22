@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include <popup.h>
 #include <button.h>
+
 #include "../helpers/audio_helper.h"
-#include "globals.h"
+#include "../UI.h"
 #include "validators.h"
 
 bool validate_always(lv_event_t *e) { return true; }
@@ -11,7 +12,7 @@ bool validate_48v(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
 
-  if (self->isToggled() && motor_btn->isToggled())
+  if (self->isToggled() && ui.rightButtonTile->getButton(0)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
@@ -21,7 +22,7 @@ bool validate_48v(lv_event_t *e)
     return false;
   }
 
-  if (!self->isToggled() && inverter_btn && inverter_btn->isToggled())
+  if (!self->isToggled() && ui.rightButtonTile->getButton(3)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
@@ -38,7 +39,7 @@ bool validate_motor(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
 
-  if (!self->isToggled() && !btn48v->isToggled())
+  if (!self->isToggled() && !ui.rightButtonTile->getButton(2)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);
@@ -55,7 +56,7 @@ bool validate_inverter(lv_event_t *e)
 {
   auto self = static_cast<Button *>(lv_event_get_user_data(e));
 
-  if (!self->isToggled() && btn48v->isToggled())
+  if (!self->isToggled() && ui.rightButtonTile->getButton(2)->isToggled())
   {
     lv_obj_t *grid = lv_obj_get_parent(self->getLVButton());
     lv_obj_t *tile = lv_obj_get_parent(grid);

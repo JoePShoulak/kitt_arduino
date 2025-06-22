@@ -8,6 +8,8 @@
 
 class GigaAudio;
 
+// TODO: Remove audio as a property of voice_tile, update voice_tile based on outside logic
+
 class VoiceTile
 {
   lv_obj_t *tile;

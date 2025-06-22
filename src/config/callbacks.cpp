@@ -1,12 +1,13 @@
+#include "callbacks.h"
+
 #include <Arduino.h>
 #include <button.h>
 #include <popup.h>
+
 #include "../tiles/voice_tile.h"
 #include "../helpers/audio_helper.h"
-#include "globals.h"
-#include "callbacks.h"
+#include "../UI.h"
 
-lv_obj_t *blackout_overlay = nullptr;
 static bool blackout_first_release = false;
 
 // ==== HELPERS ====
@@ -36,10 +37,10 @@ void evade_btn_cb(lv_event_t *e)
 {
   audio_play("evade_on.wav");
 
-  backlight.set(0);
+  ui.backlight.set(0);
   blackout_first_release = false;
-  blackout_overlay = show_fullscreen_popup(nullptr);
-  lv_obj_add_event_cb(blackout_overlay, blackout_overlay_cb, LV_EVENT_ALL, nullptr);
+  ui.blackout_overlay = show_fullscreen_popup(nullptr);
+  lv_obj_add_event_cb(ui.blackout_overlay, blackout_overlay_cb, LV_EVENT_ALL, nullptr);
 }
 
 void gps_btn_cb(lv_event_t *e)
@@ -106,7 +107,7 @@ void cruise_mode_cb(lv_event_t *e)
 
   for (int i = 0; i < 3; ++i)
   {
-    Button *other = voiceTile->getButton(i);
+    Button *other = ui.voiceTile->getButton(i);
 
     if (other != self && other->isToggled())
       other->handlePress();
@@ -122,9 +123,9 @@ void blackout_overlay_cb(lv_event_t *e)
   }
   else if (blackout_first_release)
   {
-    lv_obj_del(blackout_overlay);
-    blackout_overlay = nullptr;
-    backlight.set(255);
+    lv_obj_del(ui.blackout_overlay);
+    ui.blackout_overlay = nullptr;
+    ui.backlight.set(255);
     blackout_first_release = false;
   }
 }
