@@ -17,6 +17,7 @@ class GaugeTile
 public:
   GaugeTile(lv_obj_t *tileview, int row_id, GaugeData const *data, int count, bool with_display = false);
   ~GaugeTile();
+
   Gauge *getGauge(int idx) const;
   SevenSegmentDisplay *getSevenSegmentDisplay() const { return display; }
   lv_obj_t *getTile() const { return tile; }
