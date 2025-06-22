@@ -37,8 +37,8 @@ void evade_btn_cb(lv_event_t *e)
 {
   audio_play("evade_on.wav");
 
-  ui.backlight.set(0);
   blackout_first_release = false;
+  ui.backlight.set(0);
   ui.blackout_overlay = show_fullscreen_popup(nullptr);
   lv_obj_add_event_cb(ui.blackout_overlay, blackout_overlay_cb, LV_EVENT_ALL, nullptr);
 }

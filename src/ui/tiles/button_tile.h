@@ -10,10 +10,9 @@
 class ButtonTile
 {
 public:
-  ButtonTile(lv_obj_t *parent, ButtonData const *config);
+  ButtonTile(lv_obj_t *tileview, int row_id, ButtonData const *config);
   ~ButtonTile();
 
-  static ButtonTile *createTile(lv_obj_t *tileview, int row_id, ButtonData const *config);
   Button *buttons[BUTTON_COUNT];
 };
 

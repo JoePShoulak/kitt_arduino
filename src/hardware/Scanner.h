@@ -53,10 +53,7 @@ void Scanner::stop()
   FastLED.show();
 }
 
-void Scanner::start()
-{
-  _stopped = false;
-}
+void Scanner::start() { _stopped = false; }
 
 void Scanner::update()
 {

@@ -8,8 +8,8 @@
 #define SCANNER_DATA_PIN 6
 #include "src/hardware/Scanner.h"
 #include "src/helpers/audio_helper.h"
-#include "src/ui/UI.h"
 #include "src/helpers/ble_helper.h"
+#include "src/ui/UI.h"
 #include "src/config/data.h"
 
 GigaDisplay_GFX tft;

@@ -16,11 +16,7 @@ int lastUpdated;
 void ble_start()
 {
   if (!BLE.begin())
-  {
     Serial.println("BLE init failed");
-    while (1)
-      ;
-  }
 
   BLE.setLocalName("KITT");
   kittService.addCharacteristic(errorChar);
@@ -30,15 +26,13 @@ void ble_start()
   BLE.advertise();
 
   lastUpdated = millis();
-
-  Serial.println("BLE error broadcaster started");
 }
 
 void ble_update()
 {
   BLEDevice central = BLE.central();
-  int now = millis();
 
+  int now = millis();
   if (now - lastUpdated < POLLING_RATE)
     return;
 
