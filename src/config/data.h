@@ -9,10 +9,26 @@
 #include "callbacks.h"
 #include "validators.h"
 
+enum LEFT_GAUGES
+{
+    tach,
+    motor_current,
+    peripheral_current
+};
+
 const GaugeData left_gauges[3] = {
     {"TACH", "RPM", 0, 6000, GaugeMode::NORMAL},
     {"MOTOR CURRENT", "A", 0, 10, GaugeMode::NORMAL},
     {"PERIPHERAL CURRENT", "A", 0, 5, GaugeMode::NORMAL},
+};
+
+enum RIGHT_GAUGES
+{
+    battery_voltage,
+    battery_current,
+    time_remaining,
+    connection_strength,
+    temperature
 };
 
 const GaugeData right_gauges[5] = {
@@ -23,7 +39,19 @@ const GaugeData right_gauges[5] = {
     {"TEMPERATURE", "C", 0, 100, GaugeMode::CENTERED},
 };
 
-const ButtonData button_tile1[BUTTON_COUNT] = {
+enum LEFT_BUTTONS
+{
+    turbo_boost,
+    theme,
+    intro,
+    explode,
+    michelle,
+    shawn,
+    joseph,
+    shoe
+};
+
+const ButtonData left_buttons[BUTTON_COUNT] = {
     {"TURBO BOOST", turbo_boost_btn_cb, validate_always, false, true},
     {"THEME", theme_btn_cb, validate_always, false},
     {"INTRO", intro_btn_cb, validate_always, false},
@@ -34,7 +62,19 @@ const ButtonData button_tile1[BUTTON_COUNT] = {
     {"SHOE", shoe_btn_cb, validate_always, false},
 };
 
-const ButtonData button_tile2[BUTTON_COUNT] = {
+enum RIGHT_BUTTONS
+{
+    motor,
+    evade,
+    v48,
+    inverter,
+    gps,
+    radio,
+    usb,
+    lighting
+};
+
+const ButtonData right_buttons[BUTTON_COUNT] = {
     {"MOTOR", motor_override_cb, validate_motor, true, true, true},
     {"EVADE", evade_btn_cb, validate_always, false, true},
     {"48V MODE", btn48v_cb, validate_48v, true, true, true},
@@ -45,11 +85,30 @@ const ButtonData button_tile2[BUTTON_COUNT] = {
     {"LIGHTING", lighting_btn_cb, validate_always, true},
 };
 
+enum VOICE_BUTTONS
+{
+    auto_cruise,
+    normal_cruise,
+    pursuit
+};
+
 // ==== Voice tile configuration ====
 const ButtonData voice_buttons[3] = {
     {"AUTO CRUISE", auto_cruise_btn_cb, validate_cruise_mode, true, true},
     {"NORMAL CRUISE", normal_cruise_btn_cb, validate_cruise_mode, true, true, true},
     {"PURSUIT", pursuit_btn_cb, validate_cruise_mode, true, true},
+};
+
+enum INDICATORS
+{
+    aud,
+    lts,
+    b1,
+    b2,
+    ble,
+    rad,
+    cur,
+    tmp
 };
 
 static const IndicatorData indicators[8] = {

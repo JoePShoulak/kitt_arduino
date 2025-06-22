@@ -22,8 +22,8 @@ void UI::init()
 
   voiceTile = new VoiceTile(tiles, 2, voice_buttons);
 
-  leftButtonTile = ButtonTile::createTile(tiles, 1, button_tile1);
-  rightButtonTile = ButtonTile::createTile(tiles, 3, button_tile2);
+  leftButtonTile = ButtonTile::createTile(tiles, 1, left_buttons);
+  rightButtonTile = ButtonTile::createTile(tiles, 3, right_buttons);
 
   backlight.begin();
 

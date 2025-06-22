@@ -16,7 +16,7 @@ void aud_ind_cb(lv_event_t *e)
 
 void audio_init()
 {
-  lv_obj_add_event_cb(ui.voiceTile->indicators[0]->getObj(), aud_ind_cb, LV_EVENT_CLICKED, &audio);
+  lv_obj_add_event_cb(ui.voiceTile->indicators[INDICATORS::aud]->getObj(), aud_ind_cb, LV_EVENT_CLICKED, &audio);
   lv_timer_create(voice_anim_cb, 50, &audio);
 }
 

@@ -15,8 +15,6 @@ public:
 
   static ButtonTile *createTile(lv_obj_t *tileview, int row_id, ButtonData const *config);
   Button *buttons[BUTTON_COUNT];
-
-  Button *button(uint8_t index) { return index < BUTTON_COUNT ? buttons[index] : nullptr; }
 };
 
 #endif

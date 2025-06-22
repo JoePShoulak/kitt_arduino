@@ -44,7 +44,7 @@ void ble_update()
 
   lastUpdated = now;
 
-  ui.voiceTile->indicators[4]->toggle(central.connected());
+  ui.voiceTile->indicators[ble]->toggle(central.connected());
 
   if (central.connected())
   {

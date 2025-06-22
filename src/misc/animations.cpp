@@ -41,7 +41,7 @@ void voice_anim_cb(lv_timer_t *t)
   {
     if (was_playing)
     {
-      ui.voiceTile->indicators[0]->toggle(false);
+      ui.voiceTile->indicators[aud]->toggle(false);
       ui.voiceTile->visualiser->startFade();
     }
 
@@ -54,7 +54,7 @@ void voice_anim_cb(lv_timer_t *t)
 
   if (!was_playing)
   {
-    ui.voiceTile->indicators[0]->toggle(true);
+    ui.voiceTile->indicators[aud]->toggle(true);
     was_playing = true;
   }
 
