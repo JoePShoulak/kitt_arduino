@@ -8,8 +8,6 @@
 
 class GigaAudio;
 
-// TODO: Remove audio as a property of voice_tile, update voice_tile based on outside logic
-
 class VoiceTile
 {
   lv_obj_t *tile;
@@ -19,7 +17,7 @@ class VoiceTile
   Button *buttons[3];
 
 public:
-  VoiceTile(lv_obj_t *tileview, int row_id, ButtonData const *button_data, GigaAudio *audio);
+  VoiceTile(lv_obj_t *tileview, int row_id, ButtonData const *button_data);
   ~VoiceTile();
 
   lv_obj_t *getTile() const { return tile; }

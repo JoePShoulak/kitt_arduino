@@ -7,6 +7,8 @@
 
 extern GigaAudio audio;
 
+void audio_init();
+
 void audio_play(const char *file);
 
 #endif

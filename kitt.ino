@@ -10,7 +10,6 @@
 #include "src/helpers/audio_helper.h"
 #include "src/UI.h"
 #include "src/helpers/ble_helper.h"
-#include "src/tiles/button_tile.h"
 
 GigaDisplay_GFX tft;
 Arduino_GigaDisplayTouch TouchDetector;
@@ -21,7 +20,8 @@ void setup()
   Serial.begin(115200); // Initialize Serial
   tft.begin();          // Initialize Giga Display
   TouchDetector.begin();
-  ui.init(audio);
+  ui.init();
+  audio_init();
   scanner.begin(true);
   ble_start();
 

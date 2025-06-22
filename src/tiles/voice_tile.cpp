@@ -1,16 +1,10 @@
-#include <GigaAudio.h>
-#include <config.h>
-#include "../helpers/audio_helper.h"
-#include "../config/data.h"
 #include "voice_tile.h"
 
-static void aud_ind_cb(lv_event_t *e)
-{
-  if (lv_event_get_code(e) == LV_EVENT_CLICKED)
-    audio.stop();
-}
+#include <config.h>
 
-VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id, ButtonData const *button_data, GigaAudio *audio)
+#include "../config/data.h"
+
+VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id, ButtonData const *button_data)
 {
   tile = lv_tileview_add_tile(tileview, row_id, 0, LV_DIR_HOR);
   lv_obj_set_style_bg_color(tile, BLACK, 0);
@@ -48,8 +42,6 @@ VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id, ButtonData const *button_da
     for (int i = 0; i < 4; ++i)
       indicators[side * 4 + i] = new Indicator(::indicators[side * 4 + i], column);
   }
-
-  lv_obj_add_event_cb(indicators[0]->getObj(), aud_ind_cb, LV_EVENT_CLICKED, audio);
 
   visualiser = new VoiceVisualiser(grid);
   visualiser->setLevel(0.0f); // FIXME: Fix this over in UI

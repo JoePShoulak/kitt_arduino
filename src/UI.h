@@ -16,7 +16,6 @@ class UI
   lv_obj_t *canvas = nullptr;
   lv_obj_t *tiles = nullptr;
 
-  lv_timer_t *voice_anim_timer = nullptr;
   lv_timer_t *gauge_anim_timer = nullptr;
 
 public:
@@ -28,7 +27,7 @@ public:
   lv_obj_t *blackout_overlay;
   GigaDisplayBacklight backlight;
 
-  void init(GigaAudio &audio);
+  void init();
 };
 
 extern UI ui;
