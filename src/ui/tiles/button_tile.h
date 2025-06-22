@@ -5,7 +5,7 @@
 
 #include <lvgl.h>
 #include <button.h>
-#include "../config/data.h"
+#include "../../config/data.h"
 
 class ButtonTile
 {

@@ -4,9 +4,9 @@
 #include <button.h>
 #include <popup.h>
 
-#include "../tiles/voice_tile.h"
+#include "../ui/UI.h"
+#include "../ui/tiles/voice_tile.h"
 #include "../helpers/audio_helper.h"
-#include "../UI.h"
 
 static bool blackout_first_release = false;
 

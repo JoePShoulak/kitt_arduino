@@ -2,11 +2,11 @@
 
 #include <Arduino.h>
 #include <GigaAudio.h>
-#include "../tiles/gauge_tile.h"
-#include "../tiles/voice_tile.h"
+#include "../ui/tiles/gauge_tile.h"
+#include "../ui/tiles/voice_tile.h"
 #include "gauge.h"
 #include "seven_segment.h"
-#include "../UI.h"
+#include "../UI/UI.h"
 
 int drunken_walk(int val, int max_step, int max_val, int min_val = 0)
 {

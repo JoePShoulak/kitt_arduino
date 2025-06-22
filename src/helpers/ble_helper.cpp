@@ -2,8 +2,8 @@
 
 #include <ArduinoBLE.h>
 
-#include "../tiles/voice_tile.h"
-#include "../UI.h"
+#include "../ui/tiles/voice_tile.h"
+#include "../UI/UI.h"
 
 #define POLLING_RATE 5000
 

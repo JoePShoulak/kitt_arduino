@@ -1,7 +1,7 @@
 #include "UI.h"
 
 #include <colors.h>
-#include "misc/animations.h"
+#include "../misc/animations.h"
 
 UI ui;
 

@@ -5,7 +5,7 @@
 #include <button.h>
 
 #include "../helpers/audio_helper.h"
-#include "../UI.h"
+#include "../UI/UI.h"
 
 bool validate_always(lv_event_t *e) { return true; }
 

@@ -4,7 +4,7 @@
 #include <lvgl.h>
 
 #include "../misc/animations.h"
-#include "../UI.h"
+#include "../UI/UI.h"
 
 GigaAudio audio("USB DISK");
 

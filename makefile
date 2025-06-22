@@ -8,6 +8,10 @@ BUILD_DIR := build
 # ===== COMMANDS =====
 all: compile upload monitor
 
+install: 
+	@echo ">>> Installing..."
+	curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+
 compile:
 	@echo ">>> Compiling..."
 	arduino-cli compile --fqbn $(BOARD) --output-dir $(BUILD_DIR) $(SKETCH_NAME)
@@ -20,10 +24,11 @@ clean:
 	@echo ">>> Cleaning build directory..."
 	rm -rf $(BUILD_DIR)
 
-convert:
-	@echo ">>> Running MP3-to-WAV conversion script..."
-	@scripts/convert.sh
-
 monitor:
 	@echo ">>> Opening Serial Monitor..."
 	arduino-cli monitor -p $(PORT) --config $(BAUD)
+
+# Project specific
+convert:
+	@echo ">>> Running MP3-to-WAV conversion script..."
+	@scripts/convert.sh

@@ -2,7 +2,7 @@
 
 #include <config.h>
 
-#include "../config/data.h"
+#include "../../config/data.h"
 
 VoiceTile::VoiceTile(lv_obj_t *tileview, int row_id, ButtonData const *button_data)
 {
