@@ -1,8 +1,6 @@
 // kitt.ino
 
 #include <Arduino_GigaDisplay_GFX.h>
-#include <Arduino_GigaDisplayTouch.h>
-#include <Arduino_GigaDisplay.h>
 #include <lvgl.h>
 
 #include "src/helpers/audio_helper.h"
@@ -10,18 +8,16 @@
 #include "src/ui/UI.h"
 #include "src/config/data.h"
 #include "src/hardware/Hardware.h"
-
-GigaDisplay_GFX tft;
-Arduino_GigaDisplayTouch TouchDetector;
+#include "src/helpers/serial_helper.h"
 
 void setup()
 {
-  Serial.begin(115200); // Initialize Serial
-  tft.begin();          // Initialize Giga Display
-  TouchDetector.begin();
-  ble_init();
-  ui.init();
-  audio_init(); // must come after ui, as it inits some of its elements with audio refs
+  serial_init();
+
+  print_init_status("BLE", ble_init());
+  print_init_status("UI", ui.init());
+
+  audio_init(); // must come after ui to init some ui elements with audio refs. Should come last because of ready clip. (void)
 }
 
 void loop()

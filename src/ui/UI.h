@@ -27,7 +27,7 @@ public:
   lv_obj_t *blackout_overlay;
   GigaDisplayBacklight backlight;
 
-  void init();
+  bool init();
 };
 
 extern UI ui;

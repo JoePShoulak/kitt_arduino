@@ -9,23 +9,26 @@
 
 BLEService kittService(BLE_UUID_SERVICE);
 BLEStringCharacteristic errorChar(BLE_UUID_ERROR, BLERead | BLENotify, 20);
-BLEStringCharacteristic voltageChar(BLE_UUID_DATA, BLERead | BLENotify, 20);
+BLEStringCharacteristic data0(BLE_UUID_DATA_0, BLERead | BLENotify, 20);
 
 int lastUpdated;
 
-void ble_init()
+bool ble_init()
 {
   if (!BLE.begin())
-    Serial.println("BLE init failed");
+    return false;
+
+  kittService.addCharacteristic(errorChar);
+  kittService.addCharacteristic(data0); // voltage (dummy)
 
   BLE.setLocalName("KITT");
-  kittService.addCharacteristic(errorChar);
-  kittService.addCharacteristic(voltageChar);
   BLE.setAdvertisedService(kittService);
   BLE.addService(kittService);
   BLE.advertise();
 
   lastUpdated = millis();
+
+  return true;
 }
 
 void ble_update()
@@ -43,6 +46,6 @@ void ble_update()
   if (central.connected())
   {
     errorChar.writeValue("Overheat");
-    voltageChar.writeValue("46.8");
+    data0.writeValue("46.8");
   }
 }

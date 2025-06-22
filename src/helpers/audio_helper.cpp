@@ -19,6 +19,7 @@ void audio_init()
   lv_obj_add_event_cb(ui.voiceTile->indicators[INDICATORS::aud]->getObj(), aud_ind_cb, LV_EVENT_CLICKED, &audio);
   lv_timer_create(voice_anim_cb, 50, &audio);
   audio_play("ready.wav");
+  Serial.println("✅ Audio initialized!");
 }
 
 void audio_play(const char *file)
