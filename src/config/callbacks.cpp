@@ -8,6 +8,7 @@
 #include "../ui/UI.h"
 #include "../ui/tiles/voice_tile.h"
 #include "../helpers/audio_helper.h"
+#include "../config/data.h"
 
 static bool blackout_first_release = false;
 
@@ -42,6 +43,7 @@ void evade_btn_cb(lv_event_t *e)
   ui.backlight.set(0);
   ui.blackout_overlay = show_fullscreen_popup(nullptr);
   lv_obj_add_event_cb(ui.blackout_overlay, blackout_overlay_cb, LV_EVENT_ALL, nullptr);
+  hardware.scanner.stop();
 }
 
 void gps_btn_cb(lv_event_t *e)
@@ -129,5 +131,8 @@ void blackout_overlay_cb(lv_event_t *e)
     ui.blackout_overlay = nullptr;
     ui.backlight.set(255);
     blackout_first_release = false;
+
+    if (ui.rightButtonTile->buttons[RIGHT_BUTTONS::lighting]->isToggled())
+      hardware.scanner.start();
   }
 }
